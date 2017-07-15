@@ -246,3 +246,10 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+#temporary vim files
+*~
+*.swp 
+*.swo
+
+

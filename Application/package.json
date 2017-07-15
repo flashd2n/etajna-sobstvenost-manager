@@ -1,0 +1,34 @@
+{
+  "name": "etajna-sobstvenost-manager",
+  "version": "0.0.1",
+  "description": "A simple application that helps you manage your etajna sobsvenost.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flashd2n/etajna-sobstvenost-manager.git"
+  },
+  "keywords": [
+    "etajna",
+    "sobstvenost",
+    "manager"
+  ],
+  "author": "Eternal Dependency",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flashd2n/etajna-sobstvenost-manager/issues"
+  },
+  "homepage": "https://github.com/flashd2n/etajna-sobstvenost-manager#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "gulp": "^3.9.1",
+    "mongodb": "^2.2.30",
+    "pug": "^2.0.0-rc.2"
+  }
+}
