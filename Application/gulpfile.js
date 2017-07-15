@@ -7,7 +7,7 @@ gulp.task('auto-setup', () => {
                 require('./config');
                 return Promise.resolve();
             } catch (error) {
-                console.log('Configuration has not been setup.'
+                console.log('Configuration has not been set up. '
                     + 'Automatically copying distributed configuration.');
                 const { ncp } = require('ncp');
 
