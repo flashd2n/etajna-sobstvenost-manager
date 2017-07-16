@@ -2,8 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const path = require('path');
 
-const init = () => {
+
+const init = (data) => {
     const app = express();
 
     app.set('view engine', 'pug');
@@ -19,6 +21,8 @@ const init = () => {
         next();
     });
 
+    app.use('/public', express.static(path.join(__dirname, '../public')));
+    
     require('./routers').attachTo(app);
 
     return Promise.resolve(app);
