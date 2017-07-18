@@ -30,7 +30,9 @@ gulp.task('start-server', ['auto-setup'], () => {
     const config = require('./config');
 
     return Promise.resolve()
-        .then(() => require('./app').init())
+        .then(() => require('./database').init(config.connectionString))
+        .then((database) => require('./data').init(database))
+        .then((data) => require('./app').init(data))
         .then((app) => {
             return app.listen(
                 config.port,

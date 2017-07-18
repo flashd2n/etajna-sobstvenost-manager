@@ -1,0 +1,14 @@
+extends common/container
+block contents
+    h1
+        | Login
+    div
+        form(method="POST")
+            div
+                label Username:
+                input(type="text" name="username" placeholder="Username")
+            div
+                label Password:
+                input(type="password" name="password" placeholder="Password")
+            div
+                button(type="submit") Login

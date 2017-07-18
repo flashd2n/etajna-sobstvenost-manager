@@ -1,3 +1,5 @@
+/* globals __dirname */
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -21,8 +23,10 @@ const init = (data) => {
         next();
     });
 
+    require('../auth/setup')(app, data.appartments);
+
     app.use('/public', express.static(path.join(__dirname, '../public')));
-    
+
     require('./routers').attachTo(app);
 
     return Promise.resolve(app);
