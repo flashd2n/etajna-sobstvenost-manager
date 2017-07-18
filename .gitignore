@@ -252,4 +252,6 @@ ModelManifest.xml
 *.swp 
 *.swo
 
+#local configuration
+**/config/**
 
