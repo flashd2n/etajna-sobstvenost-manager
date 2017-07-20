@@ -31,7 +31,7 @@ gulp.task('start-server', ['auto-setup'], () => {
 
     return Promise.resolve()
         .then(() => require('./database').init(config.connectionString))
-        .then((database) => require('./data').init(database))
+        .then((database) => require('./app/data').init(database))
         .then((data) => require('./app').init(data))
         .then((app) => {
             return app.listen(
