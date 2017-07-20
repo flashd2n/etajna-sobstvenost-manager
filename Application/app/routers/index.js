@@ -22,7 +22,7 @@ const attachTo = (app) => {
         });
 
         jsFiles.forEach((file) => {
-            const absPath = path.join(__dirname, file);
+            const absPath = path.join(dir, file);
             attach(absPath);
         });
 

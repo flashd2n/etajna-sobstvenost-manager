@@ -25,8 +25,8 @@ class PublicController {
             { expenseId: req.params.expenseId });
     }
 
-    signUp(req, res) {
-        res.render('sign_up');
+    register(req, res) {
+        res.render('register');
     }
 
     login(req, res) {
