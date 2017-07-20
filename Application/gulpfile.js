@@ -1,4 +1,12 @@
 const gulp = require('gulp');
+const nodemon = require('gulp-nodemon');
+
+gulp.task('dev', () => {
+    return nodemon({
+        ext: 'js html',
+        script: 'dev.js',
+    });
+});
 
 gulp.task('auto-setup', () => {
     return Promise.resolve()

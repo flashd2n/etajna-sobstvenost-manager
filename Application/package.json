@@ -4,8 +4,9 @@
   "description": "A simple application that helps you manage your etajna sobsvenost.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp start-server"
+    "test": "gulp test",
+    "start": "gulp start-server",
+    "dev": "gulp dev"
   },
   "repository": {
     "type": "git",
@@ -41,6 +42,9 @@
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "eslint": "^4.2.0",
-    "eslint-config-google": "^0.9.1"
+    "eslint-config-google": "^0.9.1",
+    "gulp-nodemon": "^2.2.1",
+    "mocha": "^3.4.2",
+    "nodemon": "^1.11.0"
   }
 }
