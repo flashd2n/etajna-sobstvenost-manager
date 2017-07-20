@@ -4,11 +4,15 @@ const passport = require('passport');
 
 const attach = (app) => {
     router.route('/register')
-        .get(/* controller.useOne */)
+        .get((req, res) => {
+            res.send(true);
+        })
         .post(/* controller.useTwo */);
 
-    router.route('login')
-        .get(/* publicController.login */)
+    router.route('/login')
+        .get((req, res) => {
+            res.send(true);
+        })
         .post(passport.authenticate('local', {
             successRedirect: '/',
             failureRedirect: '/auth/login',
