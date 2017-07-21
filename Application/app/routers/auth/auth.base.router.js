@@ -1,21 +1,27 @@
 const { Router } = require('express');
 const router = new Router();
 const passport = require('passport');
+const { PublicController } = require('../../controllers');
 
-const attach = (app) => {
+
+const attach = (app, data) => {
+    const controller = new PublicController(data);
+
     router.route('/register')
         .get((req, res) => {
-            res.send(true);
+            controller.register(req, res);
         })
-        .post(/* controller.useTwo */);
+        .post((req, res) => {
+            controller.doRegister(req, res);
+        });
 
     router.route('/login')
         .get((req, res) => {
-            res.send(true);
+            controller.login(req, res);
         })
         .post(passport.authenticate('local', {
             successRedirect: '/',
-            failureRedirect: '/auth/login',
+            failureRedirect: '/login',
             failureFlash: true,
         }));
 

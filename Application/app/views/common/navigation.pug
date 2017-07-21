@@ -5,8 +5,20 @@ ul
         a(href="/page-of-shame") Page of Shame
     li
         a(href="/expenses") Expenses
-    li
-        a(href="/register") Sign Up
-    li
-        a(href="/login") Login
-        
+    if !loggedUser
+        li
+            a(href="/register") Sign Up
+        li
+            a(href="/login") Login
+    else
+        if (loggedUser.type == 'manager')
+            li
+                a(href="/admin") Admin
+        if (loggedUser.type == 'appartment')
+            li
+                a(href="/my-appartment") My appartment
+        li
+            a(href="/chat") Chat                
+        li
+            a(href="/logout") Logout 
+                strong #{loggedUser.username}

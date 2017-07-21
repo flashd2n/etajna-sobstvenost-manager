@@ -3,9 +3,10 @@ const init = (data) => {
     const app = express();
 
     require('./app.config').baseConfig(app);
-    require('./app.config').authConfig(app, data.appartments, data.db);
+    require('./app.config').authConfig(
+        app, data.appartments, data.manager, data.db);
 
-    require('./routers').attachTo(app);
+    require('./routers').attachTo(app, data);
 
     return Promise.resolve(app);
 };

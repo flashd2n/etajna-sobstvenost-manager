@@ -1,4 +1,4 @@
-const config = require('./config.distr');
+const config = require('./config');
 
 require('./database').init(config.connectionString)
     .then((database) => {

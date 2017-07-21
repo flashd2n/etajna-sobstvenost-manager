@@ -1,0 +1,19 @@
+extends common/container
+block contents
+    h1
+        | Admin panel
+    div
+        div Requests
+        div
+            each registrationRequest in registrationRequests
+                div
+                    | #{registrationRequest.appartmentNameOrNumber}
+                div
+                    | #{registrationRequest.username}
+                div
+                    a.approve(href="/approve-request/"+registrationRequest._id)
+                        | Approve
+                    a.reject(href="/reject-request/"+registrationRequest._id)
+                        | Reject
+            else 
+                | Currently there are no pending registration requests.

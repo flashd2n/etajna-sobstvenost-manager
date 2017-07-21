@@ -3,8 +3,9 @@ const { Strategy } = require('passport-local');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+const sha256 = require('sha256');
 
-const configAuth = (app, apartments, db) => {
+const configAuth = (app, apartments, manager, db) => {
     app.use(cookieParser());
     app.use(session({
         secret: 'Very Secret Much WoW',
@@ -18,30 +19,49 @@ const configAuth = (app, apartments, db) => {
 
     passport.use(new Strategy(
         (username, password, done) => {
-            apartments.checkValidUserUsername(username)
+            const passowrdHash = sha256(password);
+            console.log(passowrdHash);
+            manager
+                .checkValidUserUsernameAndPasswordHash(username, passowrdHash)
                 .then((user) => {
-                    // CHECK PASSWORD
                     done(null, user);
                 })
-                .catch((err) => {
-                    done(null, false,
-                        { message: 'Invalid login credentials!' });
+                .catch(() => {
+                    apartments
+                        .checkValidUserUsernameAndPasswordHash(username, passowrdHash)
+                        .then((user) => {
+                            done(null, user);
+                        })
+                        .catch((err) => {
+                            done(null, false,
+                                { message: 'Invalid login credentials!' });
+                        });
                 });
         }
     ));
 
     passport.serializeUser((user, done) => {
-        done(null, user._id);
+        done(null, { type: user.type, id: user._id });
     });
 
-    passport.deserializeUser((id, done) => {
-        apartments.findById(id)
-            .then((user) => {
-                done(null, user);
-            })
-            .catch((err) => {
-                done(err);
-            });
+    passport.deserializeUser((loggedUser, done) => {
+        if (loggedUser.type === 'manager') {
+            manager.getById(loggedUser.id)
+                .then((user) => {
+                    done(null, user);
+                })
+                .catch((err) => {
+                    done(err);
+                });
+        } else if (loggedUser.type === 'appartment') {
+            apartments.getById(loggedUser.id)
+                .then((user) => {
+                    done(null, user);
+                })
+                .catch((err) => {
+                    done(err);
+                });
+        }
     });
 };
 

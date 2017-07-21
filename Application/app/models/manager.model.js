@@ -1,12 +1,12 @@
-class Appartment {
+class Manager {
     static isValid(model) {
         return typeof model !== 'undefined' &&
-            typeof model.appartmentNameOrNumber === 'string' &&
-            typeof model.appartmentNameOrNumber;
+            typeof model.username === 'string' &&
+            typeof model.passwordHash === 'string';
     }
 
     static toViewModel(model) {
-        const viewModel = new Appartment();
+        const viewModel = new Manager();
 
         Object.keys(model)
             .forEach((prop) => {
@@ -17,9 +17,9 @@ class Appartment {
                 viewModel[prop] = model[prop];
             });
 
-        viewModel.type = 'appartment';
+        viewModel.type = 'manager';
         return viewModel;
     }
 }
 
-module.exports = Appartment;
+module.exports = Manager;

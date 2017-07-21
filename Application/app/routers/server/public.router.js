@@ -1,9 +1,11 @@
 const { Router } = require('express');
 const router = new Router();
 const { PublicController } = require('../../controllers');
-const controller = new PublicController();
 
-const attach = (app) => {
+
+const attach = (app, data) => {
+    const controller = new PublicController(data);
+
     router.route('/')
         .get(controller.home);
 

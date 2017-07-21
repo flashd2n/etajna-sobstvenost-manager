@@ -1,4 +1,23 @@
 extends common/container
 block contents
     h1
-        | Sign Up
+        | Register
+    div
+        form(method="POST")
+            div
+                label Appartment:
+                    select(name="appartment_id")
+                        each unregisteredAppartment in unregisteredAppartments
+                            option(value=unregisteredAppartment._id) 
+                                | #{unregisteredAppartment.appartmentNameOrNumber}
+            div
+                label Username:
+                input(type="text" name="username" placeholder="Username")
+            div
+                label Password:
+                input(type="password" name="password" placeholder="Password")
+            div
+                button(type="submit") Request registration
+            div 
+                | Please note that your registration must 
+                | be approved by the manager before you can login

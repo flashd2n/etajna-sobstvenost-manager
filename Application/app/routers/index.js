@@ -3,9 +3,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const attachTo = (app) => {
+const attachTo = (app, data) => {
     const attach = (modulePath) => {
-        require(modulePath)(app);
+        require(modulePath)(app, data);
     };
 
     const traverse = (dir) => {

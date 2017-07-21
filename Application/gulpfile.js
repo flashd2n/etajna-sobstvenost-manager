@@ -1,3 +1,5 @@
+/* globals process */
+
 const gulp = require('gulp');
 const nodemon = require('gulp-nodemon');
 
@@ -32,6 +34,15 @@ gulp.task('auto-setup', () => {
                 });
             }
         });
+});
+
+gulp.task('seed-database-initial', ['auto-setup'], () => {
+    const config = require('./config');
+    return Promise.resolve()
+        .then(() => require('./database').init(config.connectionString))
+        .then((database) => require('./app/data').init(database))
+        .then((data) => require('./database_seed').seedInitial(data))
+        .then(() => process.exit());
 });
 
 gulp.task('start-server', ['auto-setup'], () => {
