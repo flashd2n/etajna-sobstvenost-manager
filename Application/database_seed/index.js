@@ -24,8 +24,7 @@ const seedInitial = (data) => {
                 }
                 console.log(`Adding appartment ${appartmentNameOrNumber}.`);
                 const newAppartment = new Appartment();
-                newAppartment.appartmentNameOrNumber =
-                    appartmentNameOrNumber;
+                newAppartment.appartmentNameOrNumber = appartmentNameOrNumber;
                 return data.appartments.create(newAppartment);
             })
         );

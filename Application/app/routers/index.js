@@ -3,13 +3,13 @@
 const fs = require('fs');
 const path = require('path');
 
-const attachTo = (app, data) => {
+const attachTo = (app, controllers) => {
     app.get('/404', (req, res) => {
         res.send('THE PAGE YOUR ARE LOOKIGN FOR DOES NOT EXIST');
     });
 
     const attach = (modulePath) => {
-        require(modulePath)(app, data);
+        require(modulePath)(app, controllers);
     };
 
     const traverse = (dir) => {

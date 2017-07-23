@@ -1,11 +1,10 @@
 const { Router } = require('express');
 const router = new Router();
 const passport = require('passport');
-const { PublicController } = require('../../controllers');
 
 
-const attach = (app, data) => {
-    const controller = new PublicController(data);
+const attach = (app, contr) => {
+    const controller = contr.publicController;
 
     router.route('/register')
         .get((req, res) => {

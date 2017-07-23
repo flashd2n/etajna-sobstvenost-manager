@@ -1,8 +1,7 @@
-const configApp = (app) => {
-    const { ErrorController } = require('../controllers');
-    const controller = new ErrorController();
-
-    app.use(controller.handleError);
+const configApp = (app, controller) => {
+    app.use((err, req, res, next) => {
+        return controller.handleError(err, req, res, next);
+    });
 };
 
 module.exports = configApp;

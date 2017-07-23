@@ -5,9 +5,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const sha256 = require('sha256');
 
-const configAuth = (app, apartments, manager, db) => {
-    const config = require('../../config/index');
-
+const configAuth = (app, apartments, manager, db, config) => {
     app.use(cookieParser());
     app.use(session({
         secret: config.cookie.secret,

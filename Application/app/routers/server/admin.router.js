@@ -1,10 +1,9 @@
 const { Router } = require('express');
 const router = new Router();
-const { AdminController } = require('../../controllers');
 
 // NEED AUTHORIZATION CHECK BEFORE EACH ROUTE
-const attach = (app, data) => {
-    const controller = new AdminController(data);
+const attach = (app, contr) => {
+    const controller = contr.adminController;
 
     router.route('/admin')
         .get((req, res) => {

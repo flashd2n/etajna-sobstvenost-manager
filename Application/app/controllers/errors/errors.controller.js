@@ -1,10 +1,12 @@
-const log = require('../../utils/logger');
-
 class ErrorController {
+    constructor(logger) {
+        this.logger = logger;
+    }
+
     handleError(err, req, res, next) {
         const error = JSON.parse(err.message);
-        log(error.message);
-        log(error.code);
+        this.logger.log(error.message);
+        this.logger.log(error.code);
         res.send('Error!!!');
     }
 }

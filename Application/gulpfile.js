@@ -40,9 +40,9 @@ gulp.task('auto-setup', () => {
 gulp.task('lint', () => {
     return Promise.resolve().then(() => {
         return gulp.src(['**/*.js', '!node_modules/**'])
-        .pipe(eslint())
-        .pipe(eslint.format())
-        .pipe(eslint.failAfterError());
+            .pipe(eslint())
+            .pipe(eslint.format())
+            .pipe(eslint.failAfterError());
     });
 });
 
@@ -57,7 +57,6 @@ gulp.task('seed-database-initial', ['auto-setup'], () => {
 
 gulp.task('start-server', ['auto-setup', 'lint'], () => {
     const config = require('./config');
-
     if (config.env === config.dev) {
         return nodemon({
             ext: 'js html',
@@ -65,10 +64,25 @@ gulp.task('start-server', ['auto-setup', 'lint'], () => {
         });
     }
 
+    const { Logger } = require('./utils');
+    const logger = new Logger(config);
+    const controllers = require('./app/controllers');
+    const allControllers = {};
+
     return Promise.resolve()
         .then(() => require('./database').init(config.connectionString))
         .then((database) => require('./app/data').init(database))
-        .then((data) => require('./app').init(data))
+        .then((data) => {
+            const errorController = new controllers.ErrorController(logger);
+            const publicController = new controllers.PublicController(data);
+            const adminController = new controllers.AdminController(data);
+
+            allControllers.errorController = errorController;
+            allControllers.publicController = publicController;
+            allControllers.adminController = adminController;
+
+            return require('./app').init(data, allControllers, config);
+        })
         .then((app) => {
             return app.listen(
                 config.port,
