@@ -4,6 +4,10 @@ const fs = require('fs');
 const path = require('path');
 
 const attachTo = (app, data) => {
+    app.get('/404', (req, res) => {
+        res.send('THE PAGE YOUR ARE LOOKIGN FOR DOES NOT EXIST');
+    });
+
     const attach = (modulePath) => {
         require(modulePath)(app, data);
     };
@@ -37,6 +41,10 @@ const attachTo = (app, data) => {
     };
 
     traverse(__dirname);
+
+    app.get('*', (req, res) => {
+        res.redirect('/404');
+    });
 };
 
 module.exports = { attachTo };

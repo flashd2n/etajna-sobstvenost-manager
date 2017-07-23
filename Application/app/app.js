@@ -8,6 +8,8 @@ const init = (data) => {
 
     require('./routers').attachTo(app, data);
 
+    require('./app.config').errorConfig(app);
+
     return Promise.resolve(app);
 };
 

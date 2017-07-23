@@ -48,6 +48,13 @@ gulp.task('seed-database-initial', ['auto-setup'], () => {
 gulp.task('start-server', ['auto-setup'], () => {
     const config = require('./config');
 
+    if (config.env === config.dev) {
+        return nodemon({
+            ext: 'js html',
+            script: 'dev.js',
+        });
+    }
+
     return Promise.resolve()
         .then(() => require('./database').init(config.connectionString))
         .then((database) => require('./app/data').init(database))

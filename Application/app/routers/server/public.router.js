@@ -9,6 +9,12 @@ const attach = (app, data) => {
     router.route('/')
         .get(controller.home);
 
+    router.route('/error')
+        .get((req, res, next) => {
+            const error = { message: 'OOPS', code: 202 };
+            next(new Error(JSON.stringify(error)));
+        });
+
     router.route('/page-of-shame')
         .get(controller.pageOfShame);
 

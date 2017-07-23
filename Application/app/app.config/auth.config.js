@@ -6,10 +6,12 @@ const MongoStore = require('connect-mongo')(session);
 const sha256 = require('sha256');
 
 const configAuth = (app, apartments, manager, db) => {
+    const config = require('../../config/index');
+
     app.use(cookieParser());
     app.use(session({
-        secret: 'Very Secret Much WoW',
-        maxAge: new Date(Date.now() + 60 * 60 * 1000),
+        secret: config.cookie.secret,
+        maxAge: config.cookie.expirationTime,
         store: new MongoStore({ db }, (err) => {
             console.log(err.message);
         }),
