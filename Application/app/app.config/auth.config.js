@@ -30,7 +30,9 @@ const configAuth = (app, apartments, manager, db) => {
                 })
                 .catch(() => {
                     apartments
-                        .checkValidUserUsernameAndPasswordHash(username, passowrdHash)
+                        .checkValidUserUsernameAndPasswordHash(
+                            username,
+                            passowrdHash)
                         .then((user) => {
                             done(null, user);
                         })

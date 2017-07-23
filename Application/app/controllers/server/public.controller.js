@@ -72,7 +72,8 @@ class PublicController {
             .then((appartment) => {
                 const newRegistrationRequest = new RegistrationRequest();
                 newRegistrationRequest.appartmentId = req.body.appartment_id;
-                newRegistrationRequest.appartmentNameOrNumber = appartment.appartmentNameOrNumber;
+                newRegistrationRequest
+                    .appartmentNameOrNumber = appartment.appartmentNameOrNumber;
                 newRegistrationRequest.username = req.body.username;
                 newRegistrationRequest.passwordHash = sha256(req.body.password);
                 this.data.registrationRequests.create(newRegistrationRequest);

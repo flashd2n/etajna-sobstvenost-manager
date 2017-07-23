@@ -26,7 +26,7 @@ const attach = (app, data) => {
             controller.rejectExpense(req, res);
         });
 
-    // TODO: check if has access with some middleware
+    // check if has access with some middleware
     app.use('/', router);
 };
 

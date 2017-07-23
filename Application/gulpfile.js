@@ -2,6 +2,7 @@
 
 const gulp = require('gulp');
 const nodemon = require('gulp-nodemon');
+const eslint = require('gulp-eslint');
 
 gulp.task('dev', () => {
     return nodemon({
@@ -36,6 +37,15 @@ gulp.task('auto-setup', () => {
         });
 });
 
+gulp.task('lint', () => {
+    return Promise.resolve().then(() => {
+        return gulp.src(['**/*.js', '!node_modules/**'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+    });
+});
+
 gulp.task('seed-database-initial', ['auto-setup'], () => {
     const config = require('./config');
     return Promise.resolve()
@@ -45,7 +55,7 @@ gulp.task('seed-database-initial', ['auto-setup'], () => {
         .then(() => process.exit());
 });
 
-gulp.task('start-server', ['auto-setup'], () => {
+gulp.task('start-server', ['auto-setup', 'lint'], () => {
     const config = require('./config');
 
     if (config.env === config.dev) {
