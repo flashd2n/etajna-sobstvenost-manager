@@ -11,4 +11,4 @@ class ErrorController {
     }
 }
 
-module.exports = { ErrorController };
+module.exports = ErrorController;

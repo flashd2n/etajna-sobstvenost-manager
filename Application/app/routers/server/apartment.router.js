@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = new Router();
 // NEED AUTHORIZATION CHECK BEFORE EACH ROUTE
-const attach = (app, contr) => {
+const attach = (app, controllersFactory) => {
     router.route('/my-apartment')
         .get((req, res) => {
             res.send('My appartment page');

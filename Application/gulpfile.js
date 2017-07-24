@@ -67,21 +67,16 @@ gulp.task('start-server', ['auto-setup', 'lint'], () => {
     const { Logger } = require('./utils');
     const logger = new Logger(config);
     const controllers = require('./app/controllers');
-    const allControllers = {};
+    const { ControllersFactory } = require('./utils/factories');
 
     return Promise.resolve()
         .then(() => require('./database').init(config.connectionString))
         .then((database) => require('./app/data').init(database))
         .then((data) => {
-            const errorController = new controllers.ErrorController(logger);
-            const publicController = new controllers.PublicController(data);
-            const adminController = new controllers.AdminController(data);
+            const controllersFactory = new ControllersFactory(controllers,
+                data, logger);
 
-            allControllers.errorController = errorController;
-            allControllers.publicController = publicController;
-            allControllers.adminController = adminController;
-
-            return require('./app').init(data, allControllers, config);
+            return require('./app').init(data, controllersFactory, config);
         })
         .then((app) => {
             return app.listen(

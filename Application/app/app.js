@@ -1,4 +1,4 @@
-const init = (data, controllers, config) => {
+const init = (data, controllersFactory, config) => {
     const express = require('express');
     const app = express();
 
@@ -10,9 +10,9 @@ const init = (data, controllers, config) => {
     require('./app.config').authConfig(
         app, data.appartments, data.manager, data.db, config);
 
-    require('./routers').attachTo(app, controllers);
+    require('./routers').attachTo(app, controllersFactory);
 
-    require('./app.config').errorConfig(app, controllers.errorController);
+    require('./app.config').errorConfig(app, controllersFactory);
 
     return Promise.resolve(app);
 };

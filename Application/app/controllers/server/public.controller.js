@@ -91,4 +91,4 @@ class PublicController {
     }
 }
 
-module.exports = { PublicController };
+module.exports = PublicController;

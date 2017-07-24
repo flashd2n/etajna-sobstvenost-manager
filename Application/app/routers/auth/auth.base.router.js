@@ -3,8 +3,8 @@ const router = new Router();
 const passport = require('passport');
 
 
-const attach = (app, contr) => {
-    const controller = contr.publicController;
+const attach = (app, controllerFactory) => {
+    const controller = controllerFactory.getPublicController();
 
     router.route('/register')
         .get((req, res) => {

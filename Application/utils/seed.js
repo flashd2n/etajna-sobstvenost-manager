@@ -58,6 +58,7 @@ const seed = async (db) => {
             return {
                 _id: new ObjectID(apt._db),
                 number: apt.number,
+                username: apt.username,
                 moveInDate: apt.moveInDate,
             };
         });

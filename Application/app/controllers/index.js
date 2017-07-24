@@ -1,5 +1,5 @@
 module.exports = {
-    PublicController: require('./server/public.controller').PublicController,
-    AdminController: require('./server/admin.controller').AdminController,
-    ErrorController: require('./errors/errors.controller').ErrorController,
+    PublicController: require('./server/public.controller'),
+    AdminController: require('./server/admin.controller'),
+    ErrorController: require('./errors/errors.controller'),
 };
