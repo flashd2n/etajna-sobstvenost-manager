@@ -2,8 +2,8 @@ const BaseData = require('./base/base.data');
 const Manager = require('../models/manager.model');
 
 class ManagerData extends BaseData {
-    constructor(database) {
-        super(database, Manager);
+    constructor(database, validator) {
+        super(database, Manager, validator);
     }
 
     getUsername() {
@@ -19,7 +19,7 @@ class ManagerData extends BaseData {
         });
     }
 
-    checkValidUserUsernameAndPasswordHash(username, passowrdHash) {
+    checkValidUserUsernameAndPasswordHash(username, passwordHash) {
         return this.collection
             .findOne({
                 username,
@@ -29,7 +29,7 @@ class ManagerData extends BaseData {
                     throw new Error('Invalid user');
                 }
 
-                if (manager.passowrdHash !== passowrdHash) {
+                if (manager.password !== passwordHash) {
                     throw new Error('Invalid password');
                 }
 

@@ -1,4 +1,4 @@
-const RegistrationRequest = require('../../models/registrationrequest.model');
+const Request = require('../../models/request.model');
 const sha256 = require('sha256');
 
 class PublicController {
@@ -41,7 +41,7 @@ class PublicController {
     }
 
     doRegister(req, res) {
-        this.data.registrationRequests.getByUsername(req.body.username)
+        this.data.requests.getByUsername(req.body.username)
             .then((registrationRequest) => {
                 if (registrationRequest) {
                     req.flash('error', 'Username already exists');
@@ -70,7 +70,7 @@ class PublicController {
                 return this.data.appartments.getById(req.body.appartment_id);
             })
             .then((appartment) => {
-                const newRegistrationRequest = new RegistrationRequest();
+                const newRegistrationRequest = new Request();
                 newRegistrationRequest.appartmentId = req.body.appartment_id;
                 newRegistrationRequest
                     .appartmentNameOrNumber = appartment.appartmentNameOrNumber;

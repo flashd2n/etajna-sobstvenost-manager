@@ -3,8 +3,8 @@ const BaseData = require('./base/base.data');
 const Appartment = require('../models/appartment.model');
 
 class AppartmentsData extends BaseData {
-    constructor(database) {
-        super(database, Appartment);
+    constructor(database, validator) {
+        super(database, Appartment, validator);
     }
 
     getByNameOrNumber(nameOrNumber) {
@@ -56,29 +56,29 @@ class AppartmentsData extends BaseData {
             .findOne({
                 username,
             })
-            .then((appartment) => {
-                console.log(appartment);
-                if (!appartment) {
+            .then((apartment) => {
+                console.log(apartment);
+                if (!apartment) {
                     throw new Error('Invalid user');
                 }
 
-                if (appartment.passwordHash !== passwordHash) {
+                if (apartment.password !== passwordHash) {
                     throw new Error('Invalid password');
                 }
 
-                return this.ModelClass.toViewModel(appartment);
+                return this.ModelClass.toViewModel(apartment);
             });
     }
 
     setUsernameAndPassword(id, username, passwordHash) {
         const filter = { _id: new ObjectId(id) };
         this.getById(id)
-            .then((updatedAppartment) => {
-                updatedAppartment.username = username;
-                updatedAppartment.passwordHash = passwordHash;
+            .then((updatedApartment) => {
+                updatedApartment.username = username;
+                updatedApartment.passwordHash = passwordHash;
                 const options = {};
                 this.collection
-                    .update(filter, updatedAppartment, options);
+                    .update(filter, updatedApartment, options);
             });
     }
 }

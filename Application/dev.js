@@ -3,9 +3,10 @@ const { Logger } = require('./utils');
 const logger = new Logger(config);
 const controllers = require('./app/controllers');
 const { ControllersFactory } = require('./utils/factories');
+const validators = require('./app/validators');
 
 require('./database').init(config.connectionString)
-    .then((database) => require('./app/data').init(database))
+    .then((database) => require('./app/data').init(database, validators))
     .then((data) => {
         const controllersFactory = new ControllersFactory(controllers,
             data, logger);

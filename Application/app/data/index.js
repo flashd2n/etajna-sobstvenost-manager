@@ -1,13 +1,16 @@
-const RegistrationRequestsData = require('./registrationrequests.data');
+const RequestsData = require('./requests.data');
 const AppartmentsData = require('./appartments.data');
 const ManagerData = require('./manager.data');
 
-const init = (database) => {
+const init = (database, validators) => {
     return Promise.resolve({
         db: database,
-        registrationRequests: new RegistrationRequestsData(database),
-        appartments: new AppartmentsData(database),
-        manager: new ManagerData(database),
+        requests: new RequestsData(database,
+            validators.requestValidator),
+        appartments: new AppartmentsData(database,
+            validators.apartmentValidator),
+        manager: new ManagerData(database,
+            validators.managerValidator),
     });
 };
 

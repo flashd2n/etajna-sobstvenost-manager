@@ -1,10 +1,10 @@
 const { ObjectId } = require('mongodb');
 const BaseData = require('./base/base.data');
-const RegistrationRequest = require('../models/registrationrequest.model');
+const Request = require('../models/request.model');
 
-class RegistrationRequestsData extends BaseData {
-    constructor(database) {
-        super(database, RegistrationRequest);
+class RequestsData extends BaseData {
+    constructor(database, validator) {
+        super(database, Request, validator);
     }
 
     getByUsername(username) {
@@ -37,4 +37,4 @@ class RegistrationRequestsData extends BaseData {
     }
 }
 
-module.exports = RegistrationRequestsData;
+module.exports = RequestsData;
