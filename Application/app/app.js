@@ -2,6 +2,10 @@ const init = (data, controllers, config) => {
     const express = require('express');
     const app = express();
 
+    if (config.seed) {
+        require('../utils/index').seed(data.db);
+    }
+
     require('./app.config').baseConfig(app);
     require('./app.config').authConfig(
         app, data.appartments, data.manager, data.db, config);
