@@ -7,7 +7,7 @@ class ErrorController {
         const error = JSON.parse(err.message);
         this.logger.log(error.message);
         this.logger.log(error.code);
-        res.send('Error!!!');
+        res.status(500).send('Error!!!');
     }
 }
 
