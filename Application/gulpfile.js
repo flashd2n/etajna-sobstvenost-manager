@@ -57,11 +57,21 @@ gulp.task('seed-database-initial', ['auto-setup'], () => {
 
 gulp.task('start-server', ['auto-setup', 'lint'], () => {
     const config = require('./config');
+
     if (config.env === config.dev) {
-        return nodemon({
-            ext: 'js html',
-            script: 'dev.js',
-        });
+        return Promise.resolve()
+            .then(() => require('./database').init(config.connectionString))
+            .then(async (db) => {
+                await require('./utils/index').seed(db);
+                await db.close();
+                return;
+            })
+            .then(() => {
+                return nodemon({
+                    ext: 'js html',
+                    script: 'dev.js',
+                });
+            });
     }
 
     const { Logger } = require('./utils');

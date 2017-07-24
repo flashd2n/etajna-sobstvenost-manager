@@ -2,9 +2,10 @@ const init = (data, controllersFactory, config) => {
     const express = require('express');
     const app = express();
 
-    if (config.seed) {
-        require('../utils/index').seed(data.db);
-    }
+    // if (config.env === config.prod) {
+    //     run check for db
+    //     init seed, if no db
+    // }
 
     require('./app.config').baseConfig(app);
     require('./app.config').authConfig(
