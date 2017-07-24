@@ -213,6 +213,22 @@ const seed = async (db) => {
             await apartmentsCollection.updateOne({ number: i }, apt);
         }
     }
+
+    const moreApts = Array.from({ length: 26 })
+        .map((_, index) => {
+            return {
+                number: index + 25,
+                username: '',
+                password: '',
+                moveInDate: '',
+                paidFees: [],
+                notPaidFees: [],
+                paidExpenses: [],
+                notPaidExpenses: [],
+            };
+        });
+
+    await apartmentsCollection.insertMany(moreApts);
 };
 
 module.exports = seed;
