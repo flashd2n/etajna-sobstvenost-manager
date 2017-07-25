@@ -68,6 +68,24 @@ class AuthController {
     login(req, res) {
         res.render('login', { loggedUser: req.user });
     }
+
+    verifyLoggedUser(req, res, next) {
+        if (!req.user) {
+            const msg = 'You need to be logged in to access this page.';
+            const error = { message: msg, code: 401 };
+            return next(new Error(JSON.stringify(error)));
+        }
+        return next();
+    }
+
+    verifyLoggedAdmin(req, res, next) {
+        if (!req.user || req.user.type !== 'admin') {
+            const msg = 'You need to be an Admin to access this page.';
+            const error = { message: msg, code: 401 };
+            return next(new Error(JSON.stringify(error)));
+        }
+        return next();
+    }
 }
 
 module.exports = AuthController;

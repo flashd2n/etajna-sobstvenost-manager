@@ -4,10 +4,22 @@ class ErrorController {
     }
 
     handleError(err, req, res, next) {
-        // const error = JSON.parse(err.message);
-        // this.logger.log(error.message);
-        // this.logger.log(error.code);
-        res.status(500).send('Error!!!');
+        let error;
+
+        try {
+            error = JSON.parse(err.message);
+        } catch (e) {
+            return res.send(err.message);
+        }
+
+        const message = error.message;
+        const code = error.code;
+
+        if (code === 401) {
+            return res.status(code).send(message);
+        }
+
+        return res.status(400).send('Some unexpected error');
     }
 }
 
