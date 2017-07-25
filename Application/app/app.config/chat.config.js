@@ -6,16 +6,18 @@ const configApp = (config) => {
     });
 
     wss.on('connection', (wsc) => {
+        // append req.user
         wsc.on('message', (msg) => {
             if (msg === 'exit') {
                 wsc.close();
             } else {
+                console.log(msg); // attach req.user
                 wss.clients.forEach((client) => {
                     client.send(msg);
                 });
             }
         });
-        wsc.send('Welcome to cyber chat!');
+        // wsc.send('Welcome to Drujbai Communications!');
     });
 };
 
