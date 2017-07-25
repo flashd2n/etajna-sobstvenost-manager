@@ -10,6 +10,7 @@ const init = (data, controllersFactory, config) => {
     require('./app.config').baseConfig(app);
     require('./app.config').authConfig(
         app, data.apartments, data.admin, data.db, config);
+    require('./app.config').chatConfig(config);
 
     require('./routers').attachTo(app, controllersFactory);
 

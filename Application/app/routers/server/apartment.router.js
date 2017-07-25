@@ -11,7 +11,7 @@ const attach = (app, controllersFactory) => {
 
     router.route('/chat')
         .get(authController.verifyLoggedUser, (req, res) => {
-            res.send('Chat page');
+            res.render('chat');
         });
 
     app.use('/', router);
