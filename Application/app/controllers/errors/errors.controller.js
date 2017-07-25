@@ -4,9 +4,9 @@ class ErrorController {
     }
 
     handleError(err, req, res, next) {
-        const error = JSON.parse(err.message);
-        this.logger.log(error.message);
-        this.logger.log(error.code);
+        // const error = JSON.parse(err.message);
+        // this.logger.log(error.message);
+        // this.logger.log(error.code);
         res.status(500).send('Error!!!');
     }
 }

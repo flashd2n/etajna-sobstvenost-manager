@@ -28,12 +28,13 @@ class RequestsData extends BaseData {
         return result;
     }
 
-    deleteByAppartmentId(appartmentId) {
-        const filter = { appartmentId };
+    deleteByAppartmentId(apartmentId) {
+        console.log('DELETE');
+        console.log(apartmentId);
+        const filter = { apartmentId };
         const options = {};
-        const result = this.collection
+        return this.collection
             .remove(filter, options);
-        return result;
     }
 }
 

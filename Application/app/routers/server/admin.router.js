@@ -17,12 +17,12 @@ const attach = (app, controllersFactory) => {
 
     router.route('/approve-request/:request_id')
         .get((req, res) => {
-            controller.approveExpense(req, res);
+            controller.approveRequest(req, res);
         });
 
     router.route('/reject-request/:request_id')
         .get((req, res) => {
-            controller.rejectExpense(req, res);
+            controller.rejectRequest(req, res);
         });
 
     // check if has access with some middleware

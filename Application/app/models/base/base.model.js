@@ -8,13 +8,13 @@ class BaseModel {
 
         Object.keys(data)
             .forEach((prop) => {
-                if (prop === 'password') {
+                if (prop === 'password' && this.name.toLowerCase() !== 'request') {
                     return;
                 }
                 viewModel[prop] = data[prop];
             });
 
-        // viewModel.type = 'appartment'; -> WHY IS THIS?
+        viewModel.type = this.name.toLowerCase();
         return viewModel;
     }
 }

@@ -18,6 +18,7 @@ class BaseData {
 
         if (this.ModelClass.toViewModel) {
             result = result.then((models) => {
+                console.log(models);
                 return models
                     .map((model) =>
                         this.ModelClass.toViewModel(model));
@@ -47,6 +48,7 @@ class BaseData {
     }
 
     create(model) {
+        // console.log(model);
         if (!this._isModelValid(model)) {
             return Promise.reject('Invalid model');
         }

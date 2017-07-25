@@ -1,5 +1,5 @@
 const isValid = (model) => {
-    console.log('works');
+    return true;
 };
 
 module.exports = { isValid };

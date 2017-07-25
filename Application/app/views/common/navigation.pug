@@ -11,10 +11,10 @@ ul
         li
             a(href="/login") Login
     else
-        if (loggedUser.type == 'manager')
+        if (loggedUser.type == 'admin')
             li
                 a(href="/admin") Admin
-        if (loggedUser.type == 'appartment')
+        if (loggedUser.type == 'apartment')
             li
                 a(href="/my-appartment") My appartment
         li

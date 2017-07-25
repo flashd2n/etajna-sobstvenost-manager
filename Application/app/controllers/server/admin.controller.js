@@ -4,11 +4,11 @@ class AdminController {
     }
 
     admin(req, res) {
-        this.data.registrationRequests.getAll()
-            .then((registrationRequests) => {
+        this.data.requests.getAll()
+            .then((requests) => {
                 res.render('admin', {
                     loggedUser: req.user,
-                    registrationRequests,
+                    requests,
                 });
             });
     }
@@ -17,24 +17,24 @@ class AdminController {
         res.render('create_expense', { loggedUser: req.user });
     }
 
-    approveExpense(req, res) {
+    approveRequest(req, res) {
         req.flash('info', 'Registration approved!');
-        this.data.registrationRequests.getById(req.params.request_id)
+        this.data.requests.getById(req.params.request_id)
             .then((request) => {
-                this.data.appartments.setUsernameAndPassword(
-                    request.appartmentId,
+                this.data.apartments.setUsernameAndPassword(
+                    request.number,
                     request.username,
-                    request.passwordHash);
+                    request.password);
 
-                this.data.registrationRequests
-                    .deleteByAppartmentId(request.appartmentId);
+                this.data.requests
+                    .deleteByAppartmentId(request.apartmentId);
                 this.admin(req, res);
             });
     }
 
-    rejectExpense(req, res) {
+    rejectRequest(req, res) {
         req.flash('info', 'Registration rejected!');
-        this.data.registrationRequests.deleteById(req.params.request_id)
+        this.data.requests.deleteById(req.params.request_id)
             .then(() => {
                 this.admin(req, res);
             });

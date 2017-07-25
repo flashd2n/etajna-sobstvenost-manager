@@ -5,11 +5,11 @@ block contents
     div
         form(method="POST")
             div
-                label Appartment:
+                label Appartment number:
                     select(name="appartment_id")
                         each unregisteredAppartment in unregisteredAppartments
                             option(value=unregisteredAppartment._id) 
-                                | #{unregisteredAppartment.appartmentNameOrNumber}
+                                | #{unregisteredAppartment.number}
             div
                 label Username:
                 input(type="text" name="username" placeholder="Username")

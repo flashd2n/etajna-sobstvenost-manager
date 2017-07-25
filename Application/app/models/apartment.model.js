@@ -1,6 +1,6 @@
 const BaseModel = require('./base/base.model');
 
-class Appartment extends BaseModel {
+class Apartment extends BaseModel {
     constructor() {
         super();
     }
@@ -12,4 +12,4 @@ class Appartment extends BaseModel {
     // }
 }
 
-module.exports = Appartment;
+module.exports = Apartment;

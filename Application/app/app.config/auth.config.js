@@ -5,7 +5,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const sha256 = require('sha256');
 
-const configAuth = (app, apartments, manager, db, config) => {
+const configAuth = (app, apartments, admin, db, config) => {
     app.use(cookieParser());
     app.use(session({
         secret: config.cookie.secret,
@@ -21,14 +21,14 @@ const configAuth = (app, apartments, manager, db, config) => {
         (username, password, done) => {
             const passowrdHash = sha256(password);
             console.log(passowrdHash);
-            manager
-                .checkValidUserUsernameAndPasswordHash(username, passowrdHash)
+            admin
+                .authAdmin(username, passowrdHash)
                 .then((user) => {
                     done(null, user);
                 })
                 .catch(() => {
                     apartments
-                        .checkValidUserUsernameAndPasswordHash(
+                        .authApartment(
                             username,
                             passowrdHash)
                         .then((user) => {
@@ -47,15 +47,15 @@ const configAuth = (app, apartments, manager, db, config) => {
     });
 
     passport.deserializeUser((loggedUser, done) => {
-        if (loggedUser.type === 'manager') {
-            manager.getById(loggedUser.id)
+        if (loggedUser.type === 'admin') {
+            admin.getById(loggedUser.id)
                 .then((user) => {
                     done(null, user);
                 })
                 .catch((err) => {
                     done(err);
                 });
-        } else if (loggedUser.type === 'appartment') {
+        } else if (loggedUser.type === 'apartment') {
             apartments.getById(loggedUser.id)
                 .then((user) => {
                     done(null, user);

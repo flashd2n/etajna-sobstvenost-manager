@@ -8,10 +8,10 @@ const attach = (app, controllerFactory) => {
 
     router.route('/register')
         .get((req, res) => {
-            controller.register(req, res);
+            controller.getForm(req, res);
         })
         .post((req, res) => {
-            controller.doRegister(req, res);
+            controller.register(req, res);
         });
 
     router.route('/login')

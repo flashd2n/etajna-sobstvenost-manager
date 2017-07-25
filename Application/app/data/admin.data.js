@@ -1,14 +1,14 @@
 const BaseData = require('./base/base.data');
-const Manager = require('../models/manager.model');
+const Admin = require('../models/admin.model');
 
-class ManagerData extends BaseData {
+class AdminData extends BaseData {
     constructor(database, validator) {
-        super(database, Manager, validator);
+        super(database, Admin, validator);
     }
 
     getUsername() {
         return this.collection.findOne()
-            .then((manager) => Promise.resolve(manager.username));
+            .then((admin) => Promise.resolve(admin.username));
     }
 
     setUsernameAndPasswordHash(username, passowrdHash) {
@@ -19,7 +19,7 @@ class ManagerData extends BaseData {
         });
     }
 
-    checkValidUserUsernameAndPasswordHash(username, passwordHash) {
+    authAdmin(username, passwordHash) {
         return this.collection
             .findOne({
                 username,
@@ -36,11 +36,6 @@ class ManagerData extends BaseData {
                 return this.ModelClass.toViewModel(manager);
             });
     }
-
-    _getCollectionName() {
-        // otherwise the database collection will be called 'managers'
-        return 'manager';
-    }
 }
 
-module.exports = ManagerData;
+module.exports = AdminData;

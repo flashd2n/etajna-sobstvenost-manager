@@ -5,15 +5,15 @@ block contents
     div
         div Requests
         div
-            each registrationRequest in registrationRequests
+            each request in requests
                 div
-                    | #{registrationRequest.appartmentNameOrNumber}
+                    | #{request.number}
                 div
-                    | #{registrationRequest.username}
+                    | #{request.username}
                 div
-                    a.approve(href="/approve-request/"+registrationRequest._id)
+                    a.approve(href="/approve-request/"+request._id)
                         | Approve
-                    a.reject(href="/reject-request/"+registrationRequest._id)
+                    a.reject(href="/reject-request/"+request._id)
                         | Reject
             else 
                 | Currently there are no pending registration requests.

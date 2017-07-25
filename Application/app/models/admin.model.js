@@ -1,6 +1,6 @@
 const BaseModel = require('./base/base.model');
 
-class Manager extends BaseModel {
+class Admin extends BaseModel {
     constructor() {
         super();
     }
@@ -12,4 +12,4 @@ class Manager extends BaseModel {
     // }
 }
 
-module.exports = Manager;
+module.exports = Admin;

@@ -30,9 +30,10 @@ class PublicController {
         });
     }
 
-    register(req, res) {
-        this.data.appartments.getUnregistered()
+    getForm(req, res) {
+        this.data.apartments.getUnregistered()
             .then((unregisteredAppartments) => {
+                // console.log(unregisteredAppartments);
                 res.render('register', {
                     loggedUser: req.user,
                     unregisteredAppartments,
@@ -40,49 +41,52 @@ class PublicController {
             });
     }
 
-    doRegister(req, res) {
+    register(req, res) {
         this.data.requests.getByUsername(req.body.username)
             .then((registrationRequest) => {
                 if (registrationRequest) {
                     req.flash('error', 'Username already exists');
-                    this.register(req, res);
+                    this.getForm(req, res);
                     return Promise.reject();
                 }
-
-                return this.data.appartments.getByUsername(req.body.username);
+                return this.data.apartments.getByUsername(req.body.username);
             })
-            .then((appartment) => {
-                if (appartment) {
+            .then((apartment) => {
+                if (apartment) {
                     req.flash('error', 'Username already exists');
-                    this.register(req, res);
+                    this.getForm(req, res);
+
                     return Promise.reject();
                 }
 
-                return this.data.manager.getUsername();
+                return this.data.admin.getUsername();
             })
             .then((username) => {
                 if (username === req.body.username) {
                     req.flash('error', 'Username already exists');
-                    this.register(req, res);
+                    this.getForm(req, res);
                     return Promise.reject();
                 }
 
-                return this.data.appartments.getById(req.body.appartment_id);
+                return this.data.apartments.getById(req.body.appartment_id);
             })
-            .then((appartment) => {
-                const newRegistrationRequest = new Request();
-                newRegistrationRequest.appartmentId = req.body.appartment_id;
-                newRegistrationRequest
-                    .appartmentNameOrNumber = appartment.appartmentNameOrNumber;
-                newRegistrationRequest.username = req.body.username;
-                newRegistrationRequest.passwordHash = sha256(req.body.password);
-                this.data.registrationRequests.create(newRegistrationRequest);
+            .then((apartment) => {
+                const newRequest = new Request();
+                newRequest.apartmentId = req.body.appartment_id;
+                newRequest.number = apartment.number;
+                newRequest.username = req.body.username;
+                newRequest.password = sha256(req.body.password);
+
+                this.data.requests.create(newRequest);
                 req.flash('info', 'Thanks for registering. '
                     + 'You will be able to login once the manager '
                     + 'has approved your request.');
                 res.redirect(303, '/');
 
                 return Promise.resolve();
+            })
+            .catch((err) => {
+                console.log(err);
             });
     }
 
