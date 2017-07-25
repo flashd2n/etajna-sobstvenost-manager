@@ -63,7 +63,6 @@ class BaseData {
     }
 
     _getCollectionName() {
-        console.log(this.ModelClass.name.toLowerCase() + 's');
         return this.ModelClass.name.toLowerCase() + 's';
     }
 }

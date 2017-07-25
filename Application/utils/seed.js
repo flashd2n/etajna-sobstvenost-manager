@@ -229,7 +229,6 @@ const seed = async (db) => {
                 moveInDate: a.moveInDate,
             };
         });
-    console.log(emptyApts);
 
     const requests = Array.from({ length: 5 })
         .map((_, index) => {
