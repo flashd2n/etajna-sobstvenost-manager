@@ -1,4 +1,3 @@
-// const { ObjectId } = require('mongodb');
 const BaseData = require('./base/base.data');
 const Apartment = require('../models/apartment.model');
 
@@ -34,22 +33,16 @@ class ApartmentsData extends BaseData {
     }
 
     getUnregistered() {
-        // idea basedata -> getByUsername()
         const filter = { username: '' };
         const options = {};
-        let result = this.collection
+        return this.collection
             .find(filter, options)
-            .toArray();
-
-        if (this.ModelClass.toViewModel) {
-            console.log(this.ModelClass);
-            result = result.then((models) => {
+            .toArray()
+            .then((models) => {
                 return models
                     .map((model) =>
                         this.ModelClass.toViewModel(model));
             });
-        }
-        return result;
     }
 
     authApartment(username, passwordHash) {
@@ -58,7 +51,6 @@ class ApartmentsData extends BaseData {
                 username,
             })
             .then((apartment) => {
-                // console.log(apartment);
                 if (!apartment) {
                     throw new Error('Invalid user');
                 }

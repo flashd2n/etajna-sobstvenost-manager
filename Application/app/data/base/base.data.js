@@ -12,26 +12,23 @@ class BaseData {
     getAll() {
         const filter = {};
         const options = {};
-        let result = this.collection
-            .find(filter, options)
-            .toArray();
 
-        if (this.ModelClass.toViewModel) {
-            result = result.then((models) => {
-                console.log(models);
+        return this.collection.find(filter, options)
+            .toArray()
+            .then((models) => {
                 return models
                     .map((model) =>
                         this.ModelClass.toViewModel(model));
+            })
+            .catch((err) => {
+                console.log(err);
             });
-        }
-
-        return result;
     }
 
     getById(id) {
         const filter = { _id: new ObjectId(id) };
         const options = {};
-        const result = this.collection
+        return this.collection
             .findOne(filter, options)
             .then((foundRecord) => {
                 if (!foundRecord) {
@@ -44,11 +41,9 @@ class BaseData {
 
                 return foundRecord;
             });
-        return result;
     }
 
     create(model) {
-        // console.log(model);
         if (!this._isModelValid(model)) {
             return Promise.reject('Invalid model');
         }
@@ -61,13 +56,14 @@ class BaseData {
 
     _isModelValid(model) {
         if (!this.validator) {
-            return true;
+            return false;
         }
 
         return this.validator.isValid(model);
     }
 
     _getCollectionName() {
+        console.log(this.ModelClass.name.toLowerCase() + 's');
         return this.ModelClass.name.toLowerCase() + 's';
     }
 }

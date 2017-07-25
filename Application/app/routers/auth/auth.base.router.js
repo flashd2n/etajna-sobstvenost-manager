@@ -4,7 +4,7 @@ const passport = require('passport');
 
 
 const attach = (app, controllerFactory) => {
-    const controller = controllerFactory.getPublicController();
+    const controller = controllerFactory.getAuthController();
 
     router.route('/register')
         .get((req, res) => {
@@ -16,6 +16,7 @@ const attach = (app, controllerFactory) => {
 
     router.route('/login')
         .get((req, res) => {
+            console.log(controller);
             controller.login(req, res);
         })
         .post(passport.authenticate('local', {

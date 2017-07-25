@@ -3,7 +3,7 @@ class AdminController {
         this.data = data;
     }
 
-    admin(req, res) {
+    renderPage(req, res) {
         this.data.requests.getAll()
             .then((requests) => {
                 res.render('admin', {
@@ -28,7 +28,7 @@ class AdminController {
 
                 this.data.requests
                     .deleteByAppartmentId(request.apartmentId);
-                this.admin(req, res);
+                this.renderPage(req, res);
             });
     }
 
@@ -36,7 +36,7 @@ class AdminController {
         req.flash('info', 'Registration rejected!');
         this.data.requests.deleteById(req.params.request_id)
             .then(() => {
-                this.admin(req, res);
+                this.renderPage(req, res);
             });
     }
 }

@@ -8,7 +8,8 @@ class BaseModel {
 
         Object.keys(data)
             .forEach((prop) => {
-                if (prop === 'password' && this.name.toLowerCase() !== 'request') {
+                if (prop === 'password' &&
+                    this.name.toLowerCase() !== 'request') {
                     return;
                 }
                 viewModel[prop] = data[prop];

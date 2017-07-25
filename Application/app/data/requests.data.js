@@ -23,14 +23,11 @@ class RequestsData extends BaseData {
     deleteById(id) {
         const filter = { _id: new ObjectId(id) };
         const options = {};
-        const result = this.collection
+        return this.collection
             .remove(filter, options);
-        return result;
     }
 
     deleteByAppartmentId(apartmentId) {
-        console.log('DELETE');
-        console.log(apartmentId);
         const filter = { apartmentId };
         const options = {};
         return this.collection

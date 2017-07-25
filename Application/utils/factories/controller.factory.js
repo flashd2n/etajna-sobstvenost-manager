@@ -18,7 +18,7 @@ class ControllersFactory {
     }
 
     getAuthController() {
-
+        return new this.controllers.AuthController(this.data);
     }
 
     getApartmentController() {

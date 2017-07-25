@@ -1,6 +1,8 @@
 const RequestsData = require('./requests.data');
 const ApartmentsData = require('./apartments.data');
 const AdminData = require('./admin.data');
+const ExpensesData = require('./expense.data');
+const FeesData = require('./fee.data');
 
 const init = (database, validators) => {
     return Promise.resolve({
@@ -11,6 +13,8 @@ const init = (database, validators) => {
             validators.apartmentValidator),
         admin: new AdminData(database,
             validators.managerValidator),
+        expenses: new ExpensesData(database, validators.expenseValidator),
+        fees: new FeesData(database, validators.feeValidator),
     });
 };
 

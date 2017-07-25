@@ -7,7 +7,7 @@ const attach = (app, controllersFactory) => {
 
     router.route('/admin')
         .get((req, res) => {
-            controller.admin(req, res);
+            controller.renderPage(req, res);
         });
 
     router.route('/create-expense')

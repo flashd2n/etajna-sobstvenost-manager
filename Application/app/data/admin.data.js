@@ -12,7 +12,7 @@ class AdminData extends BaseData {
     }
 
     setUsernameAndPasswordHash(username, passowrdHash) {
-        this.collection.drop(); // only one record in this collection allowed
+        this.collection.drop();
         return this.create({
             username,
             passowrdHash,
