@@ -26,17 +26,6 @@ const seed = async (db) => {
 
     await adminCollection.insertOne(admin);
 
-    const requests = Array.from({ length: 5 })
-        .map((_, index) => {
-            return {
-                number: 25 + index,
-                password: password,
-                username: `apt${25 + index}`,
-            };
-        });
-
-    await requestsCollection.insertMany(requests);
-
     const apartments = Array.from({ length: 24 })
         .map((_, index) => {
             return {
@@ -229,6 +218,31 @@ const seed = async (db) => {
         });
 
     await apartmentsCollection.insertMany(moreApts);
+
+    const emptyApts = (await apartmentsCollection
+        .find({ number: { $gte: 25 } }).toArray())
+        .map((a) => {
+            return {
+                _id: new ObjectID(a._id),
+                number: a.number,
+                username: a.username,
+                moveInDate: a.moveInDate,
+            };
+        });
+    console.log(emptyApts);
+
+    const requests = Array.from({ length: 5 })
+        .map((_, index) => {
+            return {
+                number: 25 + index,
+                password: password,
+                username: `apt${25 + index}`,
+                apartmentId: emptyApts
+                    .find((x) => x.number === (25 + index))._id + '',
+            };
+        });
+
+    await requestsCollection.insertMany(requests);
 };
 
 module.exports = seed;
