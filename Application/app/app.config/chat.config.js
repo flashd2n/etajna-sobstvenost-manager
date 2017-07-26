@@ -1,5 +1,5 @@
 const configApp = (io) => {
-    const users = [];
+    let users = [];
 
     io.on('connection', (socket) => {
         console.log('new connection');
@@ -14,8 +14,23 @@ const configApp = (io) => {
             io.emit('all-users', users);
         });
 
+        socket.on('get-users', () => {
+            io.emit('all-users', users);
+        });
+
+        socket.on('send-message', (data) => {
+            const message = `${data.username}: ${data.message}`;
+            io.emit('message-received', {
+                message,
+            });
+        });
+
+
         socket.on('disconnect', () => {
-            console.log('BYEEE');
+            users = users.filter((u) => {
+                return u.nickname !== socket.nickname;
+            });
+            io.emit('all-users', users);
         });
     });
 };

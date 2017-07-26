@@ -1,9 +1,9 @@
 extends common/container
 block contents
     h1 Drijbai Communications
-    div#users
+    ul#users
     div.messages
-    form(action='javascript:void(0)')
+    form#chatBox(action='javascript:void(0)')
         label(for='message') &gt;
         input#message(type='text', required='', autofocus='')
     script(src='/socket.io/socket.io.js')
