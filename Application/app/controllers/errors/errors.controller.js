@@ -19,6 +19,10 @@ class ErrorController {
             return res.status(code).send(message);
         }
 
+        if (code === 500) {
+            return res.status(code).json(error);
+        }
+
         return res.status(400).send('Some unexpected error');
     }
 }

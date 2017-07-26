@@ -8,7 +8,7 @@ const config = {
     port: process.env.PORT || 3001,
     cookie: {
         secret: process.env.COOKIE_SECRET || 'Very Secret Much WoW',
-        expirationTime: new Date(Date.now() + 60 * 60 * 1000),
+        expirationTime: new Date(Date.now() + 24 * 60 * 60 * 1000),
     },
 };
 

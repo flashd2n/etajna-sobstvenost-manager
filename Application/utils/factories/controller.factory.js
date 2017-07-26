@@ -24,6 +24,10 @@ class ControllersFactory {
     getApartmentController() {
 
     }
+
+    getApiController() {
+        return new this.controllers.ApiController(this.data);
+    }
 }
 
 module.exports = ControllersFactory;

@@ -1,12 +1,10 @@
-doctype html
-head
-    meta(name='viewport', content='minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no')
-    meta(charset='utf-8')
-    title Chat
-h1 Drijbai Communications
-.messages
-form(action='javascript:void(0)')
-    label(for='message') &gt;
-    input#message(type='text', required='', autofocus='')
-script(src='/socket.io/socket.io.js')
-script(src='/public/scripts/chat.client.js')
+extends common/container
+block contents
+    h1 Drijbai Communications
+    ul.users
+    div.messages
+    form(action='javascript:void(0)')
+        label(for='message') &gt;
+        input#message(type='text', required='', autofocus='')
+    script(src='/socket.io/socket.io.js')
+    script(src='/public/scripts/chat.client.js')

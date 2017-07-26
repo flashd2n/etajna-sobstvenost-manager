@@ -16,7 +16,6 @@ const attach = (app, controllerFactory) => {
 
     router.route('/login')
         .get((req, res) => {
-            console.log(controller);
             controller.login(req, res);
         })
         .post(passport.authenticate('local', {

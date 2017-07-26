@@ -20,7 +20,6 @@ const configAuth = (app, apartments, admin, db, config) => {
     passport.use(new Strategy(
         (username, password, done) => {
             const passowrdHash = sha256(password);
-            console.log(passowrdHash);
             admin
                 .authAdmin(username, passowrdHash)
                 .then((user) => {
