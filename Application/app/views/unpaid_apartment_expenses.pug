@@ -1,0 +1,18 @@
+extends common/container
+block contents
+    h1
+        | Unpaid expenses for Apartment #{currentApartment.number} :
+        div
+            | Expenses:
+        ul 
+             each expense in currentApartment.notPaidExpenses
+                 li
+                     | #{expense.name} - $#{expense.cost}
+        div
+            | Fees:
+        ul 
+            each fee in currentApartment.notPaidFees
+                li
+                    | #{fee.month}.#{fee.year} - $#{fee.cost}
+
+        

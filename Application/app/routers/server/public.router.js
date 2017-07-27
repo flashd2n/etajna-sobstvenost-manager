@@ -15,10 +15,14 @@ const attach = (app, controllersFactory) => {
     //     });
 
     router.route('/page-of-shame')
-        .get(controller.pageOfShame);
+        .get((req, res) => {
+            controller.pageOfShame(req, res);
+        });
 
-    router.route('/page-of-shame/:appartmentId')
-        .get(controller.unpaidAppartmentExpenses);
+    router.route('/page-of-shame/:apartmentId')
+        .get((req, res) => {
+            controller.notPaidApartmentExpenses(req, res);
+        });
 
     router.route('/expenses')
         .get(controller.currentExpense);

@@ -2,3 +2,14 @@ extends common/container
 block contents
     h1
         | Page of Shame
+
+        each apartment in POSApartments
+            - var FeesDebts = apartment.notPaidFees.reduce((x, y) => x + y.cost, 0);
+            - var ExpensesDebts = apartment.notPaidExpenses.reduce((x, y) => x + y.cost, 0);
+            - var totalDebts = FeesDebts + ExpensesDebts;
+            
+            ul
+                li
+                    a(href = "/page-of-shame/:" + apartment.id) Apartment #{apartment.number} 
+                    | - Total Debts : $ #{totalDebts}
+                    

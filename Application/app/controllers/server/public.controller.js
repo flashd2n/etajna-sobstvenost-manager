@@ -8,12 +8,23 @@ class PublicController {
     }
 
     pageOfShame(req, res) {
-        res.render('page_of_shame');
+        // console.log(this.data.apartments.getPOSApartments);
+        this.data.apartments.getPOSApartments()
+            .then((POSApartments) => {
+                res.render('page_of_shame', {
+                    POSApartments,
+                });
+            });
     }
 
-    unpaidAppartmentExpenses(req, res) {
-        res.render('unpaid_appartment_expenses',
-            { appartmentId: req.params.appartmentId });
+    notPaidApartmentExpenses(req, res) {
+        console.log();
+        this.data.apartments.getById(req.params.apartmentId)
+            .then((currentApartment) => {
+                res.render('unpaid_apartment_expenses', {
+                    currentApartment,
+                });
+            });
     }
 
     currentExpenses(req, res) {

@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const BaseData = require('./base/base.data');
 const Apartment = require('../models/apartment.model');
 
@@ -32,6 +33,20 @@ class ApartmentsData extends BaseData {
             });
     }
 
+    getById(id) {
+        const trimmedId = id.toString().substring(1, 25);
+        const filter = { _id: new ObjectId(trimmedId) };
+        const options = {};
+        return this.collection
+            .findOne(filter, options)
+            .then((model) => {
+                if (!model) {
+                    return Promise.resolve(null);
+                }
+                return Promise.resolve(this.ModelClass.toViewModel(model));
+            });
+    }
+
     getUnregistered() {
         const filter = { username: '' };
         const options = {};
@@ -44,6 +59,23 @@ class ApartmentsData extends BaseData {
                         this.ModelClass.toViewModel(model));
             });
     }
+
+    getPOSApartments() {
+        const filter = {
+            $where:
+            'this.notPaidFees.length > 0 || this.notPaidExpenses.length > 0',
+        };
+        const options = {};
+        return this.collection
+            .find(filter, options)
+            .toArray()
+            .then((models) => {
+                return models
+                    .map((model) =>
+                        this.ModelClass.toViewModel(model));
+            });
+    }
+
 
     authApartment(username, passwordHash) {
         return this.collection
