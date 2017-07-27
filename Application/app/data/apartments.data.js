@@ -34,7 +34,6 @@ class ApartmentsData extends BaseData {
     }
 
     getById(id) {
-        // const trimmedId = id.toString().substring(1, 25);
         const filter = { _id: new ObjectId(id) };
         const options = {};
         return this.collection
@@ -77,6 +76,10 @@ class ApartmentsData extends BaseData {
                     .map((model) =>
                         this.ModelClass.toViewModel(model));
             });
+    }
+
+    getTotalExpenses(apt){
+        this.model.getExpenses(apt);
     }
 
 
