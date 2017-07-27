@@ -34,8 +34,8 @@ class ApartmentsData extends BaseData {
     }
 
     getById(id) {
-        const trimmedId = id.toString().substring(1, 25);
-        const filter = { _id: new ObjectId(trimmedId) };
+        // const trimmedId = id.toString().substring(1, 25);
+        const filter = { _id: new ObjectId(id) };
         const options = {};
         return this.collection
             .findOne(filter, options)

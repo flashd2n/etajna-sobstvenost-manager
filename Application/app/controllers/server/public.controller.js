@@ -18,7 +18,7 @@ class PublicController {
     }
 
     notPaidApartmentExpenses(req, res) {
-        console.log();
+        console.log(req.params.apartmentId);
         this.data.apartments.getById(req.params.apartmentId)
             .then((currentApartment) => {
                 res.render('unpaid_apartment_expenses', {

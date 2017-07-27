@@ -55,8 +55,10 @@ const configAuth = (app, apartments, admin, db, config) => {
                     done(err);
                 });
         } else if (loggedUser.type === 'apartment') {
+            console.log(loggedUser.id);
             apartments.getById(loggedUser.id)
                 .then((user) => {
+                    // does not get user here!!!
                     done(null, user);
                 })
                 .catch((err) => {
