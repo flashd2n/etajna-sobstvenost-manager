@@ -78,7 +78,7 @@ class ApartmentsData extends BaseData {
             });
     }
 
-    getTotalExpenses(apt){
+    getTotalExpenses(apt) {
         this.model.getExpenses(apt);
     }
 
@@ -110,6 +110,21 @@ class ApartmentsData extends BaseData {
                 const options = {};
                 this.collection
                     .update(filter, updatedApartment, options);
+            });
+    }
+
+    processFeePayment(apt, feeId) {
+        const updatedApt = this.ModelClass.payFee(apt, feeId);
+        const filter = {
+            _id: updatedApt._id,
+        };
+
+        return this.collection.updateOne(filter, updatedApt)
+            .then(() => {
+                return true;
+            })
+            .catch((err) => {
+                Promise.reject(err);
             });
     }
 }

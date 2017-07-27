@@ -28,25 +28,67 @@
         });
     });
 
+    const payFee = (feeId) => {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: `/api/payfee/${aptId}`,
+                data: {
+                    feeId: feeId,
+                },
+                type: 'PUT',
+                success: (res) => {
+                    resolve(res);
+                },
+                error: (err) => {
+                    reject(err);
+                },
+            });
+        });
+    };
+
+    let feeId;
+    let expenseId;
     Promise.all([getNotPaidFees, getNotPaidExpenses])
         .then((data) => {
             const fees = data[0];
             const expenses = data[1];
             populateFeesTable(fees);
             populateExpensesTable(expenses);
+            return;
+        })
+        .then(() => {
+            $('.payFee').on('click', (evt) => {
+                const $clickedBtn = $(evt.target);
+                const $feeItem = $clickedBtn.parent();
+                feeId = $feeItem.data().id;
+                payFee(feeId)
+                    .then((res) => {
+                        if (res === 'Success') {
+                            $feeItem.remove();
+                        }
+                    })
+                    .catch((er) => {
+                        console.log(er);
+                    });
+            });
+
+            $('.payExpense').on('click', (evt) => {
+                const $clickedBtn = $(evt.target);
+                const $expenseItem = $clickedBtn.parent();
+                expenseId = $expenseItem.data().id;
+            });
         })
         .catch((err) => {
             console.log(err);
         });
-    // input meta-data on each entry on get
-    // use that meta-data on put to get the fee/expense id
+
     const populateFeesTable = (fees) => {
         const table = $('#fees');
         fees.forEach((fee) => {
-            const row = $('<tr>');
+            const row = $('<tr>').data('id', fee._id);
             const month = $('<td>').text(fee.month);
             const cost = $('<td>').text(fee.cost);
-            const button = $('<button>').text('Pay Now');
+            const button = $('<button>').text('Pay Now').addClass('payFee');
             row.append(month);
             row.append(cost);
             row.append(button);
@@ -56,12 +98,11 @@
 
     const populateExpensesTable = (expenses) => {
         const table = $('#expenses');
-        console.log(expenses);
         expenses.forEach((expense) => {
-            const row = $('<tr>');
+            const row = $('<tr>').data('id', expense._id);
             const name = $('<td>').text(expense.name);
             const cost = $('<td>').text(expense.cost);
-            const button = $('<button>').text('Pay Now');
+            const button = $('<button>').text('Pay Now').addClass('payExpense');
             row.append(name);
             row.append(cost);
             row.append(button);

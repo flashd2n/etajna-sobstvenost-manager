@@ -18,6 +18,11 @@ const attach = (app, controllerFactory) => {
             controller.getNotPaidExpensesById(req, res, next);
         });
 
+    router.route('/payfee/:aptId')
+        .put((req, res, next) => {
+            controller.payFee(req, res, next);
+        });
+
     app.use('/api', router);
 };
 
