@@ -11,6 +11,32 @@ class ApiController {
         }
         return res.json(req.user);
     }
+
+    getNotPaidFeesById(req, res, next) {
+        this.data.apartments.getById(req.params.id)
+            .then((apt) => {
+                if (!apt) {
+                    return next(new Error('Not such apartment'));
+                }
+                return res.json(apt.notPaidFees);
+            })
+            .catch((err) => {
+                next(new Error(err));
+            });
+    }
+
+    getNotPaidExpensesById(req, res, next) {
+        this.data.apartments.getById(req.params.id)
+            .then((apt) => {
+                if (!apt) {
+                    return next(new Error('Not such apartment'));
+                }
+                return res.json(apt.notPaidExpenses);
+            })
+            .catch((err) => {
+                next(new Error(err));
+            });
+    }
 }
 
 module.exports = ApiController;

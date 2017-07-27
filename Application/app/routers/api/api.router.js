@@ -8,6 +8,16 @@ const attach = (app, controllerFactory) => {
     router.route('/getuser')
         .get(authController.verifyLoggedUser, controller.retriveUser);
 
+    router.route('/notpaidfees/:id')
+        .get((req, res, next) => {
+            controller.getNotPaidFeesById(req, res, next);
+        });
+
+    router.route('/notpaidexpenses/:id')
+        .get((req, res, next) => {
+            controller.getNotPaidExpensesById(req, res, next);
+        });
+
     app.use('/api', router);
 };
 

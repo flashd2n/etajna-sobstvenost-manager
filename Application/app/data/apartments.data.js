@@ -44,6 +44,9 @@ class ApartmentsData extends BaseData {
                     return Promise.resolve(null);
                 }
                 return Promise.resolve(this.ModelClass.toViewModel(model));
+            })
+            .catch((err) => {
+                Promise.reject(err);
             });
     }
 

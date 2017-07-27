@@ -16,7 +16,7 @@ ul
                 a(href="/admin") Admin
         if (loggedUser.type == 'apartment')
             li
-                a(href="/my-apartment") My apartment
+                a(href="/apartment/" + loggedUser.id) My apartment
         li
             a(href="/chat") Chat                
         li
