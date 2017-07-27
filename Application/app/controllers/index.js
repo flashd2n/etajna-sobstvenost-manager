@@ -4,4 +4,5 @@ module.exports = {
     ErrorController: require('./errors/errors.controller'),
     AuthController: require('./auth/auth.controller'),
     ApiController: require('./api/api.controller'),
+    ApartmentController: require('./server/apartment.controller'),
 };

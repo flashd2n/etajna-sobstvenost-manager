@@ -22,7 +22,7 @@ class ControllersFactory {
     }
 
     getApartmentController() {
-
+        return new this.controllers.ApartmentController(this.data);
     }
 
     getApiController() {
