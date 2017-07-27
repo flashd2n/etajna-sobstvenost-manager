@@ -46,8 +46,27 @@
         });
     };
 
+    const payExpense = (expenseId) => {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: `/api/payexpense/${aptId}`,
+                data: {
+                    expenseId: expenseId,
+                },
+                type: 'PUT',
+                success: (res) => {
+                    resolve(res);
+                },
+                error: (err) => {
+                    reject(err);
+                },
+            });
+        });
+    };
+
     let feeId;
     let expenseId;
+
     Promise.all([getNotPaidFees, getNotPaidExpenses])
         .then((data) => {
             const fees = data[0];
@@ -76,6 +95,15 @@
                 const $clickedBtn = $(evt.target);
                 const $expenseItem = $clickedBtn.parent();
                 expenseId = $expenseItem.data().id;
+                payExpense(expenseId)
+                    .then((res) => {
+                        if (res === 'Success') {
+                            $expenseItem.remove();
+                        }
+                    })
+                    .catch((er) => {
+                        console.log(er);
+                    });
             });
         })
         .catch((err) => {

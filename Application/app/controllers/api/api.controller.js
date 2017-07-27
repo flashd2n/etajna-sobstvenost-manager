@@ -41,10 +41,29 @@ class ApiController {
     payFee(req, res, next) {
         const aptId = req.params.aptId;
         const feeId = req.body.feeId;
-        // get the apartment by Id
+
         this.data.apartments.getById(aptId)
             .then((apt) => {
                 return this.data.apartments.processFeePayment(apt, feeId);
+            })
+            .then((isSuccess) => {
+                if (isSuccess) {
+                    res.send('Success');
+                }
+            })
+            .catch((err) => {
+                res.send('Fail');
+            });
+    }
+
+    payExpense(req, res, next) {
+        const aptId = req.params.aptId;
+        const expenseId = req.body.expenseId;
+
+        this.data.apartments.getById(aptId)
+            .then((apt) => {
+                return this.data.apartments
+                    .processExpensePayment(apt, expenseId);
             })
             .then((isSuccess) => {
                 if (isSuccess) {

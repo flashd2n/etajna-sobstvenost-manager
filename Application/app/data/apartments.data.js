@@ -127,6 +127,21 @@ class ApartmentsData extends BaseData {
                 Promise.reject(err);
             });
     }
+
+    processExpensePayment(apt, expenseId) {
+        const updatedApt = this.ModelClass.payExpense(apt, expenseId);
+        const filter = {
+            _id: updatedApt._id,
+        };
+
+        return this.collection.updateOne(filter, updatedApt)
+            .then(() => {
+                return true;
+            })
+            .catch((err) => {
+                Promise.reject(err);
+            });
+    }
 }
 
 module.exports = ApartmentsData;
