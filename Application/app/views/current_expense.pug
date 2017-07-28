@@ -1,6 +1,14 @@
 extends common/container
 block contents
     h1
-        | Expense
-        div
-            | Expense id: #{expenseId} (delete this, brato!)
+        | Expense : #{expense.name}
+    p
+        | Description: #{expense.description}
+    P
+        | Status: #{expense.state}
+    p
+        | Payment: #{expense.cost}
+    p
+        | Number of collected payments: #{expense.paid.length}
+    p
+        | Cost collection progress: #{collected} of #{totalCost}

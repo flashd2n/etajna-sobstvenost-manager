@@ -21,6 +21,27 @@ class ExpensesData extends BaseData {
                 Promise.reject(err);
             });
     }
+
+    getCompletedExpenses() {
+        const filter = {
+            state: 'completed',
+        };
+
+        return this.collection.find(filter).toArray()
+            .then((dbExp) => {
+                return dbExp.map((exp) => {
+                    return this.ModelClass.toViewModel(exp);
+                });
+            })
+            .catch((err) => {
+                Promise.reject(err);
+            });
+    }
+
+    getCollectedPayments(expense) {
+        const collectedPayments = expense.paid.length * expense.cost;
+        return collectedPayments;
+    }
 }
 
 module.exports = ExpensesData;

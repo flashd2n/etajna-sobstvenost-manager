@@ -1,4 +1,20 @@
 extends common/container
 block contents
     h1
-        | Current expenses
+        | All Expenses
+    h2
+        | Pending Expenses
+    ul
+        each expense in pending
+            li
+                a(href="/expenses/" + expense._id)
+                    | Name: #{expense.name} 
+                | Payment Cost: #{expense.cost}
+    h2
+        | Completed Expenses
+    ul
+        each expense in completed
+            li
+                a(href="/expenses/" + expense._id)
+                    | Name: #{expense.name} 
+                | Payment Cost: #{expense.cost}

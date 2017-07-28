@@ -8,12 +8,6 @@ const attach = (app, controllersFactory) => {
     router.route('/')
         .get(controller.home);
 
-    // router.route('/error')
-    //     .get((req, res, next) => {
-    //         const error = { message: 'OOPS', code: 202 };
-    //         next(new Error(JSON.stringify(error)));
-    //     });
-
     router.route('/page-of-shame')
         .get((req, res) => {
             controller.pageOfShame(req, res);
@@ -25,10 +19,14 @@ const attach = (app, controllersFactory) => {
         });
 
     router.route('/expenses')
-        .get(controller.currentExpense);
+        .get((req, res, next) => {
+            controller.allExpenses(req, res, next);
+        });
 
     router.route('/expenses/:expenseId')
-        .get(controller.currentExpense);
+        .get((req, res, next) => {
+            controller.currentExpense(req, res, next);
+        });
 
     app.use('/', router);
 };
