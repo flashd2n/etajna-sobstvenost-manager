@@ -5,8 +5,6 @@ const ExpensesData = require('./expenses.data');
 const FeesData = require('./fee.data');
 
 const init = (database, models, validators) => {
-    console.log(models);
-    console.log(validators);
     return Promise.resolve({
         db: database,
         requests: new RequestsData(database, models.requests,
