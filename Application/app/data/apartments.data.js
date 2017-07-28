@@ -1,10 +1,9 @@
 const { ObjectId } = require('mongodb');
 const BaseData = require('./base/base.data');
-const Apartment = require('../models/apartment.model');
 
 class ApartmentsData extends BaseData {
-    constructor(database, validator) {
-        super(database, Apartment, validator);
+    constructor(database, model, validator) {
+        super(database, model, validator);
     }
 
     getByNumber(number) {

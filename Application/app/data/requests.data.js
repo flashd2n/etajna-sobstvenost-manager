@@ -1,10 +1,9 @@
 const { ObjectId } = require('mongodb');
 const BaseData = require('./base/base.data');
-const Request = require('../models/request.model');
 
 class RequestsData extends BaseData {
-    constructor(database, validator) {
-        super(database, Request, validator);
+    constructor(database, model, validator) {
+        super(database, model, validator);
     }
 
     getByUsername(username) {

@@ -1,9 +1,8 @@
 const BaseData = require('./base/base.data');
-const Admin = require('../models/admin.model');
 
 class AdminData extends BaseData {
-    constructor(database, validator) {
-        super(database, Admin, validator);
+    constructor(database, model, validator) {
+        super(database, model, validator);
     }
 
     getUsername() {

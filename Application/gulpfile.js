@@ -80,9 +80,18 @@ gulp.task('start-server', ['auto-setup', 'lint'], () => {
     const { ControllersFactory } = require('./utils/factories');
     const validators = require('./app/validators');
 
+    const models = {
+        requests: require('./app/models/request.model'),
+        apartments: require('./app/models/apartment.model'),
+        admin: require('./app/models/admin.model'),
+        expenses: require('./app/models/expense.model'),
+        fees: require('./app/models/fee.model'),
+    };
+
     return Promise.resolve()
         .then(() => require('./database').init(config.connectionString))
-        .then((database) => require('./app/data').init(database, validators))
+        .then((database) => require('./app/data')
+            .init(database, models, validators))
         .then((data) => {
             const controllersFactory = new ControllersFactory(controllers,
                 data, logger);
