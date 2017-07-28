@@ -1,0 +1,16 @@
+extends common/container
+block contents
+    h1
+        | New expense
+    form(method="POST")
+        div
+            label Name:
+            input(type="text" name="name" required placeholder="Name")
+        div
+            label Description:
+            textarea(name="description" placeholder="Expense description")
+        div
+            label Cost:
+            input(type="number" step="0.01" min="0" required name="cost" placeholder="Cost")
+        div
+            button(type="submit") Create

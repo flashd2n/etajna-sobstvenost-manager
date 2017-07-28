@@ -3,7 +3,7 @@ block contents
     h1
         | Admin panel
     div
-        div Requests
+        h3 Requests
         div
             each request in requests
                 div
@@ -17,3 +17,43 @@ block contents
                         | Reject
             else 
                 | Currently there are no pending registration requests.
+    div
+        h3 Expenses
+        div
+        a(href="/create-expense/")
+            | New expense
+        h4 Pending expenses
+        div
+            each expense in pendingExpenses
+                div(title=expense.description)
+                    a(href="/expenses/"+expense._id)
+                        | #{expense.name}
+                div
+                    | #{expense.paidAmount}/#{expense.totalCost}
+                div
+                    a.complete-expense(href="/complete-expense/"+expense._id)
+                        | Complete
+                    a.complete-expense(href="/cancel-expense/"+expense._id)
+                        | Cancel
+            else 
+                | Currently there are no pending expenses.
+        h4 Completed expenses
+        div
+            each expense in completedExpenses
+                div(title=expense.description)
+                    a(href="/expenses/"+expense._id)
+                        | #{expense.name}
+                div
+                    | #{expense.paidAmount}/#{expense.totalCost}
+            else 
+                | Currently there are no completed expenses.
+        h4 Canceled expenses
+        div
+            each expense in canceledExpenses
+                div(title=expense.description)
+                    a(href="/expenses/"+expense._id)
+                        | #{expense.name}
+                div
+                    | #{expense.paidAmount}/#{expense.totalCost}
+            else 
+                | Currently there are no canceled expenses.

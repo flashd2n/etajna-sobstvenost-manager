@@ -10,8 +10,21 @@ const attach = (app, controllersFactory) => {
             controller.renderPage(req, res);
         });
 
+    router.route('/complete-expense/:expense_id')
+        .get(authController.verifyLoggedAdmin, (req, res) => {
+            controller.completeExpense(req, res);
+        });
+
+    router.route('/cancel-expense/:expense_id')
+        .get(authController.verifyLoggedAdmin, (req, res) => {
+            controller.cancelExpense(req, res);
+        });
+
     router.route('/create-expense')
         .get(authController.verifyLoggedAdmin, (req, res) => {
+            controller.renderCreateExpenseForm(req, res);
+        })
+        .post(authController.verifyLoggedAdmin, (req, res) => {
             controller.createExpense(req, res);
         });
 

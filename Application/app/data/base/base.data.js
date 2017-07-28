@@ -54,6 +54,14 @@ class BaseData {
             });
     }
 
+    updateById(id, model) {
+        if (!this._isModelValid(model)) {
+            return Promise.reject('Invalid model');
+        }
+
+        return this.collection.updateOne({ _id: new ObjectId(id) }, model);
+    }
+
     _isModelValid(model) {
         if (!this.validator) {
             return false;

@@ -1,7 +1,7 @@
 const RequestsData = require('./requests.data');
 const ApartmentsData = require('./apartments.data');
 const AdminData = require('./admin.data');
-const ExpensesData = require('./expense.data');
+const ExpensesData = require('./expenses.data');
 const FeesData = require('./fee.data');
 
 const init = (database, models, validators) => {

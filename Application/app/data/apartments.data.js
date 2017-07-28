@@ -141,6 +141,51 @@ class ApartmentsData extends BaseData {
                 Promise.reject(err);
             });
     }
+
+    completeExpense(expenseId) {
+        return this._setExpenseState(expenseId, 'completed');
+    }
+
+    cancelExpense(expenseId) {
+        return this._setExpenseState(expenseId, 'canceled');
+    }
+
+    _setExpenseState(expenseId, state) {
+        const filter = {};
+        const options = {};
+        return this.collection.
+            find(filter, options)
+            .toArray()
+            .then((apartments) => {
+                apartments
+                    .forEach((apartment) => {
+                        for (let i = 0;
+                            i < apartment.paidExpenses.length;
+                            i++) {
+                            if (apartment.paidExpenses[i]._id.toString()
+                                === expenseId) {
+                                console.log(apartment.paidExpenses[i]);
+                                apartment.paidExpenses[i].state = state;
+                                break;
+                            }
+                        }
+
+                        for (let i = 0;
+                            i < apartment.notPaidExpenses.length;
+                            i++) {
+                            if (apartment.notPaidExpenses[i]._id.toString()
+                                === expenseId) {
+                                apartment.notPaidExpenses[i].state = state;
+                                break;
+                            }
+                        }
+
+                        this.collection.updateOne({
+                            _id: new ObjectId(apartment._id),
+                            }, apartment);
+                    });
+            });
+    }
 }
 
 module.exports = ApartmentsData;

@@ -52,17 +52,19 @@ const configAuth = (app, apartments, admin, db, config) => {
                     done(null, user);
                 })
                 .catch((err) => {
-                    done(err);
+                    // logout the user to avoid 
+                    // "Failed to deserialize user out of session"
+                    done(null, false);
                 });
         } else if (loggedUser.type === 'apartment') {
-            console.log(loggedUser.id);
             apartments.getById(loggedUser.id)
                 .then((user) => {
-                    // does not get user here!!!
                     done(null, user);
                 })
                 .catch((err) => {
-                    done(err);
+                    // logout the user to avoid 
+                    // "Failed to deserialize user out of session"
+                    done(null, false);
                 });
         }
     });
