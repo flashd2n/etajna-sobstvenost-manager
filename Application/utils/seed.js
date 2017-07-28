@@ -45,7 +45,7 @@ const seed = async (db) => {
     const allapts = (await apartmentsCollection.find().toArray())
         .map((apt) => {
             return {
-                _id: new ObjectID(apt._db),
+                _id: new ObjectID(apt._id),
                 number: apt.number,
                 username: apt.username,
                 moveInDate: apt.moveInDate,
@@ -142,7 +142,7 @@ const seed = async (db) => {
     const allFees = (await feesCollection.find().toArray())
         .map((fee) => {
             return {
-                _id: new ObjectID(fee._db),
+                _id: new ObjectID(fee._id),
                 month: fee.month,
                 year: fee.year,
                 cost: fee.cost,
@@ -152,7 +152,7 @@ const seed = async (db) => {
     const allExpenses = (await expensesCollection.find().toArray())
         .map((exp) => {
             return {
-                _id: new ObjectID(exp._db),
+                _id: new ObjectID(exp._id),
                 name: exp.name,
                 description: exp.description,
                 cost: exp.cost,
@@ -162,12 +162,14 @@ const seed = async (db) => {
 
     const allApartments = await apartmentsCollection.find().toArray();
 
+
     for (let i = 1; i <= 24; i++) {
         if (i >= 1 && i <= 6) {
             const apt = allApartments[i - 1];
             apt.paidFees.push(...allFees);
             apt.paidExpenses.push(...allExpenses);
-            await apartmentsCollection.updateOne({ number: i }, apt);
+            await apartmentsCollection.updateOne(
+                { _id: new ObjectID(apt._id) }, apt);
         }
         if (i >= 7 && i <= 12) {
             const apt = allApartments[i - 1];
@@ -179,7 +181,8 @@ const seed = async (db) => {
                 allExpenses[2],
                 allExpenses[3]);
             apt.notPaidExpenses.push(allExpenses[4]);
-            await apartmentsCollection.updateOne({ number: i }, apt);
+            await apartmentsCollection.updateOne(
+                { _id: new ObjectID(apt._id) }, apt);
         }
         if (i >= 13 && i <= 18) {
             const apt = allApartments[i - 1];
@@ -189,7 +192,8 @@ const seed = async (db) => {
             apt.paidExpenses
                 .push(allExpenses[0], allExpenses[1], allExpenses[2]);
             apt.notPaidExpenses.push(allExpenses[3], allExpenses[4]);
-            await apartmentsCollection.updateOne({ number: i }, apt);
+            await apartmentsCollection.updateOne(
+                { _id: new ObjectID(apt._id) }, apt);
         }
         if (i >= 19 && i <= 24) {
             const apt = allApartments[i - 1];
@@ -199,7 +203,8 @@ const seed = async (db) => {
                 .push(allExpenses[0], allExpenses[1]);
             apt.notPaidExpenses
                 .push(allExpenses[2], allExpenses[3], allExpenses[4]);
-            await apartmentsCollection.updateOne({ number: i }, apt);
+            await apartmentsCollection.updateOne(
+                { _id: new ObjectID(apt._id) }, apt);
         }
     }
 
