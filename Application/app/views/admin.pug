@@ -31,8 +31,9 @@ block contents
                 div
                     | #{expense.paidAmount}/#{expense.totalCost}
                 div
-                    a.complete-expense(href="/complete-expense/"+expense._id)
-                        | Complete
+                    if expense.notPaid.length == 0
+                        a.complete-expense(href="/complete-expense/"+expense._id)
+                            | Complete
                     a.complete-expense(href="/cancel-expense/"+expense._id)
                         | Cancel
             else 
