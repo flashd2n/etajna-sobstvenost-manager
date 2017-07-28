@@ -106,7 +106,7 @@ const seed = async (db) => {
                 name: 'expense ' + (index + 1),
                 description: 'very awesome description ' + (index + 1),
                 cost: 500,
-                state: index <= 4 ? 'completed' : 'pending',
+                state: index <= 1 ? 'completed' : 'pending',
                 paid: [],
                 notPaid: [],
             };

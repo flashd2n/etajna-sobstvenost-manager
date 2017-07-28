@@ -22,10 +22,20 @@ const attach = (app, controllerFactory) => {
         .put((req, res, next) => {
             controller.payFee(req, res, next);
         });
-    
+
     router.route('/payexpense/:aptId')
         .put((req, res, next) => {
             controller.payExpense(req, res, next);
+        });
+
+    router.route('/alldebtors')
+        .get((req, res, next) => {
+            controller.getAllDebtors(req, res, next);
+        });
+
+    router.route('/currentexpenses')
+        .get((req, res, next) => {
+            controller.getCurrentExpenses(req, res, next);
         });
 
     app.use('/api', router);

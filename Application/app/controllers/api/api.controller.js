@@ -74,6 +74,26 @@ class ApiController {
                 res.send('Fail');
             });
     }
+
+    getAllDebtors(req, res, next) {
+        this.data.apartments.getPOSApartments()
+            .then((apartments) => {
+                res.json(apartments);
+            })
+            .catch((err) => {
+                next(err);
+            });
+    }
+
+    getCurrentExpenses(req, res, next) {
+        this.data.expenses.getPendingExpenses()
+            .then((expenses) => {
+                res.json(expenses);
+            })
+            .catch((err) => {
+                next(err);
+            });
+    }
 }
 
 module.exports = ApiController;

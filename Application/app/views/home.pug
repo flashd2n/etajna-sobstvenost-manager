@@ -1,5 +1,18 @@
 extends common/container
+block head_scripts
+    script(src='/public/scripts/home.js')
 block contents
     h1
         | Home
-        
+    div
+        p
+            | Total unpaid sum:
+            span#totalDebt
+    div
+        p
+            | Total number of debtors:
+            span#totalDebtors
+    div
+        p
+            | Total number of current expenses:
+            span#expensesCount
