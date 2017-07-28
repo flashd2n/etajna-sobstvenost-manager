@@ -1,6 +1,6 @@
 extends common/container
 block head_scripts
-    script(src='/public/scripts/home.js')
+    //- script(src='/public/scripts/home.js')
 block contents
     h1
         | Home
@@ -16,3 +16,6 @@ block contents
         p
             | Total number of current expenses:
             span#expensesCount
+block footer
+    script
+        | System.import("home");

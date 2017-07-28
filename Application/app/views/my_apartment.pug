@@ -1,6 +1,6 @@
 extends common/container
 block head_scripts
-    script(src='/public/scripts/my.apartment.js')
+    //- script(src='/public/scripts/my.apartment.js')
 block contents
     h1
         | My Apartment
@@ -20,3 +20,6 @@ block contents
                 | Cost
             th
                 | Pay Now
+block footer
+    script
+        | System.import("myapartment");

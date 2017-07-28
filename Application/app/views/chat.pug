@@ -7,4 +7,6 @@ block contents
         label(for='message') &gt;
         input#message(type='text', required='', autofocus='')
     script(src='/socket.io/socket.io.js')
-    script(src='/public/scripts/chat.client.js')
+block footer
+    script
+        | System.import("chat");

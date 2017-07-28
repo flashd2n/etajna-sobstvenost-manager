@@ -42,6 +42,8 @@
     "pug": "^2.0.0-rc.2",
     "sha256": "^0.2.0",
     "socket.io": "^2.0.3",
+    "systemjs": "^0.20.17",
+    "systemjs-plugin-babel": "^0.0.25",
     "ws": "^3.0.0"
   },
   "devDependencies": {
