@@ -17,6 +17,12 @@ class Apartment extends BaseModel {
         return apt;
     }
 
+    static getDebt(apt) {
+        const FeesDebts = apt.notPaidFees.reduce((x, y) => x + y.cost, 0);
+        const ExpensesDebts = apt.notPaidExpenses.reduce((x, y) => x + y.cost, 0);
+        return FeesDebts + ExpensesDebts;
+    }
+
     static payExpense(apt, expenseId) {
         const paidFee = apt.notPaidExpenses
             .find((f) => f._id + '' === expenseId);

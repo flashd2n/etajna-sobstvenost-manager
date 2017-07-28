@@ -1,9 +1,10 @@
 const { ObjectId } = require('mongodb');
 const BaseData = require('./base/base.data');
+const Apartment = require('../models/apartment.model');
 
 class ApartmentsData extends BaseData {
-    constructor(database, model, validator) {
-        super(database, model, validator);
+    constructor(database, validator) {
+        super(database, Apartment, validator);
     }
 
     getByNumber(number) {
@@ -77,10 +78,15 @@ class ApartmentsData extends BaseData {
             });
     }
 
-    getTotalExpenses(apt) {
-        this.model.getExpenses(apt);
+    getNumbersAndDebt(apartments) {
+        return apartments.map((apt) => {
+            return {
+                id: apt._id,
+                number: apt.number,
+                debt: this.ModelClass.getDebt(apt),
+            };
+        });
     }
-
 
     authApartment(username, passwordHash) {
         return this.collection

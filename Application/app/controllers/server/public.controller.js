@@ -10,8 +10,11 @@ class PublicController {
     pageOfShame(req, res) {
         this.data.apartments.getPOSApartments()
             .then((POSApartments) => {
+                return this.data.apartments.getNumbersAndDebt(POSApartments);
+            })
+            .then((apartments) => {
                 res.render('page_of_shame', {
-                    POSApartments,
+                    apartments,
                 });
             });
     }
