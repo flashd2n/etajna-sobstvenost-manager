@@ -3261,6 +3261,14 @@ supports-color@^4.0.0:
   dependencies:
     has-flag "^2.0.0"
 
+systemjs-plugin-babel@^0.0.25:
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/systemjs-plugin-babel/-/systemjs-plugin-babel-0.0.25.tgz#93bc92a58e3e9c5d1505c972c3eede570b770c65"
+
+systemjs@^0.20.17:
+  version "0.20.17"
+  resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-0.20.17.tgz#b3143bb7e02d2f41b9a640351a06024b7b63ae59"
+
 table@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/table/-/table-4.0.1.tgz#a8116c133fac2c61f4a420ab6cdf5c4d61f0e435"

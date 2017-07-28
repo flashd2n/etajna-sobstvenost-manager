@@ -16,9 +16,6 @@
     const success = (user) => {
         let users = [];
         const username = user.username;
-        // const aptNum = user.number;
-        // const userType = user.type;
-        // const userId = user._id;
 
         const socket = io.connect();
         socket.emit('join', {
