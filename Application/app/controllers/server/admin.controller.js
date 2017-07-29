@@ -118,7 +118,7 @@ class AdminController {
                     state: createdExpense.state,
                 };
 
-                return this.data.apartments.getAll();
+                return this.data.apartments.getRegistered();
             })
             .then((apartments) => {
                 apartments.forEach((apartment) => {
@@ -126,12 +126,12 @@ class AdminController {
                         _id: new ObjectId(apartment._id),
                         number: apartment.number,
                         username: apartment.username,
-                        moveInDate: apartment.moveInDate,
                     };
 
                     newExpense.notPaid.push(notPaidApartment);
-                    apartment.notPaidExpenses.push(expenseForApartment);
-                    this.data.apartments.updateById(apartment._id, apartment);
+
+                    this.data.apartments
+                        .addExpense(apartment._id, expenseForApartment);
                 });
 
                 this.data.expenses.updateById(newExpense._id, newExpense);

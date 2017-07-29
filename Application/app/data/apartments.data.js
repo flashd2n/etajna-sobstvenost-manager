@@ -61,6 +61,19 @@ class ApartmentsData extends BaseData {
             });
     }
 
+    getRegistered() {
+        const filter = { username: { $ne: '' } };
+        const options = {};
+        return this.collection
+            .find(filter, options)
+            .toArray()
+            .then((models) => {
+                return models
+                    .map((model) =>
+                        this.ModelClass.toViewModel(model));
+            });
+    }
+
     getPOSApartments() {
         const filter = {
             $where:
@@ -145,6 +158,16 @@ class ApartmentsData extends BaseData {
             .catch((err) => {
                 Promise.reject(err);
             });
+    }
+
+    addExpense(apartmentId, expense) {
+        const filter = { _id: new ObjectId(apartmentId) };
+        const options = {
+            $addToSet: {
+                notPaidExpenses: expense,
+            },
+        };
+        return this.collection.updateOne(filter, options);
     }
 
     completeExpense(expenseId) {
