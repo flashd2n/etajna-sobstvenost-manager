@@ -170,6 +170,16 @@ class ApartmentsData extends BaseData {
         return this.collection.updateOne(filter, options);
     }
 
+    addFee(apartmentId, fee) {
+        const filter = { _id: new ObjectId(apartmentId) };
+        const options = {
+            $addToSet: {
+                notPaidFees: fee,
+            },
+        };
+        return this.collection.updateOne(filter, options);
+    }
+
     completeExpense(expenseId) {
         return this._setExpenseState(expenseId, 'completed');
     }

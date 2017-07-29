@@ -1,4 +1,5 @@
 const Expense = require('../../models/expense.model');
+const Fee = require('../../models/fee.model');
 const { ObjectId } = require('mongodb');
 
 class AdminController {
@@ -134,8 +135,56 @@ class AdminController {
                         .addExpense(apartment._id, expenseForApartment);
                 });
 
-                this.data.expenses.updateById(newExpense._id, newExpense);
+                return this.data.expenses
+                    .updateById(newExpense._id, newExpense);
+            })
+            .then(() => {
+                req.flash('info', 'Expense created!');
+                res.redirect(303, '/admin');
+            });
+    }
 
+    addMonthlyFee(req, res) {
+        const newFee = new Fee();
+
+        newFee.month = +req.body.month;
+        newFee.year = +req.body.year;
+        newFee.cost = +req.body.fee;
+        newFee.paid = [];
+        newFee.notPaid = [];
+
+        let feeForApartment;
+
+        return this.data.fees.create(newFee)
+            .then((createdFee) => {
+                newFee._id = new ObjectId(createdFee._id);
+                feeForApartment = {
+                    _id: new ObjectId(createdFee._id),
+                    month: createdFee.month,
+                    year: createdFee.year,
+                    cost: createdFee.cost,
+                };
+
+                return this.data.apartments.getRegistered();
+            })
+            .then((apartments) => {
+                apartments.forEach((apartment) => {
+                    const notPaidApartment = {
+                        _id: new ObjectId(apartment._id),
+                        number: apartment.number,
+                        username: apartment.username,
+                    };
+
+                    newFee.notPaid.push(notPaidApartment);
+
+                    this.data.apartments
+                        .addFee(apartment._id, feeForApartment);
+                });
+
+                return this.data.fees.updateById(newFee._id, newFee);
+            })
+            .then(() => {
+                req.flash('info', 'Montly fee created!');
                 res.redirect(303, '/admin');
             });
     }

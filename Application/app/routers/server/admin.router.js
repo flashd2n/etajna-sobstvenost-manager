@@ -28,6 +28,11 @@ const attach = (app, controllersFactory) => {
             controller.createExpense(req, res);
         });
 
+    router.route('/admin/add-monthly-fee')
+        .post(authController.verifyLoggedAdmin, (req, res) => {
+            controller.addMonthlyFee(req, res);
+        });
+
     router.route('/approve-request/:request_id')
         .get(authController.verifyLoggedAdmin, (req, res) => {
             controller.approveRequest(req, res);
