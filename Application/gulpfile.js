@@ -16,7 +16,13 @@ gulp.task('dev', () => {
 
 gulp.task('pre-test', () => {
     return gulp.src(['./app/controllers/**/*.js',
-        './app/data/**/*.js'])
+        './app/data/**/*.js',
+        './app/models/**/*.js',
+        './app/routers/**/*.js',
+        './app/validators/**/*.js',
+        './database/**/*.js',
+        './utils/factories/**/*.js',
+        './utils/logger'])
         .pipe(istanbul({
             includeUntested: true,
         }))
