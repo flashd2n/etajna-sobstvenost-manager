@@ -1,18 +1,24 @@
 extends common/container
 block contents
-    h1
-        | Unpaid expenses for Apartment #{currentApartment.number}:
-    div
+    h1.row
+        span.hidden-xs
+            | Unpaid expenses for apartment #{currentApartment.number}:
+        span.visible-xs
+            | Apt. #{currentApartment.number}:
+    h2.row
         | Expenses:
-    ul 
-            each expense in currentApartment.notPaidExpenses
-                li
-                    a(href = '/expenses/' + expense._id) #{expense.name} 
-                    |- $#{expense.cost}
-    div
+    ul.list-unstyled
+        each expense in currentApartment.notPaidExpenses
+            li.row.highlight-row
+                a(href = '/expenses/' + expense._id) #{expense.name} 
+                |- $#{expense.cost}
+    h2.row
         | Fees:
-    ul 
+    ul.list-unstyled
         each fee in currentApartment.notPaidFees
-            li
-                | Period: #{fee.month}.#{fee.year} Cost: $#{fee.cost}
+            li.row.highlight-row
+                span.hidden-xs
+                    | Period: #{fee.month}.#{fee.year} Cost: $#{fee.cost}
+                span.visible-xs
+                    | #{fee.month}.#{fee.year} - $#{fee.cost}
                 
