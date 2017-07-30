@@ -253,6 +253,7 @@ ModelManifest.xml
 *.swo
 
 #local configuration
-**/config/**#coverage report
+**/config/**
 
+#coverage report
 **/coverage/**
