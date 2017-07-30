@@ -7,10 +7,12 @@ block contents
     ul 
             each expense in currentApartment.notPaidExpenses
                 li
-                    | #{expense.name} - $#{expense.cost}
+                    a(href = '/expenses/' + expense._id) #{expense.name} 
+                    |- $#{expense.cost}
     div
         | Fees:
     ul 
         each fee in currentApartment.notPaidFees
             li
-                | #{fee.month}.#{fee.year} - $#{fee.cost}
+                | Period: #{fee.month}.#{fee.year} Cost: $#{fee.cost}
+                
