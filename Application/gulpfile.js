@@ -151,4 +151,4 @@ gulp.task('start-server', () => {
 });
 
 gulp.task('start',
-    gulpSequence('auto-setup', ['lint', 'alltests'], 'start-server'));
+    gulpSequence('auto-setup', 'lint', 'unit', 'integration', 'start-server'));
