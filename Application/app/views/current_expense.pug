@@ -1,14 +1,22 @@
 extends common/container
 block contents
-    h1
-        | Expense : #{expense.name}
-    p
-        | Description: #{expense.description}
-    P
-        | Status: #{expense.state}
-    p
-        | Payment: #{expense.cost}
-    p
-        | Number of collected payments: #{expense.paid.length}
-    p
-        | Cost collection progress: #{collected} of #{totalCost}
+    h1.row
+        span.hidden-xs
+            | Expense: 
+        | #{expense.name}
+    div.panel.panel-default
+        div.panel-body
+            div.row.highlight-row                    
+                p.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                    | Description: #{expense.description}
+            div.row.highlight-row
+                P.col-lg-6.col-md-6.col-sm-6.col-xs-12
+                    | Status: #{expense.state}
+                p.col-lg-6.col-md-6.col-sm-6.col-xs-12
+                    | Payment: #{expense.cost}
+            div.row.highlight-row
+                p.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                    | Number of collected payments: #{expense.paid.length}
+            div.row.highlight-row
+                p.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                    | Cost collection progress: #{collected} of #{totalCost}

@@ -82,7 +82,10 @@ import apiService from 'apiService';
             const row = $('<tr>').data('id', fee._id);
             const month = $('<td>').text(fee.month);
             const cost = $('<td>').text(fee.cost);
-            const button = $('<button>').text('Pay Now').addClass('payFee');
+            const button = $('<button>').text('Pay Now')
+                .addClass('payFee')
+                .addClass('btn')
+                .addClass('btn-success');
             row.append(month);
             row.append(cost);
             row.append(button);
@@ -96,7 +99,10 @@ import apiService from 'apiService';
             const row = $('<tr>').data('id', expense._id);
             const name = $('<td>').text(expense.name);
             const cost = $('<td>').text(expense.cost);
-            const button = $('<button>').text('Pay Now').addClass('payExpense');
+            const button = $('<button>').text('Pay Now')
+                .addClass('payExpense')
+                .addClass('btn')
+                .addClass('btn-success');
             row.append(name);
             row.append(cost);
             row.append(button);
