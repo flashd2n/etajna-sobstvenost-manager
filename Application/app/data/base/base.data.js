@@ -59,6 +59,35 @@ class BaseData {
         return this.collection.updateOne({ _id: new ObjectId(id) }, model);
     }
 
+    processAptPayment(apt, debtId) {
+        const filter = {
+            _id: new ObjectId(debtId),
+        };
+        const options = {
+            $pull: {
+                notPaid: {
+                    number: apt.number,
+                },
+            },
+            $addToSet: {
+                paid: {
+                    _id: apt._id,
+                    number: apt.number,
+                    username: apt.username,
+                    moveInDate: apt.moveInDate,
+                },
+            },
+        };
+
+        return this.collection.update(filter, options)
+            .then(() => {
+                return 'Success';
+            })
+            .catch((err) => {
+                Promise.reject(err);
+            });
+    }
+
     _isModelValid(model) {
         if (!this.validator) {
             return false;

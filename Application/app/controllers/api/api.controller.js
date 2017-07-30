@@ -1,3 +1,5 @@
+const { ObjectId } = require('mongodb');
+
 class ApiController {
     constructor(data) {
         this.data = data;
@@ -41,10 +43,15 @@ class ApiController {
     payFee(req, res, next) {
         const aptId = req.params.aptId;
         const feeId = req.body.feeId;
+        let apt = null;
 
         this.data.apartments.getById(aptId)
-            .then((apt) => {
-                return this.data.apartments.processFeePayment(apt, feeId);
+            .then((_apt) => {
+                apt = _apt;
+                return this.data.apartments.processFeePayment(_apt, feeId);
+            })
+            .then(() => {
+                return this.data.fees.processAptPayment(apt, feeId);
             })
             .then((isSuccess) => {
                 if (isSuccess) {
@@ -59,11 +66,18 @@ class ApiController {
     payExpense(req, res, next) {
         const aptId = req.params.aptId;
         const expenseId = req.body.expenseId;
+        let aptNumber = 0;
+        let apt = null;
 
         this.data.apartments.getById(aptId)
-            .then((apt) => {
+            .then((_apt) => {
+                apt = _apt;
+                aptNumber = _apt.number;
                 return this.data.apartments
-                    .processExpensePayment(apt, expenseId);
+                    .processExpensePayment(_apt, expenseId);
+            })
+            .then(() => {
+                return this.data.expenses.processAptPayment(apt, expenseId);
             })
             .then((isSuccess) => {
                 if (isSuccess) {
