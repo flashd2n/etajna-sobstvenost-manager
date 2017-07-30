@@ -17,7 +17,7 @@
 
     $('.sendMutri').on('click', (evt) => {
         const $button = $(evt.target);
-        const $li = $button.parent();
+        const $li = $button.parents('.highlight-row');
         const aptNum = $li.data('aptnum');
 
         removeApt(aptNum)
