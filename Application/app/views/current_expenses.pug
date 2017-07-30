@@ -1,20 +1,31 @@
 extends common/container
 block contents
-    h1
-        | All Expenses
-    h2
-        | Pending Expenses
-    ul
+    h1.row
+        span.hidden-xs All 
+        | Expenses
+    h2.row
+        | Pending 
+        span.hidden-xs Expenses
+    ul.list-unstyled
         each expense in pending
-            li
-                a(href="/expenses/" + expense._id)
-                    | Name: #{expense.name} 
-                | Payment Cost: #{expense.cost}
-    h2
-        | Completed Expenses
-    ul
+            li.row.highlight-row
+                div.col-lg-6.col-md-6.col-sm-6.col-xs-6
+                    a(href="/expenses/" + expense._id)
+                        | Name: #{expense.name} 
+                div.col-lg-6.col-md-6.col-sm-6.col-xs-6
+                    span.hidden-xs
+                        | Payment Cost: 
+                    | #{expense.cost}
+    h2.row
+        | Completed 
+        span.hidden-xs Expenses
+    ul.list-unstyled
         each expense in completed
-            li
-                a(href="/expenses/" + expense._id)
-                    | Name: #{expense.name} 
-                | Payment Cost: #{expense.cost}
+            li.row.highlight-row
+                div.col-lg-6.col-md-6.col-sm-6.col-xs-6
+                    a(href="/expenses/" + expense._id)
+                        | #{expense.name}
+                div.col-lg-6.col-md-6.col-sm-6.col-xs-6
+                    span.hidden-xs
+                        | Payment Cost: 
+                    | #{expense.cost}
