@@ -14,7 +14,7 @@
     background-color: lightblue;
 }
 
-input {
+input,select {
     max-width: 30ch;
 }
 
