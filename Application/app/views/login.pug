@@ -1,17 +1,17 @@
 extends common/container
 block contents
-    h1
+    h1.row
         | Login
     div
         form#login(method="POST")
-            div
-                label Username:
-                input.username(type="text" name="username" placeholder="Username")
-            div
-                label Password:
-                input.password(type="password" name="password" placeholder="Password")
-            div
-                button.login(type="submit") Login
+            div.row
+                label.hidden-xs Username:
+                input.form-control.username(type="text" name="username" placeholder="Username")
+            div.row
+                label.hidden-xs Password:
+                input.form-control.password(type="password" name="password" placeholder="Password")
+            div.row
+                button.btn.btn-success.login(type="submit") Login
 block footer
     script
         | System.import("login");
