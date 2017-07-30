@@ -108,6 +108,24 @@ class ApiController {
                 next(err);
             });
     }
+
+    removeApt(req, res, next) {
+        const number = +req.params.aptNum;
+
+        this.data.apartments.deleteApartment(number)
+            .then(() => {
+                return this.data.expenses.removeAptFromNotPaid(number);
+            })
+            .then(() => {
+                return this.data.fees.removeAptFromNotPaid(number);
+            })
+            .then(() => {
+                res.send('Success');
+            })
+            .catch(() => {
+                res.status(500).send('Fail');
+            });
+    }
 }
 
 module.exports = ApiController;

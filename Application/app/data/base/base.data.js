@@ -88,6 +88,20 @@ class BaseData {
             });
     }
 
+    removeAptFromNotPaid(number) {
+        const filter = {
+
+        };
+        const options = {
+            $pull: {
+                notPaid: {
+                    number: number,
+                },
+            },
+        };
+        return this.collection.updateMany(filter, options);
+    }
+
     _isModelValid(model) {
         if (!this.validator) {
             return false;

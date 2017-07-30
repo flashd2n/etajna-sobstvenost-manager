@@ -18,6 +18,16 @@ const attach = (app, controllerFactory) => {
             controller.getNotPaidExpensesById(req, res, next);
         });
 
+    router.route('/alldebtors')
+        .get((req, res, next) => {
+            controller.getAllDebtors(req, res, next);
+        });
+
+    router.route('/currentexpenses')
+        .get((req, res, next) => {
+            controller.getCurrentExpenses(req, res, next);
+        });
+
     router.route('/payfee/:aptId')
         .put((req, res, next) => {
             controller.payFee(req, res, next);
@@ -28,14 +38,9 @@ const attach = (app, controllerFactory) => {
             controller.payExpense(req, res, next);
         });
 
-    router.route('/alldebtors')
-        .get((req, res, next) => {
-            controller.getAllDebtors(req, res, next);
-        });
-
-    router.route('/currentexpenses')
-        .get((req, res, next) => {
-            controller.getCurrentExpenses(req, res, next);
+    router.route('/removeapt/:aptNum')
+        .delete(authController.verifyLoggedAdmin, (req, res, next) => {
+            controller.removeApt(req, res, next);
         });
 
     app.use('/api', router);

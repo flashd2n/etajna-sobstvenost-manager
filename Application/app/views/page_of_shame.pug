@@ -4,7 +4,12 @@ block contents
         | Page of Shame
     ul
         each apartment in apartments
-            li
+            li(data-aptnum=apartment.number)
                 a(href = "/page-of-shame/" + apartment.id) Apartment #{apartment.number} 
                 | - Total Debts : $ #{apartment.debt}
-                    
+                if (loggedUser && loggedUser.type == 'admin' && apartment.debt > 1500)
+                    button.sendMutri
+                        | Send Mutri
+block footer
+    script
+        | System.import("pageofshame");

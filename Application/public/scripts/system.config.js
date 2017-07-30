@@ -12,5 +12,6 @@ SystemJS.config({
         'home': '/public/scripts/home.js',
         'chat': '/public/scripts/chat.client.js',
         'myapartment': '/public/scripts/my.apartment.js',
+        'pageofshame': '/public/scripts/page.of.shame.js',
     },
 });
