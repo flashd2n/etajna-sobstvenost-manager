@@ -6,7 +6,7 @@ block contents
         | Page of Shame
     div
         each apartment in apartments
-            div.row.highlight-row
+            div.row.highlight-row(data-aptnum=apartment.number)
                 div.col-lg-6.col-md-6.col-sm-6.col-xs-6
                     a(href = "/page-of-shame/" + apartment.id) 
                         span.hidden-xs
