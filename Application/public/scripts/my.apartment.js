@@ -1,67 +1,16 @@
 /* globals $, toastr */
+import apiService from 'apiService';
 (() => {
     const aptId = window.location.href.split('/')[4];
 
-    const getNotPaidFees = new Promise((resolve, reject) => {
-        $.ajax({
-            url: `/api/notpaidfees/${aptId}`,
-            type: 'GET',
-            success: (res) => {
-                resolve(res);
-            },
-            error: (err) => {
-                reject(err);
-            },
-        });
-    });
-
-    const getNotPaidExpenses = new Promise((resolve, reject) => {
-        $.ajax({
-            url: `/api/notpaidexpenses/${aptId}`,
-            type: 'GET',
-            success: (res) => {
-                resolve(res);
-            },
-            error: (err) => {
-                reject(err);
-            },
-        });
-    });
+    const getNotPaidFees = apiService.get(`/api/notpaidfees/${aptId}`);
+    const getNotPaidExpenses = apiService.get(`/api/notpaidexpenses/${aptId}`);
 
     const payFee = (feeId) => {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: `/api/payfee/${aptId}`,
-                data: {
-                    feeId: feeId,
-                },
-                type: 'PUT',
-                success: (res) => {
-                    resolve(res);
-                },
-                error: (err) => {
-                    reject(err);
-                },
-            });
-        });
+        return apiService.put(`/api/payfee/${aptId}`, { feeId });
     };
-
     const payExpense = (expenseId) => {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: `/api/payexpense/${aptId}`,
-                data: {
-                    expenseId: expenseId,
-                },
-                type: 'PUT',
-                success: (res) => {
-                    resolve(res);
-                },
-                error: (err) => {
-                    reject(err);
-                },
-            });
-        });
+        return apiService.put(`/api/payexpense/${aptId}`, { expenseId });
     };
 
     let feeId;

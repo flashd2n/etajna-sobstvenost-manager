@@ -1,6 +1,6 @@
-const configApp = (io) => {
-    let users = [];
+let users = [];
 
+const configApp = (io) => {
     io.on('connection', (socket) => {
         console.log('new connection');
 
@@ -25,10 +25,9 @@ const configApp = (io) => {
             });
         });
 
-
         socket.on('disconnect', () => {
             users = users.filter((u) => {
-                return u.nickname !== socket.nickname;
+                return u.username !== socket.username;
             });
             io.emit('all-users', users);
         });

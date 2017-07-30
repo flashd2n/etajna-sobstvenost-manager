@@ -1,31 +1,8 @@
 /* globals $ */
-
+import apiService from 'apiService';
 (() => {
-    const getAllDebtors = new Promise((resolve, reject) => {
-        $.ajax({
-            url: `/api/alldebtors`,
-            type: 'GET',
-            success: (res) => {
-                resolve(res);
-            },
-            error: (err) => {
-                reject(err);
-            },
-        });
-    });
-
-    const getCurrentExpenses = new Promise((resolve, reject) => {
-        $.ajax({
-            url: `/api/currentexpenses`,
-            type: 'GET',
-            success: (res) => {
-                resolve(res);
-            },
-            error: (err) => {
-                reject(err);
-            },
-        });
-    });
+    const getAllDebtors = apiService.get(`/api/alldebtors`);
+    const getCurrentExpenses = apiService.get(`/api/currentexpenses`);
 
     Promise.all([getAllDebtors, getCurrentExpenses])
         .then((data) => {

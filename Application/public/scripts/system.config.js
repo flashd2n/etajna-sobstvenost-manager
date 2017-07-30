@@ -17,5 +17,6 @@ SystemJS.config({
         'createExpense': '/public/scripts/create.expense.js',
         'login': '/public/scripts/login.js',
         'register': '/public/scripts/register.js',
+        'apiService': '/public/scripts/api/api.service.js',
     },
 });
