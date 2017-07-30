@@ -56,6 +56,7 @@ class AdminController {
                     pendingExpenses: renderPendingExpenses,
                     completedExpenses: renderCompletedExpenses,
                     canceledExpenses: renderCanceledExpenses,
+                    page: 'admin',
                 });
             });
     }
@@ -95,7 +96,7 @@ class AdminController {
     }
 
     renderCreateExpenseForm(req, res) {
-        res.render('create_expense', { loggedUser: req.user });
+        res.render('create_expense', { loggedUser: req.user, page: 'admin' });
     }
 
     createExpense(req, res) {

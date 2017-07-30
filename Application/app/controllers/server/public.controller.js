@@ -4,7 +4,7 @@ class PublicController {
     }
 
     home(req, res) {
-        res.render('home', { loggedUser: req.user });
+        res.render('home', { loggedUser: req.user, page: 'home' });
     }
 
     pageOfShame(req, res) {
@@ -14,7 +14,9 @@ class PublicController {
             })
             .then((apartments) => {
                 res.render('page_of_shame', {
+                    loggedUser: req.user,
                     apartments,
+                    page: 'page_of_shame',
                 });
             });
     }
@@ -23,7 +25,9 @@ class PublicController {
         this.data.apartments.getById(req.params.apartmentId)
             .then((currentApartment) => {
                 res.render('unpaid_apartment_expenses', {
+                    loggedUser: req.user,
                     currentApartment,
+                    page: 'page_of_shame',
                 });
             });
     }
@@ -38,6 +42,7 @@ class PublicController {
                     loggedUser: req.user,
                     pending: pending,
                     completed: completed,
+                    page: 'expenses',
                 });
             })
             .catch((err) => {
@@ -64,6 +69,7 @@ class PublicController {
                     expense: expense,
                     collected: collected,
                     totalCost: expense.cost * totalOccupiedApt,
+                    page: 'expenses',
                 });
             })
             .catch((err) => {

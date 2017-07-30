@@ -7,26 +7,26 @@ div.container-fluid
             <span class="icon-bar"></span>
     div#nav-controls-container.collapse.navbar-collapse
         ul.nav.navbar-nav
-            li
+            li(class=page=='home' ? 'active' : '')
                 a(href="/") Home
-            li
+            li(class=page=='page_of_shame' ? 'active' : '')
                 a(href="/page-of-shame") Page of Shame
-            li
+            li(class=page=='expenses' ? 'active' : '')
                 a(href="/expenses") Expenses
             if !loggedUser
-                li
+                li(class=page=='register' ? 'active' : '')
                     a(href="/register") Sign Up
-                li
+                li(class=page=='login' ? 'active' : '')
                     a(href="/login") Login
             else
                 if (loggedUser.type == 'admin')
-                    li
+                    li(class=page=='admin' ? 'active' : '')
                         a(href="/admin") Admin
                 if (loggedUser.type == 'apartment')
-                    li
+                    li(class=page=='apartment' ? 'active' : '')
                         a(href="/apartment/" + loggedUser.id) My apartment
-                li
+                li(class=page=='chat' ? 'active' : '')
                     a(href="/chat") Chat                
-                li
+                li(class=page=='logout' ? 'active' : '')
                     a(href="/logout") Logout 
                         strong #{loggedUser.username}

@@ -12,6 +12,7 @@ class AuthController {
                 res.render('register', {
                     loggedUser: req.user,
                     unregisteredAppartments,
+                    page: 'register',
                 });
             });
     }
@@ -66,7 +67,7 @@ class AuthController {
     }
 
     login(req, res) {
-        res.render('login', { loggedUser: req.user });
+        res.render('login', { loggedUser: req.user, page: 'login' });
     }
 
     verifyLoggedUser(req, res, next) {

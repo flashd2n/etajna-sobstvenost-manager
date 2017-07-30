@@ -10,7 +10,10 @@ class ApartmentController {
                 if (!apt) {
                     return next(new Error('Invalid apartment id!'));
                 }
-                return res.render('my_apartment', { loggedUser: req.user });
+                return res.render('my_apartment', {
+                    loggedUser: req.user,
+                    page: 'apartment',
+                });
             })
             .catch((err) => {
                 next(new Error(err));
