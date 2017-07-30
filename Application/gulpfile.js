@@ -3,12 +3,33 @@
 const gulp = require('gulp');
 const nodemon = require('gulp-nodemon');
 const eslint = require('gulp-eslint');
+const mocha = require('gulp-mocha');
+const istanbul = require('gulp-istanbul');
+const gulpSequence = require('gulp-sequence');
 
 gulp.task('dev', () => {
     return nodemon({
         ext: 'js html',
         script: 'dev.js',
     });
+});
+
+gulp.task('pre-test', () => {
+    return gulp.src(['./app/controllers/**/*.js',
+        './app/data/**/*.js'])
+        .pipe(istanbul({
+            includeUntested: true,
+        }))
+        .pipe(istanbul.hookRequire());
+});
+
+gulp.task('alltests', ['pre-test'], () => {
+    return gulp.src(['./test/unit_tests/**/*.js',
+        './test/integration_tests/**/*.js'])
+        .pipe(mocha({
+            timeout: 10000,
+        }))
+        .pipe(istanbul.writeReports());
 });
 
 gulp.task('auto-setup', () => {
@@ -55,7 +76,7 @@ gulp.task('seed-database-initial', ['auto-setup'], () => {
         .then(() => process.exit());
 });
 
-gulp.task('start-server', ['auto-setup', 'lint'], () => {
+gulp.task('start-server', () => {
     const config = require('./config');
 
     if (config.env === config.dev) {
@@ -106,3 +127,6 @@ gulp.task('start-server', ['auto-setup', 'lint'], () => {
             );
         });
 });
+
+gulp.task('start',
+    gulpSequence('auto-setup', ['lint', 'alltests'], 'start-server'));

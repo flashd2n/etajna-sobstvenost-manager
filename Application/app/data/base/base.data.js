@@ -19,9 +19,6 @@ class BaseData {
                 return models
                     .map((model) =>
                         this.ModelClass.toViewModel(model));
-            })
-            .catch((err) => {
-                console.log(err);
             });
     }
 
