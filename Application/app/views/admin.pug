@@ -12,22 +12,23 @@ block contents
                     | #{request.username}
                 div
                     a.approve(href="/approve-request/"+request._id)
-                        | Approve
+                        | Approve 
                     a.reject(href="/reject-request/"+request._id)
                         | Reject
             else 
                 | Currently there are no pending registration requests.
     div
+        h3 Monthly Fee
         div
             form#fee(method="POST" action="/admin/add-monthly-fee")
-                label
+                label(for="month")
                     | Month:
                 input#month(type="number" required step="1" min="1" max="12" name="month" value="8")
-                label
-                    | year:
+                label(for="year")
+                    | Year:
                 input#year(type="number" required step="1" min="2017" name="year" value="2017")
-                label
-                    | Fee:
+                label(for="fee")
+                    | Cost:
                 input#cost(type="number" required step="0.01" min="0" name="fee")
                 button.createFee(type="submit")
                     | Create
