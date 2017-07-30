@@ -1,0 +1,15 @@
+.page-footer {
+    background-color: gray;
+}
+
+.highlight-row:nth-child(odd) {
+    background-color: white;
+}
+
+.highlight-row:nth-child(even) {
+    background-color: lightgray;
+}
+
+.highlight-row:hover {
+    background-color: lightblue;
+}

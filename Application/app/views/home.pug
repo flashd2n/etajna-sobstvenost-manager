@@ -2,20 +2,27 @@ extends common/container
 block head_scripts
     //- script(src='/public/scripts/home.js')
 block contents
-    h1
-        | Home
-    div
-        p
-            | Total unpaid sum:
-            span#totalDebt
-    div
-        p
-            | Total number of debtors:
-            span#totalDebtors
-    div
-        p
-            | Total number of current expenses:
-            span#expensesCount
+    div.row
+        h1.col-lg-12.col-md-12.col-sm-12.col-xs-12
+            | Home
+    div.row.highlight-row
+        div.visible-lg.visible-md.visible-sm.col-lg-6.col-md-6.col-sm-6.col-xs-6
+            | Total unpaid sum: 
+        div.visible-xs.col-lg-6.col-md-6.col-sm-6.col-xs-6
+            | Unpaid:
+        div#totalDebt.col-lg-6.col-md-6.col-sm-6.col-xs-6
+    div.row.highlight-row
+        div.visible-lg.visible-md.visible-sm.col-lg-6.col-md-6.col-sm-6.col-xs-6
+            | Total number of debtors: 
+        div.visible-xs.col-lg-6.col-md-6.col-sm-6.col-xs-6
+            | Debtors: 
+        div#totalDebtors.col-lg-6.col-md-6.col-sm-6.col-xs-6.pull-left
+    div.row.highlight-row
+        div.visible-lg.visible-md.visible-sm.col-lg-6.col-md-6.col-sm-6.col-xs-6
+            | Total number of current expenses: 
+        div.visible-xs.col-lg-6.col-md-6.col-sm-6.col-xs-6
+            | Current exp.: 
+        div#expensesCount.col-lg-6.col-md-6.col-sm-6.col-xs-6
 block footer
     script
         | System.import("home");

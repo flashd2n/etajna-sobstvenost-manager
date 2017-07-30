@@ -5,6 +5,7 @@ head
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible" content="ie=edge")
     link(rel="stylesheet" type="text/css" href="/libs/bootstrap/dist/css/bootstrap.min.css")
+    link(rel="stylesheet" type="text/css" href="/public/css/main.css")
     title 
         | Etajna Sobstvenost Manager
     script(src='/libs/jquery/dist/jquery.min.js')
@@ -17,8 +18,11 @@ body
             != messages()
     main.container
         block contents
-    footer.footer.navbar-fixed-bottom
-        | Etajna Sobstvenost Manager 2017 team Eternal Dependency
+    footer.footer.navbar-fixed-bottom.page-footer
+        div.container-fluid
+            div.row
+                div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12
+                    | Etajna Sobstvenost Manager 2017. Team Eternal Dependency
     script(src='/libs/systemjs/dist/system.js')
     script(src='/public/scripts/system.config.js')
     script(src='/libs/bootstrap/dist/js/bootstrap.min.js')

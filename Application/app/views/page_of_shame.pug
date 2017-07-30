@@ -1,10 +1,18 @@
 extends common/container
 block contents
-    h1
+    h1.row
         | Page of Shame
-    ul
+    div
         each apartment in apartments
-            li
-                a(href = "/page-of-shame/" + apartment.id) Apartment #{apartment.number} 
-                | - Total Debts : $ #{apartment.debt}
-                    
+            div.row.highlight-row
+                div.col-lg-6.col-md-6.col-sm-6.col-xs-6
+                    a(href = "/page-of-shame/" + apartment.id) 
+                        span.hidden-xs
+                            | Apartment #{apartment.number}
+                        span.visible-xs
+                            | Apt. #{apartment.number}
+                div.col-lg-4.col-md-4.col-sm-4.col-xs-6
+                    span.hidden-xs
+                        | Total Debts: 
+                    span
+                        | #{apartment.debt}
