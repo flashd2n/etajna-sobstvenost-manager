@@ -38,6 +38,22 @@ gulp.task('alltests', ['pre-test'], () => {
         .pipe(istanbul.writeReports());
 });
 
+gulp.task('unit', ['pre-test'], () => {
+    return gulp.src('./test/unit_tests/**/*.js')
+        .pipe(mocha({
+            timeout: 10000,
+        }))
+        .pipe(istanbul.writeReports());
+});
+
+gulp.task('integration', ['pre-test'], () => {
+    return gulp.src('./test/integration_tests/**/*.js')
+        .pipe(mocha({
+            timeout: 10000,
+        }))
+        .pipe(istanbul.writeReports());
+});
+
 gulp.task('auto-setup', () => {
     return Promise.resolve()
         .then(() => {
