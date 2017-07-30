@@ -1,4 +1,6 @@
 extends common/container
+block head_scripts
+    link(rel="stylesheet" type="text/css" href="/libs/toastr/build/toastr.css")
 block contents
     h1 Drijbai Communications
     ul#users
@@ -8,5 +10,6 @@ block contents
         input#message(type='text', required='', autofocus='')
     script(src='/socket.io/socket.io.js')
 block footer
+    script(src='/libs/toastr/build/toastr.min.js')
     script
         | System.import("chat");

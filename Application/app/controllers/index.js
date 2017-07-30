@@ -5,4 +5,5 @@ module.exports = {
     AuthController: require('./auth/auth.controller'),
     ApiController: require('./api/api.controller'),
     ApartmentController: require('./server/apartment.controller'),
+    ValidatorController: require('./validators/validator.controller'),
 };

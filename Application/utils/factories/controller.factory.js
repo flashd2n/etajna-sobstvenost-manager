@@ -28,6 +28,10 @@ class ControllersFactory {
     getApiController() {
         return new this.controllers.ApiController(this.data);
     }
+
+    getValidatorController() {
+        return new this.controllers.ValidatorController();
+    }
 }
 
 module.exports = ControllersFactory;

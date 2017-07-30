@@ -3,7 +3,7 @@ block contents
     h1
         | Register
     div
-        form(method="POST")
+        form#registration(method="POST")
             div
                 label Appartment number:
                     select(name="appartment_id")
@@ -12,12 +12,15 @@ block contents
                                 | #{unregisteredAppartment.number}
             div
                 label Username:
-                input(type="text" name="username" placeholder="Username")
+                input.username(type="text" name="username" placeholder="Username")
             div
                 label Password:
-                input(type="password" name="password" placeholder="Password")
+                input.password(type="password" name="password" placeholder="Password")
             div
-                button(type="submit") Request registration
+                button.register(type="submit") Request registration
             div 
                 | Please note that your registration must 
                 | be approved by the manager before you can login
+block footer
+    script
+        | System.import("register");

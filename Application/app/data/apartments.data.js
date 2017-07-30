@@ -32,7 +32,7 @@ class ApartmentsData extends BaseData {
             });
     }
 
-    getById(id) {
+    getByIdWithPass(id) {
         const filter = { _id: new ObjectId(id) };
         const options = {};
         return this.collection
@@ -41,7 +41,8 @@ class ApartmentsData extends BaseData {
                 if (!model) {
                     return Promise.resolve(null);
                 }
-                return Promise.resolve(this.ModelClass.toViewModel(model));
+                return Promise.resolve(this.ModelClass
+                        .toViewModelWithPass(model));
             })
             .catch((err) => {
                 Promise.reject(err);
@@ -188,6 +189,28 @@ class ApartmentsData extends BaseData {
         return this._setExpenseState(expenseId, 'canceled');
     }
 
+    deleteApartment(number) {
+        const filter = {
+            number,
+        };
+
+        return this.collection.findOne(filter)
+            .then((apt) => {
+                const freshApt = {
+                    _id: apt._id,
+                    number: apt.number,
+                    username: '',
+                    password: '',
+                    moveInDate: '',
+                    paidFees: [],
+                    notPaidFees: [],
+                    paidExpenses: [],
+                    notPaidExpenses: [],
+                };
+                return this.collection.update({ number: apt.number }, freshApt);
+            });
+    }
+
     _setExpenseState(expenseId, state) {
         const filter = {};
         const options = {};
@@ -220,7 +243,7 @@ class ApartmentsData extends BaseData {
 
                         this.collection.updateOne({
                             _id: new ObjectId(apartment._id),
-                            }, apartment);
+                        }, apartment);
                     });
             });
     }

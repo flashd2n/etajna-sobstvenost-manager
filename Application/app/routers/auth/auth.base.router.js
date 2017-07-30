@@ -5,12 +5,13 @@ const passport = require('passport');
 
 const attach = (app, controllerFactory) => {
     const controller = controllerFactory.getAuthController();
+    const validator = controllerFactory.getValidatorController();
 
     router.route('/register')
         .get((req, res) => {
             controller.getForm(req, res);
         })
-        .post((req, res) => {
+        .post(validator.validateRegister, (req, res) => {
             controller.register(req, res);
         });
 
@@ -18,7 +19,7 @@ const attach = (app, controllerFactory) => {
         .get((req, res) => {
             controller.login(req, res);
         })
-        .post(passport.authenticate('local', {
+        .post(validator.validateLogin, passport.authenticate('local', {
             successRedirect: '/',
             failureRedirect: '/login',
             failureFlash: true,

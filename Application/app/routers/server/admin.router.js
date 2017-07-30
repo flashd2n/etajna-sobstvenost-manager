@@ -4,6 +4,7 @@ const router = new Router();
 const attach = (app, controllersFactory) => {
     const controller = controllersFactory.getAdminController();
     const authController = controllersFactory.getAuthController();
+    const validator = controllersFactory.getValidatorController();
 
     router.route('/admin')
         .get(authController.verifyLoggedAdmin, (req, res) => {
@@ -24,14 +25,16 @@ const attach = (app, controllersFactory) => {
         .get(authController.verifyLoggedAdmin, (req, res) => {
             controller.renderCreateExpenseForm(req, res);
         })
-        .post(authController.verifyLoggedAdmin, (req, res) => {
-            controller.createExpense(req, res);
-        });
+        .post([authController.verifyLoggedAdmin, validator.validateExpense],
+            (req, res) => {
+                controller.createExpense(req, res);
+            });
 
     router.route('/admin/add-monthly-fee')
-        .post(authController.verifyLoggedAdmin, (req, res) => {
-            controller.addMonthlyFee(req, res);
-        });
+        .post([authController.verifyLoggedAdmin, validator.validateFee],
+            (req, res) => {
+                controller.addMonthlyFee(req, res);
+            });
 
     router.route('/approve-request/:request_id')
         .get(authController.verifyLoggedAdmin, (req, res) => {

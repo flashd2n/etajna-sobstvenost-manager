@@ -45,7 +45,7 @@ class ApiController {
         const feeId = req.body.feeId;
         let apt = null;
 
-        this.data.apartments.getById(aptId)
+        this.data.apartments.getByIdWithPass(aptId)
             .then((_apt) => {
                 apt = _apt;
                 return this.data.apartments.processFeePayment(_apt, feeId);
@@ -54,9 +54,11 @@ class ApiController {
                 return this.data.fees.processAptPayment(apt, feeId);
             })
             .then((isSuccess) => {
-                if (isSuccess) {
-                    res.send('Success');
-                }
+                setTimeout(() => {
+                    if (isSuccess) {
+                        res.send('Success');
+                    }
+                }, 1000);
             })
             .catch((err) => {
                 res.send('Fail');
@@ -66,13 +68,11 @@ class ApiController {
     payExpense(req, res, next) {
         const aptId = req.params.aptId;
         const expenseId = req.body.expenseId;
-        let aptNumber = 0;
         let apt = null;
 
-        this.data.apartments.getById(aptId)
+        this.data.apartments.getByIdWithPass(aptId)
             .then((_apt) => {
                 apt = _apt;
-                aptNumber = _apt.number;
                 return this.data.apartments
                     .processExpensePayment(_apt, expenseId);
             })
@@ -106,6 +106,24 @@ class ApiController {
             })
             .catch((err) => {
                 next(err);
+            });
+    }
+
+    removeApt(req, res, next) {
+        const number = +req.params.aptNum;
+
+        this.data.apartments.deleteApartment(number)
+            .then(() => {
+                return this.data.expenses.removeAptFromNotPaid(number);
+            })
+            .then(() => {
+                return this.data.fees.removeAptFromNotPaid(number);
+            })
+            .then(() => {
+                res.send('Success');
+            })
+            .catch(() => {
+                res.status(500).send('Fail');
             });
     }
 }

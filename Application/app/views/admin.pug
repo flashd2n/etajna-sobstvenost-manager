@@ -19,17 +19,17 @@ block contents
                 | Currently there are no pending registration requests.
     div
         div
-            form(method="POST" action="/admin/add-monthly-fee")
+            form#fee(method="POST" action="/admin/add-monthly-fee")
                 label
                     | Month:
-                input(type="number" required step="1" min="1" max="12" name="month" value="8")
+                input#month(type="number" required step="1" min="1" max="12" name="month" value="8")
                 label
                     | year:
-                input(type="number" required step="1" min="2017" name="year" value="2017")
+                input#year(type="number" required step="1" min="2017" name="year" value="2017")
                 label
                     | Fee:
-                input(type="number" required step="0.01" min="0" name="fee")
-                button(type="submit")
+                input#cost(type="number" required step="0.01" min="0" name="fee")
+                button.createFee(type="submit")
                     | Create
         h3 Expenses
         div
@@ -71,3 +71,6 @@ block contents
                     | #{expense.paidAmount}/#{expense.totalCost}
             else 
                 | Currently there are no canceled expenses.
+block footer
+    script
+        | System.import("admin");
