@@ -1,8 +1,8 @@
 extends common/container
 block contents
-    h1
+    h1.row
         | My Apartment
-    table#fees
+    table#fees.table.table-striped.table-bordered.table-hover
         tr
             th
                 | Not Paid Month
@@ -10,7 +10,7 @@ block contents
                 | Cost
             th
                 | Pay Now
-    table#expenses
+    table#expenses.table.table-striped.table-bordered.table-hover
         tr
             th
                 | Not Paid Expense
