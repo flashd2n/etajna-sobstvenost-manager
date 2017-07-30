@@ -1,4 +1,4 @@
-/* globals $ */
+/* globals $, toastr */
 (() => {
     const aptId = window.location.href.split('/')[4];
 
@@ -67,6 +67,13 @@
     let feeId;
     let expenseId;
 
+    const callLoader = () => {
+        $.loader({
+            className: 'blue-with-image-2',
+            content: '',
+        });
+    };
+
     Promise.all([getNotPaidFees, getNotPaidExpenses])
         .then((data) => {
             const fees = data[0];
@@ -77,31 +84,41 @@
         })
         .then(() => {
             $('.payFee').on('click', (evt) => {
+                callLoader();
                 const $clickedBtn = $(evt.target);
                 const $feeItem = $clickedBtn.parent();
                 feeId = $feeItem.data().id;
                 payFee(feeId)
                     .then((res) => {
                         if (res === 'Success') {
+                            $.loader('close');
                             $feeItem.remove();
+                            toastr.success('Fee Paid!');
                         }
                     })
                     .catch((er) => {
+                        $.loader('close');
+                        toastr.error('ooops, something went wrong');
                         console.log(er);
                     });
             });
 
             $('.payExpense').on('click', (evt) => {
+                callLoader();
                 const $clickedBtn = $(evt.target);
                 const $expenseItem = $clickedBtn.parent();
                 expenseId = $expenseItem.data().id;
                 payExpense(expenseId)
                     .then((res) => {
                         if (res === 'Success') {
+                            $.loader('close');
                             $expenseItem.remove();
+                            toastr.success('Expense Paid!');
                         }
                     })
                     .catch((er) => {
+                        $.loader('close');
+                        toastr.error('ooops, something went wrong');
                         console.log(er);
                     });
             });

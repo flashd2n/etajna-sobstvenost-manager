@@ -11,4 +11,7 @@ block contents
                 label Password:
                 input(type="password" name="password" placeholder="Password")
             div
-                button(type="submit") Login
+                button.login(type="submit") Login
+block footer
+    script
+        | System.import("login");

@@ -1,4 +1,6 @@
 extends common/container
+block head_scripts
+    link(rel="stylesheet" type="text/css" href="/libs/toastr/build/toastr.css")
 block contents
     h1
         | Page of Shame
@@ -11,5 +13,6 @@ block contents
                     button.sendMutri
                         | Send Mutri
 block footer
+    script(src='/libs/toastr/build/toastr.min.js')
     script
         | System.import("pageofshame");

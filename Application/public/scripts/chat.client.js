@@ -1,4 +1,4 @@
-/* globals io, $ */
+/* globals io, $, toastr */
 'use strict';
 
 (() => {

@@ -54,9 +54,11 @@ class ApiController {
                 return this.data.fees.processAptPayment(apt, feeId);
             })
             .then((isSuccess) => {
-                if (isSuccess) {
-                    res.send('Success');
-                }
+                setTimeout(() => {
+                    if (isSuccess) {
+                        res.send('Success');
+                    }
+                }, 1000);
             })
             .catch((err) => {
                 res.send('Fail');

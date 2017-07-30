@@ -1,4 +1,4 @@
-/* globals $ */
+/* globals $, toastr */
 (() => {
     const removeApt = (number) => {
         return new Promise((resolve, reject) => {
@@ -22,7 +22,8 @@
 
         removeApt(aptNum)
             .then(() => {
-                location.reload();
+                toastr.success(`Apartment ${aptNum} bites the dust!`);
+                $li.remove();
             })
             .catch((err) => {
                 console.log(err);

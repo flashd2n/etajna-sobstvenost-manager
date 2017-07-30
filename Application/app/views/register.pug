@@ -17,7 +17,10 @@ block contents
                 label Password:
                 input(type="password" name="password" placeholder="Password")
             div
-                button(type="submit") Request registration
+                button.register(type="submit") Request registration
             div 
                 | Please note that your registration must 
                 | be approved by the manager before you can login
+block footer
+    script
+        | System.import("register");
