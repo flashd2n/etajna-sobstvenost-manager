@@ -32,7 +32,7 @@ class ApartmentsData extends BaseData {
             });
     }
 
-    getById(id) {
+    getByIdWithPass(id) {
         const filter = { _id: new ObjectId(id) };
         const options = {};
         return this.collection
@@ -41,7 +41,8 @@ class ApartmentsData extends BaseData {
                 if (!model) {
                     return Promise.resolve(null);
                 }
-                return Promise.resolve(this.ModelClass.toViewModel(model));
+                return Promise.resolve(this.ModelClass
+                        .toViewModelWithPass(model));
             })
             .catch((err) => {
                 Promise.reject(err);

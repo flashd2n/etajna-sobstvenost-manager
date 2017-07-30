@@ -4,6 +4,7 @@ const router = new Router();
 const attach = (app, controllerFactory) => {
     const controller = controllerFactory.getApiController();
     const authController = controllerFactory.getAuthController();
+    const validator = controllerFactory.getValidatorController();
 
     router.route('/getuser')
         .get(authController.verifyLoggedUser, controller.retriveUser);
@@ -29,12 +30,12 @@ const attach = (app, controllerFactory) => {
         });
 
     router.route('/payfee/:aptId')
-        .put((req, res, next) => {
+        .put(validator.validatePayFee, (req, res, next) => {
             controller.payFee(req, res, next);
         });
 
     router.route('/payexpense/:aptId')
-        .put((req, res, next) => {
+        .put(validator.validatePayExpense, (req, res, next) => {
             controller.payExpense(req, res, next);
         });
 
