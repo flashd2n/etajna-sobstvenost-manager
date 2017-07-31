@@ -34,7 +34,6 @@ class ApiController {
                 return res.json(apt.notPaidExpenses);
             })
             .catch((err) => {
-                console.log('--------');
                 res.status(404).send('Invalid user id');
             });
     }
@@ -54,8 +53,9 @@ class ApiController {
             })
             .then((isSuccess) => {
                 if (isSuccess) {
-                    res.send('Success');
+                    return res.send('Success');
                 }
+                return Promise.reject();
             })
             .catch((err) => {
                 res.status(404).send('Fail');
@@ -78,8 +78,9 @@ class ApiController {
             })
             .then((isSuccess) => {
                 if (isSuccess) {
-                    res.send('Success');
+                    return res.send('Success');
                 }
+                return Promise.reject();
             })
             .catch((err) => {
                 res.status(404).send('Fail');
