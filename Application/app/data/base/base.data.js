@@ -29,7 +29,7 @@ class BaseData {
             .findOne(filter, options)
             .then((foundRecord) => {
                 if (!foundRecord) {
-                    return Promise.reject();
+                    return Promise.reject('info');
                 }
 
                 if (this.ModelClass.toViewModel) {
@@ -83,8 +83,8 @@ class BaseData {
             .then(() => {
                 return 'Success';
             })
-            .catch((err) => {
-                Promise.reject(err);
+            .catch(() => {
+                return Promise.reject('Fail');
             });
     }
 
