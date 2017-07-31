@@ -7,7 +7,7 @@ describe('AJAX routes tests', () => {
     let db = null;
 
     before(() => {
-        const connectionString = 'mongodb://localhost/etajna-sobstvenost-manager-dev';
+        const connectionString = 'mongodb://localhost/etajna-sobstvenost-manager-integration';
         const config = require('../../config');
 
         const { Logger } = require('../../utils');
