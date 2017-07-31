@@ -5,11 +5,11 @@ block contents
     div
         form#login(method="POST")
             div.row
-                label.hidden-xs Username:
-                input.form-control.username(type="text" name="username" placeholder="Username")
+                label.hidden-xs(for="username") Username:
+                input.form-control.username(type="text" name="username" id="username" placeholder="Username")
             div.row
-                label.hidden-xs Password:
-                input.form-control.password(type="password" name="password" placeholder="Password")
+                label.hidden-xs(for="password") Password:
+                input.form-control.password(type="password" name="password" id="password" placeholder="Password")
             div.row
                 button.btn.btn-success.login(type="submit") Login
 block footer

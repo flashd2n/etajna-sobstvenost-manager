@@ -5,21 +5,21 @@ block contents
     div
         form#registration(method="POST")
             div.row
-                label.hidden-xs Appartment number:
-                label.visible-xs Apt. No:
-                select.form-control(name="appartment_id")
+                label.hidden-xs(for="apartment_id") Apartment number:
+                label.visible-xs(for="apartment_id") Apt. No:
+                select.form-control(name="appartment_id" id="apartment_id" )
                     each unregisteredAppartment in unregisteredAppartments
                         option(value=unregisteredAppartment._id) 
                             | #{unregisteredAppartment.number}
             div.row
-                label.hidden-xs Username:
-                input.form-control.username(type="text" name="username" placeholder="Username")
+                label.hidden-xs(for="username") Username:
+                input.form-control.username(type="text" name="username" id="username" placeholder="Username")
             div.row
-                label.hidden-xs Password:
-                input.form-control.password(type="password" name="password" placeholder="Password")
+                label.hidden-xs(for="password") Password:
+                input.form-control.password(type="password" name="password"  id="password" placeholder="Password")
             div.row
                 button.register.btn.btn-success(type="submit") Request registration
-            div 
+            div
                 | Please note that your registration must 
                 | be approved by the manager before you can login
 block footer

@@ -1,3 +1,7 @@
+body {
+	font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
 .page-footer {
     background-color: gray;
 }
@@ -21,6 +25,16 @@ input,select {
 button {
     margin: 10px;
 }
+
+.jumbotron {
+	height: 600px;
+	background: url("/public/images/Drujbai-jumbotron.jpg") center center;
+}
+
+  form div.row {
+	  font-family: "Comic Sans MS", "Comic Sans", cursive;
+	margin-top: 10px;
+}  
 
 #jquery-loader.blue-with-image-2{
 	border:none;

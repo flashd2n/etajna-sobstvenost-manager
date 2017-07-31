@@ -5,23 +5,37 @@ block contents
     h1.row
         | Page of Shame
     div.panel.panel-default
-        div.panel-body
+
             each apartment in apartments
-                div.row.highlight-row(data-aptnum=apartment.number)
-                    div.col-lg-6.col-md-6.col-sm-6.col-xs-6
-                        a(href = "/page-of-shame/" + apartment.id) 
+                //- div.row.highlight-row(data-aptnum=apartment.number)
+                //-     div.col-lg-6.col-md-6.col-sm-6.col-xs-6
+                //-         a(href = "/page-of-shame/" + apartment.id) 
+                //-             span.hidden-xs
+                //-                 | Apartment #{apartment.number}
+                //-             span.visible-xs
+                //-                 | Apt. #{apartment.number}
+                //-     div.col-lg-4.col-md-4.col-sm-4.col-xs-6
+                //-         span.hidden-xs
+                //-             | Total Debts: 
+                //-         span
+                //-             | #{apartment.debt}
+                //-             if (loggedUser && loggedUser.type == 'admin' && apartment.debt > 1500)
+                //-                 button.sendMutri
+                //-                     | Send Mutri
+                                div.row.highlight-row(data-aptnum=apartment.number)
+                div.list-group
+                    a.list-group-item(href = "/page-of-shame/" + apartment.id) 
                             span.hidden-xs
-                                | Apartment #{apartment.number}
+                                | Apartment #{apartment.number} 
                             span.visible-xs
-                                | Apt. #{apartment.number}
-                    div.col-lg-4.col-md-4.col-sm-4.col-xs-6
-                        span.hidden-xs
-                            | Total Debts: 
-                        span
-                            | #{apartment.debt}
-                            if (loggedUser && loggedUser.type == 'admin' && apartment.debt > 1500)
-                                button.sendMutri
-                                    | Send Mutri
+                                | Apt. #{apartment.number} 
+                            span.hidden-xs
+                                | Total Debts: 
+                            span
+                                | #{apartment.debt}
+                                if (loggedUser && loggedUser.type == 'admin' && apartment.debt > 1500)
+                                    button.sendMutri
+                                        | Send Mutri
 block footer
     script(src='/libs/toastr/build/toastr.min.js')
     script
