@@ -1,19 +1,21 @@
 extends common/container
 block contents
-    h1
-        | New expense
-    form#create(method="POST" class="form-horizontal")
-        div
-            label(for="name") Name:
-            input#name(type="text" name="name" required placeholder="Name")
-        div
-            label(for="description") Description:
-            textarea#description(name="description" placeholder="Expense description")
-        div
-            label(for="const") Cost:
-            input#cost(type="number" step="0.01" min="0" required name="cost" placeholder="Cost")
-        div
-            button.createExpense(type="submit") Create
+
+    div.newExpenseContainer.container.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
+        h1
+            | New expense
+        form#create(method="POST" class="form-horizontal")
+            div.form-group.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                label(for="name" class="control-label col-xs-2") Name:
+                input#name(type="text" name="name" class="form-control" required placeholder="Name")
+            div.form-group.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                label(for="cost" class="control-label col-xs-2") Cost:
+                input#cost(type="number" class="form-control" step="0.01" min="0" required name="cost" placeholder="Cost")
+            div.form-group.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                label(for="description" class="control-label col-xs-2") Description:
+                textarea#description(name="description" class="form-control" rows="2" placeholder="Expense description")
+            div.form-group.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                button.createExpense.btn.btn-success(type="submit") Create
 block footer
     script
         | System.import("createExpense");

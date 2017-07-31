@@ -15,10 +15,6 @@
         });
     };
 
-    $('.list-group-item').on('click', (evt) => {
-        return false;
-    });
-
     $('.sendMutri').on('click', (evt) => {
         const $button = $(evt.target);
         const $li = $button.parents('.list-group');

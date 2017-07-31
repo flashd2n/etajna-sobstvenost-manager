@@ -5,23 +5,25 @@ block contents
     h1.row
         | Page of Shame
         
-    div.panel.panel-default
+    div.panel.panel-default.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
         each apartment in apartments
             div.list-group(data-aptnum=apartment.number)
-                a.list-group-item(href = "/page-of-shame/" + apartment.id) 
-                        span.l-col.hidden-xs
+                span.list-group-item
+                        a(href = "/page-of-shame/" + apartment.id).l-col.hidden-xs
                             if(apartment.number < 10)
                                 | Apartment 0#{apartment.number}
                             else
                                 | Apartment #{apartment.number}
-                        span.l-col.visible-xs
-                            | Apt. #{apartment.number} 
-                        span.c-col.hidden-xs
-                            | Total Debts: 
-                            | #{apartment.debt}
-                            if (loggedUser && loggedUser.type == 'admin' && apartment.debt > 1500)
-                                button.sendMutri
-                                    | Send Mutri
+                        a(href = "/page-of-shame/" + apartment.id).l-col.visible-xs
+                            if(apartment.number < 10)
+                                | Apt. 0#{apartment.number}
+                            else
+                                | Apt. #{apartment.number}
+                        | Total Debts: 
+                        | #{apartment.debt}
+                        if (loggedUser && loggedUser.type == 'admin' && apartment.debt > 1500)
+                            button.sendMutri.btn.btn-danger.btn-sm
+                                | Send Mutri
 block footer
     script(src='/libs/toastr/build/toastr.min.js')
     script

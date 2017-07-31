@@ -3,20 +3,20 @@ block contents
     h1.row
         | Register
     div
-        form#registration(method="POST")
+        form#registration(method="POST" class="form-horizontal")
             div.row
-                label.hidden-xs(for="apartment_id") Apartment number:
-                label.visible-xs(for="apartment_id") Apt. No:
-                select.form-control(name="appartment_id" id="apartment_id" )
+                label.hidden-xs(for="apartment_id" class="control-label col-xs-2") Apartment number:
+                label.visible-xs(for="apartment_id" class="control-label col-xs-2") Apt. No:
+                select.form-control(name="appartment_id" class="form-control" id="apartment_id")
                     each unregisteredAppartment in unregisteredAppartments
                         option(value=unregisteredAppartment._id) 
                             | #{unregisteredAppartment.number}
             div.row
-                label.hidden-xs(for="username") Username:
-                input.form-control.username(type="text" name="username" id="username" placeholder="Username")
+                label.visible-lg.visible-md.visible-sm.visible-xs(for="username" class="control-label col-xs-2") Username:
+                input.form-control.username(type="text" name="username" class="form-control" id="username" placeholder="Username")
             div.row
-                label.hidden-xs(for="password") Password:
-                input.form-control.password(type="password" name="password"  id="password" placeholder="Password")
+                label.visible-lg.visible-md.visible-sm.visible-xs(for="password" class="control-label col-xs-2") Password:
+                input.form-control.password(type="password" name="password" class="form-control"  id="password" placeholder="Password")
             div.row
                 button.register.btn.btn-success(type="submit") Request registration
             div
