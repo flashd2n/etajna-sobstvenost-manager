@@ -9,11 +9,15 @@ class ErrorController {
         try {
             error = JSON.parse(err.message);
         } catch (e) {
+            this.logger.log(err.message);
+
             return res.send(err.message);
         }
 
         const message = error.message;
-        const code = error.code;
+        const code = +error.code;
+
+        this.logger.log(message);
 
         if (code === 401) {
             return res.status(code).send(message);

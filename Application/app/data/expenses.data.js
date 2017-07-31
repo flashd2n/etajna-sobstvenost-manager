@@ -18,7 +18,7 @@ class ExpensesData extends BaseData {
                 });
             })
             .catch((err) => {
-                Promise.reject(err);
+                return Promise.reject(err);
             });
     }
 
@@ -34,7 +34,7 @@ class ExpensesData extends BaseData {
                 });
             })
             .catch((err) => {
-                Promise.reject(err);
+                return Promise.reject(err);
             });
     }
 
@@ -50,7 +50,7 @@ class ExpensesData extends BaseData {
                 });
             })
             .catch((err) => {
-                Promise.reject(err);
+                return Promise.reject(err);
             });
     }
 
