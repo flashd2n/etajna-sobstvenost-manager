@@ -44,7 +44,7 @@ describe('Error Controller Tests', () => {
                 message: '{ "message":"something", "code":"500" }',
             };
             controller.handleError(err, req, res, next);
-            expect(res.status.calledWith('500')).to.equal(true);
+            expect(res.status.calledWith(500)).to.equal(true);
             expect(res.status().json.calledWith(JSON.parse(err.message))).to.equal(true);
         });
 
@@ -53,7 +53,7 @@ describe('Error Controller Tests', () => {
                 message: '{ "message":"something", "code":"401" }',
             };
             controller.handleError(err, req, res, next);
-            expect(res.status.calledWith('401')).to.equal(true);
+            expect(res.status.calledWith(401)).to.equal(true);
             expect(res.status().send.calledWith('something')).to.equal(true);
         });
 

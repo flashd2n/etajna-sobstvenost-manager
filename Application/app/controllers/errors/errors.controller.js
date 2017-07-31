@@ -15,15 +15,15 @@ class ErrorController {
         }
 
         const message = error.message;
-        const code = error.code;
+        const code = +error.code;
 
         this.logger.log(message);
 
-        if (code === '401') {
+        if (code === 401) {
             return res.status(code).send(message);
         }
 
-        if (code === '500') {
+        if (code === 500) {
             return res.status(code).json(error);
         }
 
