@@ -2,7 +2,7 @@ extends common/container
 block contents
     h1
         | Admin panel
-    div.regRequests.container.col-lg-3
+    div.regRequests.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12
         h2 Registration requests
         div.list-group
             each request in requests
@@ -19,31 +19,31 @@ block contents
                                 | Reject
             else 
                 | Currently there are no pending registration requests.
-    div.feeContainer.container.col-lg-4
-        h2 Monthly Fee
-    
-        form#fee(method="POST" action="/admin/add-monthly-fee")
-        //- div.row
-        div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12
-            label(for="month")
-                | Month:
-            input#month(type="number" required step="1" min="1" max="12" name="month" value="8")
-        //- div.row
-        div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12    
-                label(for="year")
+    div.feeContainer.container.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12 
+        h2 Create monthly fee
+        //- div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12
+        form#fee(class="form-horizontal" method="POST" action="/admin/add-monthly-fee")
+            //- div.row
+            div.form-group.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                    label(for="month" class="control-label col-sm-2")
+                        | Month:
+                    input#month(type="number" class="form-control" required step="1" min="1" max="12" name="month" value="8")
+            //- div.row
+            div.form-group.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12    
+                label(for="year" class="control-label col-sm-2")
                     | Year:
-                input#year(type="number" required step="1" min="2017" name="year" value="2017")
-        //- div.row
-        div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12    
-                label(for="cost")
+                input#year(type="number" class="form-control" required step="1" min="2017" max ="3000" name="year" value="2017")
+            //- div.row
+            div.form-group.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12    
+                label(for="cost" class="control-label col-sm-2")
                     | Cost:
-                input#cost(type="number" required step="0.01" min="0" name="fee")
-        //- div.row
-        div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12   
-                button.createFee(type="submit")
+                input#cost(type="number" class="form-control" required step="0.01" min="0" max ="100" name="fee")
+            //- div.row
+            div.form-group.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12   
+                button.createFee(type="submit" class="btn btn-default")
                     | Create
 
-    div.expensesContainer.container.col-lg-3
+    div.expensesContainer.container.visible-lg.visible-md.visible-sm.col-lg-12.col-md-3.col-sm-12.col-xs-12
         h2 Expenses
         a.newExpense(href="/create-expense/")
             | New expense
@@ -94,6 +94,6 @@ block contents
                         | #{expense.paidAmount}/#{expense.totalCost}
         else 
             | Currently there are no canceled expenses.
-block footer
+//- block footer
     script
         | System.import("admin");

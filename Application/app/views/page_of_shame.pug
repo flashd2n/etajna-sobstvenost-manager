@@ -16,14 +16,12 @@ block contents
                                 | Apartment #{apartment.number}
                         span.l-col.visible-xs
                             | Apt. #{apartment.number} 
-                        span.m-col.hidden-xs
+                        span.c-col.hidden-xs
                             | Total Debts: 
                             | #{apartment.debt}
                             if (loggedUser && loggedUser.type == 'admin' && apartment.debt > 1500)
                                 button.sendMutri
                                     | Send Mutri
-                            else
-                                div.noMutri
 block footer
     script(src='/libs/toastr/build/toastr.min.js')
     script
