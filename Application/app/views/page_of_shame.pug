@@ -7,7 +7,7 @@ block contents
         
     div.panel.panel-default
         each apartment in apartments
-            div.list-group
+            div.list-group(data-aptnum=apartment.number)
                 a.list-group-item(href = "/page-of-shame/" + apartment.id) 
                         span.l-col.hidden-xs
                             if(apartment.number < 10)

@@ -15,9 +15,13 @@
         });
     };
 
+    $('.list-group-item').on('click', (evt) => {
+        return false;
+    });
+
     $('.sendMutri').on('click', (evt) => {
         const $button = $(evt.target);
-        const $li = $button.parents('.highlight-row');
+        const $li = $button.parents('.list-group');
         const aptNum = $li.data('aptnum');
 
         removeApt(aptNum)
