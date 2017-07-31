@@ -71,15 +71,47 @@ p.reject {
 
 .l-col {
 	float:left;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 .c-col {
 	padding-left: 20%;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.r-col {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+a.approve {
+	float:right;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+a.reject {
+	float:right;
+	margin-top: 0px;
+	margin-bottom: px;
+	margin-right: 0px;
+	margin-left: 0px;
 }
 
 .r-col {
 	float:right;
 }
+
+a.cancel-expense {
+	margin-bottom: 3%;
+	border-bottom: 1px solid black;
+}
+
+app
 
 .list-group>li {
 	float: left;

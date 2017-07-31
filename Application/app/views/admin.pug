@@ -2,7 +2,7 @@ extends common/container
 block contents
     h1
         | Admin panel
-    div.regRequests.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12
+    div.regRequests.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
         h2 Registration requests
         div.list-group
             each request in requests
@@ -11,39 +11,37 @@ block contents
                             | #{request.number}
                         span.m-col
                             | #{request.username}
-                        span.approve.r-col
-                            a.approve(href="/approve-request/"+request._id)
-                                | Approve 
-                        span.reject.r-col
-                            a.reject(href="/reject-request/"+request._id)
-                                | Reject
+                        a.approve.btn.btn-success.btn-md(href="/approve-request/"+request._id)
+                            | Approve 
+                        a.reject.btn.btn-danger.btn-md(href="/reject-request/"+request._id)
+                            | Reject
             else 
                 | Currently there are no pending registration requests.
-    div.feeContainer.container.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12 
+    div.feeContainer.container.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
         h2 Create monthly fee
         //- div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12
         form#fee(class="form-horizontal" method="POST" action="/admin/add-monthly-fee")
             //- div.row
-            div.form-group.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12
+            div.form-group.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
                     label(for="month" class="control-label col-sm-2")
                         | Month:
                     input#month(type="number" class="form-control" required step="1" min="1" max="12" name="month" value="8")
             //- div.row
-            div.form-group.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12    
+            div.form-group.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
                 label(for="year" class="control-label col-sm-2")
                     | Year:
                 input#year(type="number" class="form-control" required step="1" min="2017" max ="3000" name="year" value="2017")
             //- div.row
-            div.form-group.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12    
+            div.form-group.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
                 label(for="cost" class="control-label col-sm-2")
                     | Cost:
                 input#cost(type="number" class="form-control" required step="0.01" min="0" max ="100" name="fee")
             //- div.row
-            div.form-group.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12   
-                button.createFee(type="submit" class="btn btn-default")
+            div.form-group.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                button.createFee.btn.btn-success.btn-md(type="submit" class="btn btn-default")
                     | Create
 
-    div.expensesContainer.container.visible-lg.visible-md.visible-sm.col-lg-12.col-md-3.col-sm-12.col-xs-12
+    div.expensesContainer.container.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
         h2 Expenses
         a.newExpense(href="/create-expense/")
             | New expense
@@ -52,7 +50,7 @@ block contents
         h3 Pending expenses
         each expense in pendingExpenses
             div.row
-                div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12     
+                div.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
                     div(title=expense.description)
                         span.l-col    
                             a(href="/expenses/"+expense._id)
@@ -63,7 +61,7 @@ block contents
                             if expense.notPaid.length == 0
                                 a.complete-expense(href="/complete-expense/"+expense._id)
                                     | Complete
-                            a.complete-expense(href="/cancel-expense/"+expense._id)
+                            a.cancel-expense.btn.btn-danger.btn-md( class=href="/cancel-expense/"+expense._id)
                                 | Cancel
         else 
             | Currently there are no pending expenses.
@@ -72,7 +70,7 @@ block contents
         h3 Completed expenses
         each expense in completedExpenses
             div.row
-            div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12
+            div.visible-lg.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
                 div(title=expense.description)
                     span.l-col
                         a(href="/expenses/"+expense._id)
@@ -86,7 +84,7 @@ block contents
         h3 Canceled expenses
         each expense in canceledExpenses
             div.row
-                div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12   
+                div.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
                     div(title=expense.description)
                         a(href="/expenses/"+expense._id)
                             | #{expense.name}
