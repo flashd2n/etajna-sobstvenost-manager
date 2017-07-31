@@ -10,9 +10,9 @@ block contents
             each expense in pending
                 div.list-group
                     a.list-group-item(href="/expenses/" + expense._id)
-                        span.l-col
+                        span
                             | #{expense.name} 
-                        span.r-col
+                        span
                             | Payment Cost: 
                             | #{expense.cost}
     h2.row
@@ -22,8 +22,8 @@ block contents
             each expense in completed
                 div.list-group
                     a.list-group-item(href="/expenses/" + expense._id)
-                        span.l-col
+                        span
                             | #{expense.name} 
-                        span.r-col
+                        span
                             | Payment Cost: 
                             | #{expense.cost}

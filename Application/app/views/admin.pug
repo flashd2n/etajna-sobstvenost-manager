@@ -3,83 +3,90 @@ block contents
     h1
         | Admin panel
     div.regRequests.container.col-lg-3
-        h3 Registration requests
+        h2 Registration requests
         div.list-group
             each request in requests
-                    div.list-group-item
-                        p.text-left
+                    div.requestRow.list-group-item
+                        span.l-col
                             | #{request.number}
-                        p.text-center
+                        span.m-col
                             | #{request.username}
-                        p.approve.text-right
+                        span.approve.r-col
                             a.approve(href="/approve-request/"+request._id)
                                 | Approve 
-                        p.reject.text-right
+                        span.reject.r-col
                             a.reject(href="/reject-request/"+request._id)
                                 | Reject
             else 
                 | Currently there are no pending registration requests.
     div.feeContainer.container.col-lg-4
-        h3 Monthly Fee
-        div.col-sm-6
-            form#fee(method="POST" action="/admin/add-monthly-fee")
-            div.row
-            div.visible-lg.visible-md.visible-sm.col-lg-4.col-md-4.col-sm-4.col-xs-4
-                label(for="month")
-                    | Month:
-                input#month(type="number" required step="1" min="1" max="12" name="month" value="8")
-            div.row
-            div.visible-lg.visible-md.visible-sm.col-lg-4.col-md-4.col-sm-4.col-xs-4    
-                    label(for="year")
-                        | Year:
-                    input#year(type="number" required step="1" min="2017" name="year" value="2017")
-            div.row
-            div.visible-lg.visible-md.visible-sm.col-lg-4.col-md-4.col-sm-4.col-xs-4    
-                    label(for="fee")
-                        | Cost:
-                    input#cost(type="number" required step="0.01" min="0" name="fee")
-            div.row
-            div.visible-lg.visible-md.visible-sm.col-lg-4.col-md-4.col-sm-4.col-xs-4    
-                    button.createFee(type="submit")
-                        | Create
-    h3 Expenses
-    div.expensesContainer.container.col-lg-9
-    a(href="/create-expense/")
-        | New expense
+        h2 Monthly Fee
     
-    div.container
-    h4 Pending expenses
-    each expense in pendingExpenses
-        div.row
-            div.visible-lg.visible-md.visible-sm.col-lg-4.col-md-4.col-sm-4.col-xs-4     
-                div(title=expense.description)
-                    a(href="/expenses/"+expense._id)
-                        | #{expense.name}
-                div
-                    | #{expense.paidAmount}/#{expense.totalCost}
-                div
-                    if expense.notPaid.length == 0
-                        a.complete-expense(href="/complete-expense/"+expense._id)
-                            | Complete
-                    a.complete-expense(href="/cancel-expense/"+expense._id)
-                        | Cancel
-    else 
-        | Currently there are no pending expenses.
-    h4 Completed expenses
-    div.container
+        form#fee(method="POST" action="/admin/add-monthly-fee")
+        //- div.row
+        div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12
+            label(for="month")
+                | Month:
+            input#month(type="number" required step="1" min="1" max="12" name="month" value="8")
+        //- div.row
+        div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12    
+                label(for="year")
+                    | Year:
+                input#year(type="number" required step="1" min="2017" name="year" value="2017")
+        //- div.row
+        div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12    
+                label(for="cost")
+                    | Cost:
+                input#cost(type="number" required step="0.01" min="0" name="fee")
+        //- div.row
+        div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12   
+                button.createFee(type="submit")
+                    | Create
+
+    div.expensesContainer.container.col-lg-3
+        h2 Expenses
+        a.newExpense(href="/create-expense/")
+            | New expense
+    
+        div.pendingExp.container
+        h3 Pending expenses
+        each expense in pendingExpenses
+            div.row
+                div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12     
+                    div(title=expense.description)
+                        span.l-col    
+                            a(href="/expenses/"+expense._id)
+                                | #{expense.name}
+                        span.c-col
+                            | #{expense.paidAmount}/#{expense.totalCost}
+                        span.r-col
+                            if expense.notPaid.length == 0
+                                a.complete-expense(href="/complete-expense/"+expense._id)
+                                    | Complete
+                            a.complete-expense(href="/cancel-expense/"+expense._id)
+                                | Cancel
+        else 
+            | Currently there are no pending expenses.
+
+        div.completeExp.container
+        h3 Completed expenses
         each expense in completedExpenses
-            div(title=expense.description)
-                a(href="/expenses/"+expense._id)
-                    | #{expense.name}
-            div
-                | #{expense.paidAmount}/#{expense.totalCost}
+            div.row
+            div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                div(title=expense.description)
+                    span.l-col
+                        a(href="/expenses/"+expense._id)
+                            | #{expense.name}
+                    span.r-col
+                        | #{expense.paidAmount}/#{expense.totalCost}
         else 
             | Currently there are no completed expenses.
-    h4 Canceled expenses
-    div.container
+
+        div.canceledExp.container
+        h3 Canceled expenses
         each expense in canceledExpenses
             div.row
-                div.visible-lg.visible-md.visible-sm.col-lg-4.col-md-4.col-sm-4.col-xs-4    
+                div.visible-lg.visible-md.visible-sm.col-lg-12.col-md-12.col-sm-12.col-xs-12   
                     div(title=expense.description)
                         a(href="/expenses/"+expense._id)
                             | #{expense.name}
