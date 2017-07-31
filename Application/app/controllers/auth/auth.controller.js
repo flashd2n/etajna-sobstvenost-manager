@@ -17,7 +17,7 @@ class AuthController {
             });
     }
 
-    register(req, res) {
+    register(req, res, next) {
         this.data.requests.getByUsername(req.body.username)
             .then((registrationRequest) => {
                 if (registrationRequest) {
@@ -62,7 +62,7 @@ class AuthController {
                 return Promise.resolve();
             })
             .catch((err) => {
-                console.log(err);
+                return next(err);
             });
     }
 
