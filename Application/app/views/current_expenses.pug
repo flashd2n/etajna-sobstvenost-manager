@@ -7,27 +7,23 @@ block contents
         | Pending 
         span.hidden-xs Expenses
     div.panel.panel-default
-        ul.list-unstyled.panel-body
             each expense in pending
-                li.row.highlight-row
-                    div.col-lg-6.col-md-6.col-sm-6.col-xs-6
-                        a(href="/expenses/" + expense._id)
+                div.list-group
+                    a.list-group-item(href="/expenses/" + expense._id)
+                        span.l-col
                             | #{expense.name} 
-                    div.col-lg-6.col-md-6.col-sm-6.col-xs-6
-                        span.hidden-xs
+                        span.r-col
                             | Payment Cost: 
-                        | #{expense.cost}
+                            | #{expense.cost}
     h2.row
         | Completed 
         span.hidden-xs Expenses
     div.panel.panel-default
-        ul.list-unstyled.panel-body
             each expense in completed
-                li.row.highlight-row
-                    div.col-lg-6.col-md-6.col-sm-6.col-xs-6
-                        a(href="/expenses/" + expense._id)
-                            | #{expense.name}
-                    div.col-lg-6.col-md-6.col-sm-6.col-xs-6
-                        span.hidden-xs
+                div.list-group
+                    a.list-group-item(href="/expenses/" + expense._id)
+                        span.l-col
+                            | #{expense.name} 
+                        span.r-col
                             | Payment Cost: 
-                        | #{expense.cost}
+                            | #{expense.cost}

@@ -1,5 +1,10 @@
 body {
 	font-family: "Comic Sans MS", "Comic Sans", cursive;
+	
+}
+
+.navbar {
+    margin-bottom: 0px;
 }
 
 .page-footer {
@@ -26,15 +31,71 @@ button {
     margin: 10px;
 }
 
-.jumbotron {
-	height: 600px;
-	background: url("/public/images/Drujbai-jumbotron.jpg") center center;
+ .feeContainer {
+	border: 1px solid black;
+	border-radius : 3%;
+} 
+
+.regRequests {
+	border: 1px solid black;
+	border-radius : 3%;
 }
 
-  form div.row {
+.jumbotron {
+	padding: 0px;
+	height: 100vh;
+	background: url("/public/images/Drujbai-jumbotron.jpg") center center;  
+}
+
+.list-group-item {
+	text-align: center;
+}
+
+.list-group-item>:first-child {
+	float: left;
+}
+
+p.approve {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+p.reject {
+	margin-top: 5;
+	margin-bottom: 0;
+}
+
+.text-center {
+	margin: 0 0 0 0;
+}
+
+.text-left {
+	margin: 0 0 0 0;
+}
+
+.list-group>li {
+	float: left;
+	display: block;
+}
+
+ .sendMutri {
+	margin-top: 0px;
+	margin-bottom: 0px;
+} 
+
+form div.row {
 	  font-family: "Comic Sans MS", "Comic Sans", cursive;
 	margin-top: 10px;
 }  
+
+.jumbotron>.container>.row {
+	vertical-align: top;
+	 margin-top: 0%;
+	 color: transparent;
+	  -webkit-text-stroke-color: black;
+	  -webkit-text-stroke-width: 1px;
+	 background-color: transparent;
+ }
 
 #jquery-loader.blue-with-image-2{
 	border:none;

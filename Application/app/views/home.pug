@@ -3,28 +3,28 @@ block head_scripts
     //- script(src='/public/scripts/home.js')
 block contents
     div.jumbotron.col-lg-12.col-md-12.col-sm-12.col-xs-12
-        //- img(class="img-responsive")(src=)
-    div.row
-        h1.col-lg-12.col-md-12.col-sm-12.col-xs-12
-            | Home
-    div.row.highlight-row
-        div.visible-lg.visible-md.visible-sm.col-lg-6.col-md-6.col-sm-6.col-xs-6
-            | Total unpaid sum: 
-        div.visible-xs.col-lg-6.col-md-6.col-sm-6.col-xs-6
-            | Unpaid:
-        div#totalDebt.col-lg-6.col-md-6.col-sm-6.col-xs-6
-    div.row.highlight-row
-        div.visible-lg.visible-md.visible-sm.col-lg-6.col-md-6.col-sm-6.col-xs-6
-            | Total number of debtors: 
-        div.visible-xs.col-lg-6.col-md-6.col-sm-6.col-xs-6
-            | Debtors: 
-        div#totalDebtors.col-lg-6.col-md-6.col-sm-6.col-xs-6.pull-left
-    div.row.highlight-row
-        div.visible-lg.visible-md.visible-sm.col-lg-6.col-md-6.col-sm-6.col-xs-6
-            | Total number of current expenses: 
-        div.visible-xs.col-lg-6.col-md-6.col-sm-6.col-xs-6
-            | Current exp.: 
-        div#expensesCount.col-lg-6.col-md-6.col-sm-6.col-xs-6
+        div.container    
+            div.row
+                h2.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                    | Superintendent Manager (drujbai mutri edition)
+            div.row.highlight-row
+                div.visible-lg.visible-md.visible-sm.col-lg-4.col-md-4.col-sm-4.col-xs-4
+                    | Total unpaid sum: 
+                div.visible-xs.col-lg-4.col-md-4.col-sm-4.col-xs-4
+                    | Unpaid:
+                div#totalDebt.col-lg-4.col-md-4.col-sm-4.col-xs-4
+            div.row.highlight-row
+                div.visible-lg.visible-md.visible-sm.col-lg-4.col-md-4.col-sm-4.col-xs-4
+                    | Total number of debtors: 
+                div.visible-xs.col-lg-4.col-md-4.col-sm-4.col-xs-4
+                    | Debtors: 
+                div#totalDebtors.col-lg-4.col-md-4.col-sm-4.col-xs-4.pull-left
+            div.row.highlight-row
+                div.visible-lg.visible-md.visible-sm.col-lg-4.col-md-4.col-sm-4.col-xs-4
+                    | Total number of current expenses: 
+                div.visible-xs.col-lg-4.col-md-4.col-sm-4.col-xs-4
+                    | Current exp.: 
+                div#expensesCount.col-lg-4.col-md-4.col-sm-4.col-xs-4
 block footer
     script
         | System.import("home");

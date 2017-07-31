@@ -7,11 +7,13 @@ block contents
             | Apt. #{currentApartment.number}:
     h2.row
         | Expenses:
-    ul.list-unstyled
+    div.list-group
         each expense in currentApartment.notPaidExpenses
-            li.row.highlight-row
-                a(href = '/expenses/' + expense._id) #{expense.name} 
-                |- $#{expense.cost}
+            a.list-group-item(href = "/expenses/" + expense._id)
+                span.l-col
+                    |#{expense.name} 
+                span.mid-col
+                    |$#{expense.cost}
     h2.row
         | Fees:
     ul.list-unstyled

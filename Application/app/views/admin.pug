@@ -2,43 +2,56 @@ extends common/container
 block contents
     h1
         | Admin panel
-    div
-        h3 Requests
-        div
+    div.regRequests.container.col-lg-3
+        h3 Registration requests
+        div.list-group
             each request in requests
-                div
-                    | #{request.number}
-                div
-                    | #{request.username}
-                div
-                    a.approve(href="/approve-request/"+request._id)
-                        | Approve 
-                    a.reject(href="/reject-request/"+request._id)
-                        | Reject
+                    div.list-group-item
+                        p.text-left
+                            | #{request.number}
+                        p.text-center
+                            | #{request.username}
+                        p.approve.text-right
+                            a.approve(href="/approve-request/"+request._id)
+                                | Approve 
+                        p.reject.text-right
+                            a.reject(href="/reject-request/"+request._id)
+                                | Reject
             else 
                 | Currently there are no pending registration requests.
-    div
+    div.feeContainer.container.col-lg-4
         h3 Monthly Fee
-        div
+        div.col-sm-6
             form#fee(method="POST" action="/admin/add-monthly-fee")
+            div.row
+            div.visible-lg.visible-md.visible-sm.col-lg-4.col-md-4.col-sm-4.col-xs-4
                 label(for="month")
                     | Month:
                 input#month(type="number" required step="1" min="1" max="12" name="month" value="8")
-                label(for="year")
-                    | Year:
-                input#year(type="number" required step="1" min="2017" name="year" value="2017")
-                label(for="fee")
-                    | Cost:
-                input#cost(type="number" required step="0.01" min="0" name="fee")
-                button.createFee(type="submit")
-                    | Create
-        h3 Expenses
-        div
-        a(href="/create-expense/")
-            | New expense
-        h4 Pending expenses
-        div
-            each expense in pendingExpenses
+            div.row
+            div.visible-lg.visible-md.visible-sm.col-lg-4.col-md-4.col-sm-4.col-xs-4    
+                    label(for="year")
+                        | Year:
+                    input#year(type="number" required step="1" min="2017" name="year" value="2017")
+            div.row
+            div.visible-lg.visible-md.visible-sm.col-lg-4.col-md-4.col-sm-4.col-xs-4    
+                    label(for="fee")
+                        | Cost:
+                    input#cost(type="number" required step="0.01" min="0" name="fee")
+            div.row
+            div.visible-lg.visible-md.visible-sm.col-lg-4.col-md-4.col-sm-4.col-xs-4    
+                    button.createFee(type="submit")
+                        | Create
+    h3 Expenses
+    div.expensesContainer.container.col-lg-9
+    a(href="/create-expense/")
+        | New expense
+    
+    div.container
+    h4 Pending expenses
+    each expense in pendingExpenses
+        div.row
+            div.visible-lg.visible-md.visible-sm.col-lg-4.col-md-4.col-sm-4.col-xs-4     
                 div(title=expense.description)
                     a(href="/expenses/"+expense._id)
                         | #{expense.name}
@@ -50,28 +63,30 @@ block contents
                             | Complete
                     a.complete-expense(href="/cancel-expense/"+expense._id)
                         | Cancel
-            else 
-                | Currently there are no pending expenses.
-        h4 Completed expenses
-        div
-            each expense in completedExpenses
-                div(title=expense.description)
-                    a(href="/expenses/"+expense._id)
-                        | #{expense.name}
-                div
-                    | #{expense.paidAmount}/#{expense.totalCost}
-            else 
-                | Currently there are no completed expenses.
-        h4 Canceled expenses
-        div
-            each expense in canceledExpenses
-                div(title=expense.description)
-                    a(href="/expenses/"+expense._id)
-                        | #{expense.name}
-                div
-                    | #{expense.paidAmount}/#{expense.totalCost}
-            else 
-                | Currently there are no canceled expenses.
+    else 
+        | Currently there are no pending expenses.
+    h4 Completed expenses
+    div.container
+        each expense in completedExpenses
+            div(title=expense.description)
+                a(href="/expenses/"+expense._id)
+                    | #{expense.name}
+            div
+                | #{expense.paidAmount}/#{expense.totalCost}
+        else 
+            | Currently there are no completed expenses.
+    h4 Canceled expenses
+    div.container
+        each expense in canceledExpenses
+            div.row
+                div.visible-lg.visible-md.visible-sm.col-lg-4.col-md-4.col-sm-4.col-xs-4    
+                    div(title=expense.description)
+                        a(href="/expenses/"+expense._id)
+                            | #{expense.name}
+                    div
+                        | #{expense.paidAmount}/#{expense.totalCost}
+        else 
+            | Currently there are no canceled expenses.
 block footer
     script
         | System.import("admin");
