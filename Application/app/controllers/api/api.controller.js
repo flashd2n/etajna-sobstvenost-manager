@@ -1,5 +1,3 @@
-const { ObjectId } = require('mongodb');
-
 class ApiController {
     constructor(data) {
         this.data = data;
@@ -18,12 +16,12 @@ class ApiController {
         this.data.apartments.getById(req.params.id)
             .then((apt) => {
                 if (!apt) {
-                    return next(new Error('Not such apartment'));
+                    return res.status(404).send('Invalid user id');
                 }
                 return res.json(apt.notPaidFees);
             })
             .catch((err) => {
-                next(new Error(err));
+                res.status(404).send('Invalid user id');
             });
     }
 
@@ -31,12 +29,12 @@ class ApiController {
         this.data.apartments.getById(req.params.id)
             .then((apt) => {
                 if (!apt) {
-                    return next(new Error('Not such apartment'));
+                    return res.status(404).send('Invalid user id');
                 }
                 return res.json(apt.notPaidExpenses);
             })
             .catch((err) => {
-                next(new Error(err));
+                res.status(404).send('Invalid user id');
             });
     }
 
@@ -54,14 +52,13 @@ class ApiController {
                 return this.data.fees.processAptPayment(apt, feeId);
             })
             .then((isSuccess) => {
-                setTimeout(() => {
-                    if (isSuccess) {
-                        res.send('Success');
-                    }
-                }, 1000);
+                if (isSuccess) {
+                    return res.send('Success');
+                }
+                return Promise.reject();
             })
             .catch((err) => {
-                res.send('Fail');
+                res.status(404).send('Fail');
             });
     }
 
@@ -81,11 +78,12 @@ class ApiController {
             })
             .then((isSuccess) => {
                 if (isSuccess) {
-                    res.send('Success');
+                    return res.send('Success');
                 }
+                return Promise.reject();
             })
             .catch((err) => {
-                res.send('Fail');
+                res.status(404).send('Fail');
             });
     }
 
@@ -95,7 +93,7 @@ class ApiController {
                 res.json(apartments);
             })
             .catch((err) => {
-                next(err);
+                res.status(404).send('Something went terribly wrong');
             });
     }
 
@@ -105,7 +103,7 @@ class ApiController {
                 res.json(expenses);
             })
             .catch((err) => {
-                next(err);
+                res.status(404).send('Something went terribly wrong');
             });
     }
 
