@@ -157,7 +157,7 @@ class ApartmentsData extends BaseData {
                 return true;
             })
             .catch((err) => {
-                Promise.reject(err);
+                return Promise.reject(err);
             });
     }
 

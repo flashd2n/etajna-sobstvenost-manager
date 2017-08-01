@@ -45,6 +45,7 @@ describe('Apartments Data Tests', () => {
             toViewModelWithPass: sinon.stub().returns(record),
             getDebt: sinon.stub().returns(42),
             payFee: sinon.stub().returns(record),
+            payExpense: sinon.stub().returns(record),
         };
 
         validator = {
@@ -350,7 +351,7 @@ describe('Apartments Data Tests', () => {
                     find: sinon.stub().returns({
                         toArray: sinon.stub().returns(Promise.resolve(items)),
                     }),
-                    findOne: sinon.stub().returns(Promise.reject('Fail')),
+                    findOne: sinon.stub().returns(Promise.resolve(apartment)),
                     insert: sinon.stub().returns(Promise.resolve()),
                     updateOne: sinon.stub().returns(Promise.reject('Fail')),
                     update: sinon.stub().returns(Promise.resolve()),
@@ -363,6 +364,46 @@ describe('Apartments Data Tests', () => {
             Promise.resolve()
                 .then(() => {
                     return data.processFeePayment(apartment, id);
+                })
+                .catch((res) => {
+                    expect(res).to.equal('Fail');
+                    done();
+                });
+        });
+    });
+
+    describe('processExpensePayment tests', () => {
+        it('Should call payFee and return true when updateOne resolves', (done) => {
+            Promise.resolve()
+                .then(() => {
+                    return data.processExpensePayment(apartment, id);
+                })
+                .then((res) => {
+                    expect(res).to.equal(true);
+                    expect(model.payExpense.calledWith(apartment, id)).to.equal(true);
+                    done();
+                });
+        });
+
+        it('Should reject with correct error when updateOne rejects', (done) => {
+            database = {
+                collection: sinon.stub().returns({
+                    find: sinon.stub().returns({
+                        toArray: sinon.stub().returns(Promise.resolve(items)),
+                    }),
+                    findOne: sinon.stub().returns(Promise.resolve(apartment)),
+                    insert: sinon.stub().returns(Promise.resolve()),
+                    updateOne: sinon.stub().returns(Promise.reject('Fail')),
+                    update: sinon.stub().returns(Promise.resolve()),
+                    updateMany: sinon.stub().returns(Promise.resolve()),
+                    remove: sinon.stub().returns(Promise.resolve()),
+                    drop: sinon.stub(),
+                }),
+            };
+            data = new ApartmentsData(database, model, validator);
+            Promise.resolve()
+                .then(() => {
+                    return data.processExpensePayment(apartment, id);
                 })
                 .catch((res) => {
                     expect(res).to.equal('Fail');
