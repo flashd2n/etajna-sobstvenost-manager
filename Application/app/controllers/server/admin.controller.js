@@ -8,7 +8,7 @@ class AdminController {
     }
 
     renderPage(req, res) {
-        Promise.all([
+        return Promise.all([
             this.data.requests.getAll(),
             this.data.expenses.getPendingExpenses(),
             this.data.expenses.getCompletedExpenses(),
@@ -62,7 +62,7 @@ class AdminController {
     }
 
     completeExpense(req, res) {
-        this.data.expenses.completeExpense(req.params.expense_id)
+        return this.data.expenses.completeExpense(req.params.expense_id)
             .then((result) => {
                 if (result.modifiedCount > 0) {
                     this.data.apartments.completeExpense(req.params.expense_id);
@@ -79,7 +79,7 @@ class AdminController {
     }
 
     cancelExpense(req, res) {
-        this.data.expenses.cancelExpense(req.params.expense_id)
+        return this.data.expenses.cancelExpense(req.params.expense_id)
             .then((result) => {
                 if (result.modifiedCount > 0) {
                     this.data.apartments.cancelExpense(req.params.expense_id);
@@ -109,7 +109,7 @@ class AdminController {
         newExpense.notPaid = [];
         let expenseForApartment;
 
-        this.data.expenses.create(newExpense)
+        return this.data.expenses.create(newExpense)
             .then((createdExpense) => {
                 newExpense._id = new ObjectId(createdExpense._id);
                 expenseForApartment = {
@@ -191,7 +191,7 @@ class AdminController {
     }
 
     approveRequest(req, res) {
-        this.data.requests.getById(req.params.request_id)
+        return this.data.requests.getById(req.params.request_id)
             .then((request) => {
                 this.data.apartments.setUsernameAndPassword(
                     request.number,
@@ -214,7 +214,7 @@ class AdminController {
 
     rejectRequest(req, res) {
         req.flash('info', 'Registration rejected!');
-        this.data.requests.deleteById(req.params.request_id)
+        return this.data.requests.deleteById(req.params.request_id)
             .then(() => {
                 res.redirect(303, '/admin');
             });

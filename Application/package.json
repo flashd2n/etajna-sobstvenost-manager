@@ -63,6 +63,7 @@
     "nodemon": "^1.11.0",
     "selenium-webdriver": "^3.5.0",
     "sinon": "^2.4.1",
+    "sinon-chai": "^2.12.0",
     "superagent": "^3.5.2",
     "supertest": "^3.0.0"
   }
