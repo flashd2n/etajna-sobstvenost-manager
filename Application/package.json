@@ -4,8 +4,9 @@
   "description": "A simple application that helps you manage your etajna sobsvenost.",
   "main": "index.js",
   "scripts": {
-    "test": "gulp test",
+    "test": "gulp alltests",
     "start": "gulp start",
+    "dev": "gulp dev",
     "functional_tests": "gulp functional"
   },
   "repository": {
