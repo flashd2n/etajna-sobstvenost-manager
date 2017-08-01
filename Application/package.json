@@ -4,8 +4,9 @@
   "description": "A simple application that helps you manage your etajna sobsvenost.",
   "main": "index.js",
   "scripts": {
-    "test": "gulp test",
+    "test": "gulp alltests",
     "start": "gulp start",
+    "dev": "gulp dev",
     "functional_tests": "gulp functional"
   },
   "repository": {
@@ -60,7 +61,9 @@
     "gulp-sequence": "^0.4.6",
     "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
+    "mock-require": "^2.0.2",
     "nodemon": "^1.11.0",
+    "rewire": "^2.5.2",
     "selenium-webdriver": "^3.5.0",
     "sinon": "^2.4.1",
     "sinon-chai": "^2.12.0",

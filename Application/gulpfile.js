@@ -19,7 +19,6 @@ gulp.task('pre-test', () => {
         './app/data/**/*.js',
         './app/models/**/*.js',
         './app/validators/**/*.js',
-        './database/**/*.js',
         './utils/factories/**/*.js',
         './utils/logger.js'])
         .pipe(istanbul({
@@ -151,4 +150,7 @@ gulp.task('start-server', () => {
 });
 
 gulp.task('start',
+    gulpSequence('auto-setup', 'start-server'));
+
+gulp.task('dev',
     gulpSequence('auto-setup', 'lint', 'unit', 'integration', 'start-server'));
