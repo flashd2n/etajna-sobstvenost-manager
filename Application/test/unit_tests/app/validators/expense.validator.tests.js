@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 const { expect } = require('chai');
 const { isValid } = require('../../../../app/validators/expense.validator');
-const sinon = require('sinon');
 
 describe('Expense Validator Tests', () => {
     const model = {
