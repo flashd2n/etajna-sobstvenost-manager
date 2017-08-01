@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 const { expect } = require('chai');
 const { isValid } = require('../../../../app/validators/manager.validator');
-const sinon = require('sinon');
 
 describe('Manager Validator Tests', () => {
     it('Should return true when model is valid', () => {

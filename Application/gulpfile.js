@@ -19,7 +19,6 @@ gulp.task('pre-test', () => {
         './app/data/**/*.js',
         './app/models/**/*.js',
         './app/validators/**/*.js',
-        './database/**/*.js',
         './utils/factories/**/*.js',
         './utils/logger.js'])
         .pipe(istanbul({
