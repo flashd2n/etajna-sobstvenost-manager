@@ -54,6 +54,16 @@ gulp.task('integration', ['pre-test'], () => {
         .pipe(istanbul.writeReports());
 });
 
+gulp.task('functional', () => {
+    return gulp.src('./test/functional_tests/**/*.js')
+        .pipe(mocha({
+            reporter: 'nyan',
+            timeout: 60000,
+        })).on('end', () => {
+            process.exit();
+        });
+});
+
 gulp.task('auto-setup', () => {
     return Promise.resolve()
         .then(() => {
@@ -87,15 +97,6 @@ gulp.task('lint', () => {
             .pipe(eslint.format())
             .pipe(eslint.failAfterError());
     });
-});
-
-gulp.task('seed-database-initial', ['auto-setup'], () => {
-    const config = require('./config');
-    return Promise.resolve()
-        .then(() => require('./database').init(config.connectionString))
-        .then((database) => require('./app/data').init(database))
-        .then((data) => require('./database_seed').seedInitial(data))
-        .then(() => process.exit());
 });
 
 gulp.task('start-server', () => {

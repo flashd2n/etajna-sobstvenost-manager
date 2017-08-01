@@ -5,9 +5,12 @@ block contents
     h1 Drijbai Communications
     ul#users
     div.messages
-    form#chatBox(action='javascript:void(0)')
-        label(for='message') &gt;
-        input#message(type='text', required='', autofocus='')
+    form.form-group#chatBox(action='javascript:void(0)')
+        div
+            label(for='message') &gt;
+            input#message(type='text', required='', autofocus='')
+        div
+            button.btn.btn-info(type="submit") Send
     script(src='/socket.io/socket.io.js')
 block footer
     script(src='/libs/toastr/build/toastr.min.js')
