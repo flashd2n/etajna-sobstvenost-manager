@@ -14,7 +14,8 @@ block contents
                             | #{expense.name} 
                         span
                             | Payment Cost: 
-                            | #{expense.cost}
+                            span.pending-expense-cost
+                                | #{expense.cost}
     h2.row
         | Completed 
         span.hidden-xs Expenses
@@ -26,4 +27,5 @@ block contents
                             | #{expense.name} 
                         span
                             | Payment Cost: 
-                            | #{expense.cost}
+                            span.completed-expense-cost
+                                | #{expense.cost}

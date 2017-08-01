@@ -8,25 +8,25 @@ div.container-fluid
     div#nav-controls-container.collapse.navbar-collapse
         ul.nav.navbar-nav
             li(class=page=='home' ? 'active' : '')
-                a(href="/") Home
+                a#home-nav(href="/") Home
             li(class=page=='page_of_shame' ? 'active' : '')
-                a(href="/page-of-shame") Page of Shame
+                a#pos-nav(href="/page-of-shame") Page of Shame
             li(class=page=='expenses' ? 'active' : '')
-                a(href="/expenses") Expenses
+                a#expenses-nav(href="/expenses") Expenses
             if !loggedUser
                 li(class=page=='register' ? 'active' : '')
-                    a(href="/register") Sign Up
+                    a#register-nav(href="/register") Sign Up
                 li(class=page=='login' ? 'active' : '')
-                    a(href="/login") Login
+                    a#login-nav(href="/login") Login
             else
                 if (loggedUser.type == 'admin')
                     li(class=page=='admin' ? 'active' : '')
-                        a(href="/admin") Admin
+                        a#admin-nav(href="/admin") Admin
                 if (loggedUser.type == 'apartment')
                     li(class=page=='apartment' ? 'active' : '')
-                        a(href="/apartment/" + loggedUser.id) My apartment
+                        a#apartment-nav(href="/apartment/" + loggedUser.id) My apartment
                 li(class=page=='chat' ? 'active' : '')
-                    a(href="/chat") Chat                
+                    a#chat-nav(href="/chat") Chat                
                 li(class=page=='logout' ? 'active' : '')
-                    a(href="/logout") Logout 
+                    a#logout-nav(href="/logout") Logout 
                         strong #{loggedUser.username}

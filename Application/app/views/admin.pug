@@ -51,7 +51,7 @@ block contents
         each expense in pendingExpenses
             div.row
                 div.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                    div(title=expense.description)
+                    div.pending-expense(title=expense.description)
                         span.l-col    
                             a(href="/expenses/"+expense._id)
                                 | #{expense.name}
@@ -61,7 +61,7 @@ block contents
                             if expense.notPaid.length == 0
                                 a.complete-expense(href="/complete-expense/"+expense._id)
                                     | Complete
-                            a.cancel-expense.btn.btn-danger.btn-md( class=href="/cancel-expense/"+expense._id)
+                            a.cancel-expense.btn.btn-danger.btn-md(href="/cancel-expense/"+expense._id)
                                 | Cancel
         else 
             | Currently there are no pending expenses.
@@ -71,7 +71,7 @@ block contents
         each expense in completedExpenses
             div.row
             div.visible-lg.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                div(title=expense.description)
+                div.completed-expense(title=expense.description)
                     span.l-col
                         a(href="/expenses/"+expense._id)
                             | #{expense.name}
@@ -85,7 +85,7 @@ block contents
         each expense in canceledExpenses
             div.row
                 div.visible-lg.visible-md.visible-sm.visible-xs.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                    div(title=expense.description)
+                    div.canceled-expense(title=expense.description)
                         a(href="/expenses/"+expense._id)
                             | #{expense.name}
                     div

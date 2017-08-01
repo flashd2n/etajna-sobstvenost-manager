@@ -20,7 +20,8 @@ block contents
                             else
                                 | Apt. #{apartment.number}
                         | Total Debts: 
-                        | #{apartment.debt}
+                        span.debt-value
+                            | #{apartment.debt}
                         if (loggedUser && loggedUser.type == 'admin' && apartment.debt > 1500)
                             button.sendMutri.btn.btn-danger.btn-sm
                                 | Send Mutri
