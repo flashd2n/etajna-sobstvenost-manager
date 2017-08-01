@@ -1,5 +1,4 @@
 const isValid = (model) => {
-    console.log(model);
     const id = model.apartmentId;
     const number = model.number;
     const username = model.username;

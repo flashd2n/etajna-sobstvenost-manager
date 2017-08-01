@@ -18,11 +18,10 @@ gulp.task('pre-test', () => {
     return gulp.src(['./app/controllers/**/*.js',
         './app/data/**/*.js',
         './app/models/**/*.js',
-        './app/routers/**/*.js',
         './app/validators/**/*.js',
         './database/**/*.js',
         './utils/factories/**/*.js',
-        './utils/logger'])
+        './utils/logger.js'])
         .pipe(istanbul({
             includeUntested: true,
         }))
