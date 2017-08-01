@@ -45,7 +45,7 @@ class ApartmentsData extends BaseData {
                         .toViewModelWithPass(model));
             })
             .catch((err) => {
-                Promise.reject(err);
+                return Promise.reject(err);
             });
     }
 
@@ -142,7 +142,7 @@ class ApartmentsData extends BaseData {
                 return true;
             })
             .catch((err) => {
-                Promise.reject(err);
+                return Promise.reject(err);
             });
     }
 
