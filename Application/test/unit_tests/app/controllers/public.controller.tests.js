@@ -98,7 +98,6 @@ describe('Public Controller Tests', () => {
                     done();
                 });
         });
-
     });
 
     describe('notPaidApartmentExpenses tests', () => {
@@ -117,7 +116,7 @@ describe('Public Controller Tests', () => {
                     apartmentId: 5,
                 },
             };
-            const currentApt = {}
+            const currentApt = {};
             const expectedRender = {
                 loggedUser: req.user,
                 currentApartment: currentApt,
@@ -132,7 +131,6 @@ describe('Public Controller Tests', () => {
                     expect(res.render.callCount).to.equal(1);
                     expect(res.render.calledWith('unpaid_apartment_expenses', expectedRender)).to.equal(true);
                 });
-
         });
     });
 });
