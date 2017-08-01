@@ -9,7 +9,6 @@ describe('Public Controller Tests', () => {
     let req = null;
     let res = null;
     let controller = null;
-    let next = null;
 
     const apartments = [];
     const apartment = {
@@ -34,8 +33,6 @@ describe('Public Controller Tests', () => {
             render: sinon.stub(),
             redirect: sinon.stub(),
         };
-
-        next = sinon.stub();
 
         data = {
             apartments: {
@@ -102,7 +99,7 @@ describe('Public Controller Tests', () => {
 
     describe('notPaidApartmentExpenses tests', () => {
         it('should call res.render with correct args', () => {
-            const req = {
+            req = {
                 user: {
                     type: 'admin',
                 },
